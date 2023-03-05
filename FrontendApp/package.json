@@ -1,0 +1,104 @@
+{
+  "name": "algorithm_visualizer",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "homepage": "./",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "set GENERATE_SOURCEMAP=false && react-scripts build",
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"cross-env BROWSER=none npm start\" \"npm:electron\" -k",
+    "electron": "wait-on tcp:3000 && electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "react-scripts build && electron-forge package",
+    "make": "react-scripts build && electron-forge make --production"
+  },
+  "keywords": [],
+  "author": "Jatin Aneja",
+  "license": "ISC",
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "electron": "^23.0.0",
+    "electron-is-dev": "^2.0.0",
+    "eslint": "^8.34.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.31.10",
+    "prettier": "^2.8.4",
+    "@electron-forge/cli": "^6.0.0-beta.59",
+    "@electron-forge/maker-deb": "^6.0.0-beta.59",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.59",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.59",
+    "@electron-forge/maker-zip": "^6.0.0-beta.59"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "antd": "^5.2.1",
+    "concurrently": "^7.6.0",
+    "cross-env": "^7.0.3",
+    "electron-cgi": "^1.0.6",
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
+    "react-router-dom": "6.3.0",
+    "react-scripts": "5.0.1",
+    "styled-components": "^5.3.6",
+    "uuid": "^9.0.0",
+    "wait-on": "^7.0.1",
+    "web-vitals": "^3.1.1"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "src/imgs/icons/tekgemcollectoricon_4js_icon.ico",
+        "name": "AlgoVisualizer",
+        "extraResource": "src/Backend/",
+        "asar": true,
+        "win32metadata": {
+          "requested-execution-level": "requireAdministrator"
+        }
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "AlgoVisualizer"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}

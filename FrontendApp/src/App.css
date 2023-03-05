@@ -1,0 +1,535 @@
+.App {
+    text-align: center;
+    white-space: pre-wrap;
+  }
+  
+  body {
+    background-color: white;
+    font-family: 'Open Sans', sans-serif;
+    /* text-transform: uppercase; */
+  }
+  
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .inlineForm.ipForm {
+    width: 4vw;
+  }
+  
+  .inlineForm {  
+    display: inline-flex;
+    margin-right: 1vw;
+  }
+  
+  .ant-tooltip-hidden {
+    display: none;
+  }
+  
+  .ant-table-wrapper {
+    clear: both;
+    width: 100vw;  
+  }
+  .ant-layout, .ant-layout * {
+    box-sizing: border-box;
+  }
+  
+  .ant-col-24.large {
+    height: 4vh;
+    display: table;
+  }
+  
+  .ant-row.medium {
+    height: 2vh;
+    display: table
+  }
+  
+  .ant-row.small {
+    height: 1vh;
+    display: table;
+  }
+  
+  .ant-row.large {
+    height: 4vh;
+    display: table;
+  }
+  
+  .ant-col {
+    display: -webkit-inline-flex;
+  }
+  
+  .ant-col-24.small {
+    height: 1vh;
+    display: table;
+  }
+  
+  .ant-slide-up-leave {
+    display: none !important;
+  }
+  
+  .ant-slider-handle {
+    background-color: #fff;
+    border: 2px solid #91d5ff;
+    border-radius: 50%;
+    box-shadow: 0;
+    cursor: pointer;
+    height: 14px;
+    margin-top: -5px;
+    position: absolute;
+    transition: border-color .3s, box-shadow .6s, transform .3s cubic-bezier(.18, .89, .32, 1.28);
+    width: 14px;
+  }
+  
+  .ant-slider-mark {
+    font-size: 14px;
+      left: 0;
+      position: absolute;
+      top: 14px;
+      width: 100%;
+  }
+  
+  .ant-slider-mark-text {
+    color: rgba(0,0,0,.45);
+      cursor: pointer;
+      display: inline-block;
+      position: absolute;
+      text-align: center;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      word-break: keep-all;
+  }
+  
+  .ant-dropdown-menu-item {
+    clear: both;
+    color: rgba(0, 0, 0, .85);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    margin: 0;
+    padding: 5px 12px;
+    transition: all .3s;
+    align-items: center;
+    display: flex;
+    position: relative;
+  }
+  
+  .ant-dropdown-menu {
+    background-clip: padding-box;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 3px 6px -4px rgb(0 0 0 / 12%), 0 6px 16px 0 rgb(0 0 0 / 8%), 0 9px 28px 8px rgb(0 0 0 / 5%);
+    list-style-type: none;
+    margin: 0;
+    outline: none;
+    padding: 4px 0;
+    position: relative;
+    text-align: left;
+  }
+  
+  .ant-dropdown {
+    font-feature-settings: "tnum","tnum";
+    box-sizing: border-box;
+    color: rgba(0,0,0,.85);
+    display: block;
+    font-size: 14px;
+    font-variant: tabular-nums;
+    left: -9999px;
+    line-height: 1.5715;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: -9999px;
+    z-index: 1050;
+  }
+  
+  .ant-table table {
+    border-collapse: separate;
+    border-radius: 2px 2px 0 0;
+    border-spacing: 0;
+    text-align: center;
+    width: 60%;
+  }
+  
+  .ant-btn {
+    text-transform: uppercase;
+  
+    background-image: none;
+    background: #1890ff;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    height: 32px;
+    line-height: 1.5715;
+    padding: 4px 15px;
+    position: relative;
+    text-align: center;
+    touch-action: manipulation;
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+  
+  .ant-btn-primary[disabled] {
+    background: #f5f5f5;
+    border-color: #d9d9d9;
+    box-shadow: none;
+    color: rgba(0, 0, 0, .25);
+    text-shadow: none;
+    pointer-events: none;
+  }
+  
+  .ant-slider {
+    font-feature-settings: "tnum", "tnum";
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, .85);
+    cursor: pointer;
+    font-size: 14px;
+    font-variant: tabular-nums;
+    height: 12px;
+    line-height: 1.5715;
+    list-style: none;
+    margin: 10px 6px;
+    padding: 4px 0;
+    position: relative;
+    touch-action: none;
+  }
+  
+  .ant-slider-rail {
+    border-radius: 2px;
+    height: 4px;
+    position: absolute;
+    transition: background-color .3s;
+    background-color: #0E76BC;
+    width: 100%;
+  }
+  
+  .Connected,
+  .Running {
+    color: green;
+  }
+  
+  .Disconnected,
+  .Stopped {
+    color: red;
+  }
+  
+  .topbar {
+    background-color: #0E76BC;
+    height: 3vh;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+  }
+  
+  .ant-layout-header {
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+  }
+  
+  .sidebar {
+    height: 90vh;
+    width: 30%;
+    background-color: #164370;
+  }
+  
+  .site-layout-background {
+    background-color: #164370;
+    height: 92vh;
+    position: fixed;
+    margin-top: 8vh
+  }
+  
+  .App-circuits {
+    height: 30vh;
+    left: 12.5%;
+    width: 75%;
+    float: left;
+    position: absolute;
+    bottom: 0px;
+  }
+  
+  .App-icon {
+    position: relative;
+    width: 30%;
+    left: 34%;
+    top: 3vh;
+  }
+  
+  
+  /* .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  } */
+  /* 
+  ul {
+    list-style-type: none;
+  } */
+  
+  /* ul li:hover {
+    background-color: #2e567f;
+  } */
+  
+  .checkbox {
+    padding-bottom: 3vh;
+  }
+  
+  .desc {
+    font-size: small;
+  }
+  
+  .ant-alert-description {
+    font-size: small;
+  }
+  
+  .ant-alert-info {
+    border: 1px solid #91d5ff;
+  }
+  
+  .ant-alert-with-description.ant-alert-no-icon {
+    padding: 15px;
+  }
+  
+  .ant-btn-primary {
+    background: #1890ff;
+    border-color: #1890ff;
+    box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+    color: #fff;
+    text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+  }
+  
+  .currentPage {
+    margin-top: 12vh;
+    position: fixed;
+    margin-left: 23vw;
+    width: 65vw;
+    height: 88vh;
+  }
+  
+  button {
+    font-family: calibri;
+    color: white;
+    background-color: #0E76BC;
+    border: 0px;
+    border-radius: 7px;
+    font-size: x-large;
+  }
+  
+  #okbutton {
+    width: 100px;
+    height: 30px;
+    position: absolute;
+    top: 50%;
+    left: 23%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    padding-left: 1%;
+    padding-right: 1%;
+    margin: 2%;
+  }
+  
+  #button {
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    padding-left: 1%;
+    padding-right: 1%;
+    margin: 2%;
+  }
+  
+  #power {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 93%;
+    top: 91%;
+  }
+  
+  #powercontent {
+    right: -10px;
+    bottom: 50px;
+  }
+  
+  button:hover {
+    background-color: #0093DD;
+    cursor: pointer;
+  }
+  
+  .dropbtn {
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    height: 50px;
+    width: 50px;
+  }
+  
+  #main-content {
+    left: 16px;
+  }
+  
+  .dropdown {
+    position: absolute;
+    display: inline-block;
+    left: 2%;
+    top: 92%;
+    height: 65px;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: transparent;
+    min-width: 100%;
+    bottom: 60px;
+    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
+    z-index: 1;
+  }
+  
+  .dropdown-content button {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+    font-size: medium;
+    width: 200px;
+    margin-top: 10px
+  }
+  
+  /* Change color of dropdown links on hover */
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  /* .dropdown:hover .dropbtn {background-color: #3e8e41;} */
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  #title {
+    padding-top: 1%;
+    padding-left: 41%;
+  }
+  
+  /* TODO: try out calibri light */
+  #mainText {
+    padding-top: 13%;
+    font-family: calibri;
+    font-weight: lighter;
+    font-size: xx-large;
+    color: white;
+  }
+  
+  #downloadText {
+    overflow: hidden;
+    white-space: nowrap;
+    top: 90%;
+    left: 46%;
+    position: absolute;
+    color: white;
+    font-family: calibri;
+    font-weight: lighter;
+    height: 80px;
+  }
+  
+  #loading {
+    color: white;
+    font-size: xx-large;
+    font-family: calibri;
+    padding-top: 13%;
+  }
+  
+  #loader {
+    border: 16px solid #f3f3f3;
+    /* Light grey */
+    border-top: 16px solid #3498db;
+    /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 1.5s linear infinite;
+    position: absolute;
+    left: 45%;
+    top: 45%;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  #smallLoader {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    animation: spin 1.5s linear infinite;
+    position: absolute;
+    left: 45%;
+    top: 50%
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .requestProgress {
+    margin-top: 30px;
+    width: 20%;
+    left: 40%;
+    height: 2px;
+    position: relative;
+    overflow: hidden;
+    /* background: linear-gradient(to right, #007db6, #0091b2, #009c9e, #00a77e, #22b24c, #60b031, #a5b62e); */
+    background: #0E76BC;
+  }
+  
+  .bar {
+    position: absolute;
+    width: calc(100% * 2/7);
+    height: 100%;
+    display: flex;
+    animation: move 2s linear infinite;
+    background-color: gray;
+  }
+  
+  @keyframes move {
+    0% {
+      transform: translate(-100%, 0)
+    }
+  
+    100% {
+      transform: translate(calc(7/2*100%), 0)
+    }
+  }

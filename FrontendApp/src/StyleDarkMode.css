@@ -1,0 +1,4 @@
+.dark-mode {
+    background: linear-gradient(180deg,rgb(68, 84, 102), #090e12e5, #000000 100%);
+    background-attachment: fixed;
+}
