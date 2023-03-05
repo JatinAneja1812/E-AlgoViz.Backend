@@ -39,15 +39,12 @@ function createWindow() {
   }
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    // width: 800,
-    // height: 720,
-    // minWidth: 1920,
-    // minHeight: 1180,
     height: 768,
     width: 1024,
     useContentSize: true,
     frame: false,
     transparent: true,
+    resizable: true,
     webPreferences: {
       enableRemoteModule: true,
       contextIsolation: false,

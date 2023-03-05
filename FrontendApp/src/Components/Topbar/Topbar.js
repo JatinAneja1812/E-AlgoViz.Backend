@@ -26,10 +26,10 @@ export default function Topbar() {
     ipcRenderer.send("maximise-window");
   };
 
-  const handleClick = () => {
-    console.log("Clicked");
-    ipcRenderer.send("greeting");
-  };
+  // const handleClick = () => {
+  //   console.log("Clicked");
+  //   ipcRenderer.send("greeting");
+  // };
 
   useEffect(() => {
     ipcRenderer.removeAllListeners("maximised-window");
@@ -73,14 +73,6 @@ export default function Topbar() {
           />
         )}
       </Header>
-
-      <button
-        style={{ fontSize: "24px", color: "#000", marginTop: "6vh" }}
-        onClick={handleClick}
-      >
-        {" "}
-        Click me{" "}
-      </button>
     </TopbarWrapper>
   );
 }

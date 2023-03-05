@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Topbar from "./Components/Topbar/Topbar";
 import './index.css';
 import App from './App';
+import HomePage from "./Containers/HomePage/Homepage"; 
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Topbar />
+    <Router>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/homepage" element={<HomePage/>} />
+      </Routes>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

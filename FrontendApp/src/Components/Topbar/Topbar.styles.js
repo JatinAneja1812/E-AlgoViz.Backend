@@ -29,6 +29,8 @@ const TopbarWrapper = styled.div`
     height: 5vh !important;
     font-size: small;
     background: #0082df !important;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
   }
 
   .App-title {
@@ -46,7 +48,7 @@ const TopbarWrapper = styled.div`
   }
 
   ul li {
-    -webkit-app-region: no-drag;
+    -webkit-app-region: drag;
     text-transform: uppercase;
   }
 
