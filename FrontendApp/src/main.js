@@ -30,7 +30,7 @@ let connection = new ConnectionBuilder().connectTo(connString).build();
 connection.onDisconnect = () => {
   console.log("lost");
   alert("Connection lost, restarting...");
-  _connection = new ConnectionBuilder().connectTo(connString).build();
+  connection = new ConnectionBuilder().connectTo(connString).build();
 };
 
 function createWindow() {
@@ -91,7 +91,7 @@ function createWindow() {
     mainWindow.loadURL(url);
   });
 
-  screenWidth = screen.getPrimaryDisplay().workAreaSize.width;
+  // screenWidth = screen.getPrimaryDisplay().workAreaSize.width;
 }
 
 // const menuContents = Menu.buildFromTemplate(menuTemplate(mainWindow));
