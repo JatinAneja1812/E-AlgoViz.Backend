@@ -9,6 +9,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import ErrorNotification from "../../Components/Snackbar/ErrorSnackbar";
 import Reset from "../ResetUser/Reset";
+import LiquidButtonWrapper from "../../Utility/Styles/CustomButtonStyles/LiquidButton.styles.js"
 
 export default function Login(props) {
   const userRef = useRef();
@@ -31,7 +32,6 @@ export default function Login(props) {
     
     const timer =  setTimeout(async () => {
       await signInWithEmailAndPassword(auth, email, password).catch((error) => {
-        console.log(error)
         setError(error);
       });
     
@@ -48,8 +48,6 @@ export default function Login(props) {
       }
       else{
         auth.onAuthStateChanged((user) => {
-          console.log(user)
-          //we are loggedIn, so direct to Home
           let path = "/homepage";
           sessionStorage.setItem("user", JSON.stringify(user));
           sessionStorage.setItem("userName", JSON.stringify(user.displayName));
@@ -84,9 +82,13 @@ export default function Login(props) {
         />
       )}
 
-      {userReset && <Reset setUserReset={setUserReset} />}
+      {userReset && <Reset setUserReset={setUserReset}  userReset={userReset}/>}
+
+
       <div className="base-container" ref={props.containerRef}>
-        <div className="mainheader">ShortWay Predictor</div>
+        <div class="TitleLogin">
+          <h1>E-Algo-ViZ</h1>
+        </div>
         <div className="header">Login</div>
         <div className="content">
           <div className="image">
@@ -113,7 +115,7 @@ export default function Login(props) {
               <label htmlFor="password">Password</label>
               <input
                 type="password"
-                placeholder="password"
+                placeholder="Password"
                 id="password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
@@ -124,19 +126,22 @@ export default function Login(props) {
           </div>
         </div>
         <div className="footer">
-          <LoadingButton
-            disabled={!email || !password ? true : false}
-            color="primary"
-            loadingPosition="end"
-            endIcon={<LoginIcon />}
-            variant="contained"
-            className="btn"
-            style={{fontSize: "16px"}}
-            onClick={handleLogin}
-            loading={isLoading === false ? false : true}
-          >
-            Login
-          </LoadingButton>
+          <LiquidButtonWrapper>
+            <LoadingButton 
+              disabled={!email || !password ? true : false}
+              className="liquidButton" 
+              icon={null}         
+              loadingPosition="end"
+              variant="contained"
+              style={{fontSize: "16px", color: "white"}}
+              onClick={handleLogin}
+              loading={isLoading === false ? false : true}
+            >
+              <span className="liquidButton__text">LOGIN</span>
+              <span className="liquidButton__icon"><LoginIcon style={{color: "white"}} /></span>
+              <span className="liquidButton__liquid"></span>
+            </LoadingButton>
+          </LiquidButtonWrapper>
         </div>
         <br />
         <div>
@@ -145,6 +150,7 @@ export default function Login(props) {
           </Link>
         </div>
       </div>
+
     </>
   );
 }

@@ -2,19 +2,17 @@ import styled from "styled-components";
 
 const ResetPasswordWrapper = styled.div`
 
-    .reset {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        position: fixed;
-        width: 108%;
-        height: 118%;
-        margin-top: -57px;
-        background: rgba(0, 0, 0, 0.652);
-        
-        z-index: 1001;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: fixed;
+    width: 108%;
+    height: 118%;
+    margin-top: -57px;
+    background: rgba(0, 0, 0, 0.652);
+    z-index: 1001;
+    
     .reset__container {
         display: flex;
         flex-direction: column;
@@ -23,6 +21,13 @@ const ResetPasswordWrapper = styled.div`
         border: 2px solid #000;
         padding: 30px;
     }
+
+    .resetModal_Title{
+        position: sticky;
+        margin-top: -18px;
+        text-align: left;
+    }
+
     .reset__textBox {
         padding: 10px;
         font-size: 16px;

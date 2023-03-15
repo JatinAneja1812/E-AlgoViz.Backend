@@ -45,8 +45,9 @@ function Reset(props) {
         />
       )}
 
-      <ResetPasswordWrapper className="reset">
+      <ResetPasswordWrapper>
         <div className="reset__container">
+          <h2 className="resetModal_Title">Reset Password</h2>
           <h5>Please enter Registered Email-Address: </h5>
           <input
             type="text"

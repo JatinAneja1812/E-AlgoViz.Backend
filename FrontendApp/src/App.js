@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import ApplicationWrapper from "./App.styles";
+import "./App.css";
 import Login from "./Authentication/SignIn_SignUp_User/Login";
 import Register from "./Authentication/SignIn_SignUp_User/Register";
 
@@ -26,12 +26,12 @@ export default function App() {
     setIsLogginActive(!isLogginActive);
   };
 
-  let current = isLogginActive ? "Register" : "Login";
-  let currentActive = isLogginActive ? "Login" : "Register";
+  let current = isLogginActive ? "REGISTER" : "LOGIN";
+  let currentActive = isLogginActive ? "LOGIN" : "REGISTER";
 
 
   return (
-    <ApplicationWrapper>
+      <>
         <div className="App">
           <div className="login">
             <div className="container">
@@ -46,7 +46,22 @@ export default function App() {
             />
           </div>
         </div>
-    </ApplicationWrapper>
+
+        <div className="area" >
+            <ul className="circles">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+        </div >
+      </>
   );
 }
 
@@ -57,7 +72,7 @@ const RightSide = (props) => {
       onClick={props.onClick}
     >
       <div className="inner-container" >
-        <div className={props.current === "Login" ? "text" : "regtext"} >
+        <div className={props.current === "LOGIN" ? "text" : "regtext"} >
           {props.current}
         </div>
       </div>

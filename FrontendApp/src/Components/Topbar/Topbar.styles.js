@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
 const TopbarWrapper = styled.div`
-  .topbar {
-    background-color: #0e76bc;
-    height: 3vh;
-    -webkit-user-select: none;
-    -webkit-app-region: drag;
-  }
+  
+  background-color: #fd746c;
+  height: 3vh;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
 
   .ant-menu-item {
     padding-left: 3vw;
@@ -28,9 +27,10 @@ const TopbarWrapper = styled.div`
     width: 100%;
     height: 5vh !important;
     font-size: small;
-    background: #0082df !important;
+    background: #fd746c !important;
     -webkit-user-select: none;
     -webkit-app-region: drag;
+    box-shadow: 0px 0px 12px 5px rgba(15, 15, 15, 0.281);
   }
 
   .App-title {
