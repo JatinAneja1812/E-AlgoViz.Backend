@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import loginImg from "../../imgs/LoginIcon.svg";
-import "./Auth.styles.css";
+import { RegisterWrapper } from "./Auth.styles.js";
 import {
   faCheck,
   faTimes,
@@ -11,7 +11,8 @@ import { auth, registerWithEmailAndPassword } from "../Firebase/Firebase";
 import RegisterSuccessDialog from "../../Components/Popups/RegisterSuccessPopup";
 import LoadingButton from "@mui/lab/LoadingButton";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
-import LiquidButtonWrapper from "../../Utility/Styles/CustomButtonStyles/LiquidButton.styles.js"
+import LiquidButtonWrapper from "../../Utility/Styles/CustomButtonStyles/LiquidButton.styles.js";
+import { openErrorNotification } from "../../Utility/LibraryFunctions/GlobalNotification";
 
 const USER_REGEX = /^[A-z][A-z0-9-_ ]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/; 
@@ -74,10 +75,25 @@ export default function Register(props) {
     setValidMatch(pwd === matchPwd);
   }, [pwd, matchPwd]);
 
-  const register = () => {
+  const register = async () => {
     if (!username) alert("Please enter name");
-    registerWithEmailAndPassword(username, email, pwd);
-    setOpen(true);
+    
+     await registerWithEmailAndPassword(username, email, pwd)
+    .then((message) => {
+      // handle successful registration message
+      console.log(message)
+       // eslint-disable-next-line eqeqeq
+        if(message == undefined || message == ''){
+          setOpen(true);
+        }else{
+          openErrorNotification(message.toString());
+        }
+    })
+    .catch((error) => {
+      // handle registration error
+      openErrorNotification(error);
+    });
+
     setUsername("");
     setEmail("");
     setPwd("");
@@ -92,10 +108,11 @@ export default function Register(props) {
         </section>
       ) : 
       (
+        <RegisterWrapper>
+          <div className="TitleReg">
+            <h1>E-Algo-ViZ</h1>
+          </div>
           <div className="regbase-container" ref={props.containerRef}>  
-            <div class="TitleReg">
-              <h1>E-Algo-ViZ</h1>
-            </div>
             <div className="regheader">Register</div>
             <div className="regcontent">
               <div className="image">
@@ -286,6 +303,7 @@ export default function Register(props) {
               </LiquidButtonWrapper>
             </div>
           </div>
+        </RegisterWrapper>
       )}
     </>
   );

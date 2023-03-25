@@ -4,7 +4,7 @@ import { Layout, Typography } from "antd";
 import TopbarWrapper from "./Topbar.styles";
 import exitImg from "../../imgs/X.svg";
 import underscoreImg from "../../imgs/underscore.svg";
-import maximiseImg from "../../imgs/maximise.svg";
+// import maximiseImg from "../../imgs/maximise.svg";
 import unmaximiseImg from "../../imgs/unmaximise.svg";
 
 const { Text } = Typography;
@@ -58,7 +58,7 @@ export default function Topbar() {
         />
         {maximisedWindow === false && (
           <img
-            src={maximiseImg}
+            src={unmaximiseImg}
             className="App-maximise"
             alt="maxi"
             onClick={handleMaxiOnClick}
@@ -72,6 +72,7 @@ export default function Topbar() {
             onClick={handleMaxiOnClick}
           />
         )}
+
       </Header>
     </TopbarWrapper>
   );

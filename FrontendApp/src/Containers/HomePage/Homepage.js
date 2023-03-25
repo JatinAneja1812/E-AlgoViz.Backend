@@ -1,5 +1,6 @@
 import React from "react";
 import HomepageWrapper from "./HomePage.styles";
+import CustomAvatar from "../../Components/CustomeAvatar/Avatar";
 // import InstructionModalPopup1 from "../Components/Popups/InstructionModalPopup1";
 // // import moment from "moment";
 // import PathVisualizer from "../PVisualizer/PathVisualizer";
@@ -14,7 +15,8 @@ const Homepage = () => {
 //   },[])
 
   return (
-    <HomepageWrapper className=".Home">
+    <HomepageWrapper classname="Home">
+      <CustomAvatar />
       {/* { isInstructionModalDisabled === false &&
         <InstructionModalPopup1 setInstructionModalDisable={setInstructionModalDisable} isInstructionModalDisabled={isInstructionModalDisabled}/>
       }

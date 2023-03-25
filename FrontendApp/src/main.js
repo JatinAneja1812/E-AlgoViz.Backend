@@ -72,6 +72,7 @@ function createWindow() {
 
   mainWindow.once("ready-to-show", () => mainWindow.show());
 
+  // reload on Maximizing and on clicking Algorith visualizer on Topbar
   mainWindow.on("maximize", () => {
     mainWindow.reload();
   });
@@ -88,7 +89,6 @@ function createWindow() {
     mainWindow.loadURL(url);
   });
 
-  // screenWidth = screen.getPrimaryDisplay().workAreaSize.width;
 }
 
 // const menuContents = Menu.buildFromTemplate(menuTemplate(mainWindow));

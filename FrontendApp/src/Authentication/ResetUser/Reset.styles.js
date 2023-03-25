@@ -20,6 +20,7 @@ const ResetPasswordWrapper = styled.div`
         background-color: #dcdcdc;
         border: 2px solid #000;
         padding: 30px;
+        width: 22vw;
     }
 
     .resetModal_Title{

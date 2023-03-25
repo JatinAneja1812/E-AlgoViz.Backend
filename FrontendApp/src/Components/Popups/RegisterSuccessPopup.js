@@ -45,6 +45,11 @@ export default function RegisterSuccessDialog(props) {
             You have been successfully registered to E-AlgoViz - An Algorithm Visualizer. 
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Please verify your email address before log in by clicking on the link that has been sent to your email. 
+            In the event that you do not see the email in your inbox, we suggest checking your spam folder or 
+            attempting to sign up again using a valid email address.  
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
            Please proceed to Login.
           </Typography>
           <Button onClick={handleClick}>Proceed</Button>

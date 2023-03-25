@@ -44,6 +44,7 @@ const TopbarWrapper = styled.div`
     color: #fff;
     width: 28vw;
     font-size: 25px;
+    cursor: pointer;
     line-height: 5vh;
   }
 
