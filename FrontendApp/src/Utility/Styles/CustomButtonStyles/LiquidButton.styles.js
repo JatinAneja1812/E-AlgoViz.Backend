@@ -40,7 +40,7 @@ const LiquidButtonWrapper = styled.div`
     left: 0;
     width: 200px;
     height: 200px;
-    background: #fd746c;
+    background: #26a0da;
     box-shadow: inset 0px 0px 50px rgba(0, 0, 0, 0.5);
     transition: 0.5s;
   }
@@ -72,6 +72,18 @@ const LiquidButtonWrapper = styled.div`
     animation: animatebtn 10s linear infinite;
   }
 
+  .disabledLiquidButton__liquid {
+    position: absolute;
+    top: -80px;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    background: #CCCCCC;
+    box-shadow: inset 0px 0px 50px rgba(0, 0, 0, 0.5);
+    transition: 0.5s;
+  }
+
+
   @keyframes animatebtn {
     0% {
       transform: translate(-50%, -75%) rotate(0deg);
@@ -80,6 +92,7 @@ const LiquidButtonWrapper = styled.div`
       transform: translate(-50%, -75%) rotate(360deg);
     }
   }
+
 
 `;
 

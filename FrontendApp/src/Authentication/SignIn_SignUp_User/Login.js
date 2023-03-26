@@ -10,7 +10,6 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import ErrorNotification from "../../Components/Snackbar/ErrorSnackbar";
 import Reset from "../ResetUser/Reset";
 import LiquidButtonWrapper from "../../Utility/Styles/CustomButtonStyles/LiquidButton.styles.js";
-import { openErrorNotification } from "../../Utility/LibraryFunctions/GlobalNotification";
 
 export default function Login(props) {
   const userRef = useRef();
@@ -21,7 +20,7 @@ export default function Login(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [userReset, setUserReset] = useState(false);
-  // const [error, setError] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     userRef.current.focus();
@@ -47,10 +46,10 @@ export default function Login(props) {
         } 
         else 
         {
-          openErrorNotification("Please verify your email before logging in.");
+          setError("Please verify your email before logging in.");
           setEmail("");
           setPassword("");
-          setIsOpen(false);
+          setIsOpen(true);
           navigate("/");
           setIsLoading(false);
           sessionStorage.removeItem("user");
@@ -58,10 +57,10 @@ export default function Login(props) {
           return () => clearTimeout(timer) && setIsLoading(false);
         }
       } catch (error) {
-        openErrorNotification(error)
+        setError('Wrong Credential. Try Again.');
         setEmail("");
         setPassword("");
-        setIsOpen(false);
+        setIsOpen(true);
         navigate("/");
         setIsLoading(false);
         sessionStorage.removeItem("user");
@@ -85,7 +84,7 @@ export default function Login(props) {
     <>
       {isOpen && (
         <ErrorNotification
-          message={"Wrong Credential. Try Again."}
+          message={error}
           setIsOpen={setIsOpen}
           isOpen={isOpen}
         />
@@ -111,6 +110,7 @@ export default function Login(props) {
               <div className="form-group">
                 <label htmlFor="email">E-mail Address</label>
                 <input
+                  disabled={isLoading ? true : false}
                   type="text"
                   placeholder="E-mail Address"
                   id="Email"
@@ -123,6 +123,7 @@ export default function Login(props) {
               <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input
+                  disabled={isLoading ? true : false}
                   type="password"
                   placeholder="Password"
                   id="password"
@@ -137,8 +138,8 @@ export default function Login(props) {
           <div className="footer">
             <LiquidButtonWrapper>
               <LoadingButton 
-                disabled={!email || !password ? true : false}
-                className="liquidButton" 
+                disabled={isLoading ? true : !email || !password ? true : false}
+                className="liquidButton"
                 icon={null}         
                 loadingPosition="end"
                 variant="contained"
@@ -148,7 +149,7 @@ export default function Login(props) {
               >
                 <span className="liquidButton__text">LOGIN</span>
                 <span className="liquidButton__icon"><LoginIcon style={{color: "white"}} /></span>
-                <span className="liquidButton__liquid"></span>
+                <span className={isLoading ? "disabledLiquidButton__liquid" : "liquidButton__liquid"} ></span>
               </LoadingButton>
             </LiquidButtonWrapper>
           </div>

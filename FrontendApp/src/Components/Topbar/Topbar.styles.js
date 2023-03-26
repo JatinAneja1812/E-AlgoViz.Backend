@@ -27,10 +27,9 @@ const TopbarWrapper = styled.div`
     width: 100%;
     height: 5vh !important;
     font-size: small;
-    background: #fd746c !important;
+    background: #eaeaea !important;
     -webkit-user-select: none;
     -webkit-app-region: drag;
-    box-shadow: 0px 0px 12px 5px rgba(15, 15, 15, 0.281);
   }
 
   .App-title {
@@ -41,11 +40,11 @@ const TopbarWrapper = styled.div`
     text-transform: uppercase;
     display: block;
     text-decoration: none;
-    color: #fff;
-    width: 28vw;
-    font-size: 25px;
+    color: #000;
+    width: 100%;
+    font-size: 17px;
     cursor: pointer;
-    line-height: 5vh;
+    line-height: 4vh;
   }
 
   ul li {

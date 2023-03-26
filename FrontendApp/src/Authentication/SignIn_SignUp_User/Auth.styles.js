@@ -94,12 +94,12 @@ const LoginWrapper = styled.div`
 
     .form .form-group :hover {
     background-color: #ffffff;
-    box-shadow: 0px 0px 14px 0.3px #0e81ce96;
+    box-shadow: 0px 0px 14px 0.2px #26a0da;
     }
 
     .form .form-group :focus {
     outline: none;
-    box-shadow: 0px 0px 12px 0.8px #3474dbb2;
+    box-shadow: 0px 0px 12px 0.5px #26a0da;
     }
 
     .footer {
@@ -200,12 +200,12 @@ const RegisterWrapper = styled.div`
     
     .regform .regform-group :hover {
         background-color: transparent;
-        box-shadow: 0px 0px 14px 0.3px #0e81ce96;
+        box-shadow: 0px 0px 14px 0.2px #26a0da;
     }
     
     .regform .regform-group :focus {
         outline: none;
-        box-shadow: 0px 0px 12px 0.8px #3474dbb2;
+        box-shadow: 0px 0px 12px 0.5px #26a0da;
     }
     
     .regfooter {

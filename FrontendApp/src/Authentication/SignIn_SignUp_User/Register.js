@@ -12,7 +12,8 @@ import RegisterSuccessDialog from "../../Components/Popups/RegisterSuccessPopup"
 import LoadingButton from "@mui/lab/LoadingButton";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import LiquidButtonWrapper from "../../Utility/Styles/CustomButtonStyles/LiquidButton.styles.js";
-import { openErrorNotification } from "../../Utility/LibraryFunctions/GlobalNotification";
+import ErrorNotification from "../../Components/Snackbar/ErrorSnackbar";
+import RegisterationConfirmPopup from "../../Components/Popups/RegisterationConfirmPopup";
 
 const USER_REGEX = /^[A-z][A-z0-9-_ ]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/; 
@@ -40,6 +41,9 @@ export default function Register(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   const [open, setOpen] = useState(false);
+  const [errorOpen, setErrorOpen] = useState(false);
+  const [error, setError] = useState('');
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false); 
 
   useEffect(() => {
     userRef.current.focus();
@@ -78,31 +82,56 @@ export default function Register(props) {
   const register = async () => {
     if (!username) alert("Please enter name");
     
-     await registerWithEmailAndPassword(username, email, pwd)
+    await registerWithEmailAndPassword(username, email, pwd)
     .then((message) => {
       // handle successful registration message
-      console.log(message)
-       // eslint-disable-next-line eqeqeq
-        if(message == undefined || message == ''){
-          setOpen(true);
-        }else{
-          openErrorNotification(message.toString());
-        }
+      // eslint-disable-next-line eqeqeq
+      if(message == undefined || message == ''){
+        setOpen(true);
+        setErrorOpen(false);
+      }else{
+        setErrorOpen(true);
+        setError(message.toString());
+      }
     })
     .catch((error) => {
       // handle registration error
-      openErrorNotification(error);
+      setError(error);
     });
 
+    setConfirmModalOpen(false);
     setUsername("");
     setEmail("");
     setPwd("");
     setMatchPwd("");
   };
 
+  const OpenConfirmRegisterationModal = () => {
+    setConfirmModalOpen(true);
+  }
+
   return (
     <>
-      {open ? (
+
+
+      {errorOpen && (
+          <ErrorNotification
+            message={error}
+            setIsOpen={setErrorOpen}
+            isOpen={errorOpen}
+          />
+      )}
+      {confirmModalOpen && (
+          <RegisterationConfirmPopup 
+            username={username}
+            email={email}
+            registerUser={register}
+            confirmModalOpen={confirmModalOpen}
+            setConfirmModalOpen={setConfirmModalOpen}
+          />
+      )}
+      {open ? 
+      (
         <section>
           <RegisterSuccessDialog open={open} setOpen={setOpen} />
         </section>
@@ -294,7 +323,7 @@ export default function Register(props) {
                   className="liquidButton" 
                   style={{fontSize: "16px", color: "white", marginTop: "8px", width: "180px"}}
                   loading={isLoading}
-                  onClick={register}
+                  onClick={OpenConfirmRegisterationModal}
                 >
                   <span className="liquidButton__text">REGISTER</span>
                   <span className="liquidButton__icon"><AppRegistrationIcon style={{color: "white"}} /></span>
