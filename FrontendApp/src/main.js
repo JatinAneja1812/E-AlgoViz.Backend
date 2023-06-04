@@ -39,15 +39,12 @@ function createWindow() {
   }
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    // width: 800,
-    // height: 720,
-    // minWidth: 1920,
-    // minHeight: 1180,
     height: 768,
     width: 1024,
     useContentSize: true,
     frame: false,
     transparent: true,
+    resizable: true,
     webPreferences: {
       enableRemoteModule: true,
       contextIsolation: false,
@@ -75,6 +72,7 @@ function createWindow() {
 
   mainWindow.once("ready-to-show", () => mainWindow.show());
 
+  // reload on Maximizing and on clicking Algorith visualizer on Topbar
   mainWindow.on("maximize", () => {
     mainWindow.reload();
   });
@@ -91,7 +89,6 @@ function createWindow() {
     mainWindow.loadURL(url);
   });
 
-  // screenWidth = screen.getPrimaryDisplay().workAreaSize.width;
 }
 
 // const menuContents = Menu.buildFromTemplate(menuTemplate(mainWindow));
