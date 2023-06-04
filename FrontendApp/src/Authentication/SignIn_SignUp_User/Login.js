@@ -1,4 +1,4 @@
-import loginImg from "../../imgs/LoginIcon.svg";
+import loginImg from "../../imgs/LoginImage.svg";
 import { LoginWrapper } from "./Auth.styles.js";
 import React, { useState, useEffect, useRef } from "react";
 import { auth } from "../Firebase/Firebase";
@@ -10,6 +10,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import ErrorNotification from "../../Components/Snackbar/ErrorSnackbar";
 import Reset from "../ResetUser/Reset";
 import LiquidButtonWrapper from "../../Utility/Styles/CustomButtonStyles/LiquidButton.styles.js";
+import { startSession, endSession} from "../Storage/Session";
 
 export default function Login(props) {
   const userRef = useRef();
@@ -25,6 +26,7 @@ export default function Login(props) {
   useEffect(() => {
     userRef.current.focus();
   }, []);
+  
 
   const handleLogin = () => {
     setIsLoading(true);
@@ -36,8 +38,7 @@ export default function Login(props) {
         if (user.emailVerified) {
           // Allow 
           const path = "/homepage";
-          sessionStorage.setItem("user", JSON.stringify(user));
-          sessionStorage.setItem("userName", JSON.stringify(user.displayName));
+          startSession(user);
           const timeout = setTimeout(() => {
             navigate(path);
             setIsLoading(false);
@@ -52,8 +53,7 @@ export default function Login(props) {
           setIsOpen(true);
           navigate("/");
           setIsLoading(false);
-          sessionStorage.removeItem("user");
-          sessionStorage.removeItem("userName");
+          
           return () => clearTimeout(timer) && setIsLoading(false);
         }
       } catch (error) {
@@ -63,12 +63,13 @@ export default function Login(props) {
         setIsOpen(true);
         navigate("/");
         setIsLoading(false);
-        sessionStorage.removeItem("user");
-        sessionStorage.removeItem("userName");
+        endSession();
         return () => clearTimeout(timer) && setIsLoading(false);
       }
     }, 15000);
   };
+
+
   const handleReset = () => {
     setUserReset(true);
   };
@@ -101,7 +102,7 @@ export default function Login(props) {
           <div className="content">
             <div className="image">
               <img
-                style={{ width: "100%", height: "100%" }}
+                style={{ width: "80%", height: "80%" }}
                 src={loginImg}
                 alt="loginImg"
               />

@@ -10,6 +10,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Logout from "@mui/icons-material/Logout";
 import { logout } from "../../Authentication/Firebase/Firebase";
 import { useNavigate } from "react-router-dom";
+import { endSession } from '../../Authentication/Storage/Session';
 
 export default function CustomAvatar(props) {
     const [currUserName, setCurrUserName] = useState(null);
@@ -34,8 +35,8 @@ export default function CustomAvatar(props) {
   
     const handleLogout = () => {
       setTimeout(() => {
+        endSession();
         logout();
-        sessionStorage.clear();
       }, 10000);
   
       let path = "/";

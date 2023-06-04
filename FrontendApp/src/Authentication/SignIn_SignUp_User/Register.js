@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import loginImg from "../../imgs/LoginIcon.svg";
+import loginImg from "../../imgs/RegisterImage.svg";
 import { RegisterWrapper } from "./Auth.styles.js";
 import {
   faCheck,
@@ -146,7 +146,7 @@ export default function Register(props) {
             <div className="regcontent">
               <div className="image">
                 <img
-                  style={{ width: "90%", height: "90%" }}
+                  style={{ width: "60%", height: "60%" }}
                   src={loginImg}
                   alt="Registerimg"
                 />
