@@ -3,11 +3,10 @@ import { DescriptionEnum } from "../../Enums/DescriptionEnum";
 import { VisualizerCardWrapper } from "./VisualizerCard.styles";
 
 const slides = [
- 
   {
     title: "Sorting Algorithm",
     subtitle: "Visualizer",
-    description: "",
+    description: DescriptionEnum.SORTING_ALGORITHM_TEXT.toString(),
     image:
       "https://media.istockphoto.com/id/901172818/vector/financial-data-graph-chart-vector-illustration-trend-lines-columns-market-economy-information.jpg?s=612x612&w=0&k=20&c=lHK7Vbt6ifSUTLWjxRHNM2tqI1YPntzhVjkpFVT22uA="
   },
@@ -15,7 +14,7 @@ const slides = [
     title: "Pathfinding Algorithm",
     subtitle: "Visualizer",
     description: DescriptionEnum.PATHFINDING_ALGORITHM_TEXT.toString(),
-    image:"https://www.wallpaperup.com/uploads/wallpapers/2013/03/11/50755/3d4dc9513f36aeb3763c4d9c6fbab491.jpg"
+    image:"https://i.gifer.com/7qRB.gif"
   },
   {
     title: "Machine Learning Algorithm",
@@ -87,6 +86,20 @@ const slidesReducer = (state, event) => {
   }
 };
 
+const VisualizerClick = (Title) => {
+
+  
+  // switch(Title){
+  //   case "Pathfinding Algorithm": 
+  //     break;
+  //   case  "Sorting Algorithm":
+  //     break;
+  //   default: 
+  //     break;
+  // }
+
+}
+
 function Slide({ slide, offset }) {
   const active = offset === 0 ? true : null;
   const ref = useTilt(active);
@@ -119,7 +132,7 @@ function Slide({ slide, offset }) {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.2)", // Adjust the alpha value for darkness
+            backgroundColor: "rgba(255, 255, 255, 0.2)", // Adjust the alpha value for darkness
             filter: "blur(3px)", // Adjust the blur value as desired
           }}
         ></div>
@@ -129,7 +142,17 @@ function Slide({ slide, offset }) {
           <div className="slideDescription">
             <p>{slide.description}</p>
           </div>
+          <div class="center">
+            <button class="btn" onClick={VisualizerClick}>
+              <svg width="180px" height="60px" viewBox="0 0 180 60" class="border">
+                <polyline points="179,1 179,59 1,59 1,1 179,1" class="bg-line" />
+                <polyline points="179,1 179,59 1,59 1,1 179,1" class="hl-line" />
+              </svg>
+              <span>Let's Explore</span>
+            </button>
+          </div>
         </div>
+        
       </div>
     </div>
   );
@@ -150,7 +173,7 @@ export default function VisualizerCard(props) {
         </div>
         <div className="slides">
           {showPrevButton && (
-            <button onClick={() => dispatch({ type: "PREV" })}>‹</button>
+            <button onClick={() => dispatch({ type: "PREV" })} style={{color: "#000"}}>‹</button>
           )}
 
           {[...slides, ...slides, ...slides].map((slide, i) => {
@@ -159,7 +182,7 @@ export default function VisualizerCard(props) {
           })}
 
           {showNextButton && (
-            <button onClick={() => dispatch({ type: "NEXT" })}>›</button>
+            <button onClick={() => dispatch({ type: "NEXT" })} style={{color: "#000"}}>›</button>
           )}
         </div>
       </VisualizerCardWrapper>

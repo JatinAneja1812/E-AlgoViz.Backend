@@ -53,6 +53,7 @@ const VisualizerCardWrapper = styled.div`
   overflow: hidden;
   > .slide {
     grid-area: 1 / 2;
+    border-radius: 10px; /* Adjust the value as per your preference */
   }
 
   > button {
@@ -112,7 +113,7 @@ const VisualizerCardWrapper = styled.div`
 
   .slideSubtitle,
   .slideTitle {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: normal;
     letter-spacing: 0.2ch;
     text-transform: uppercase;
@@ -125,18 +126,67 @@ const VisualizerCardWrapper = styled.div`
 
   .slideDescription {
     margin: 50px;
-    font-size: 0.70rem;
+    font-size: 0.90rem;
     display: flex;
-    background-color: rgba(0, 0, 0, 0.5); /* Set the background color with transparency */
+    background-color: rgba(7, 101, 133, 0.8); /* Set the background color with transparency */
     padding: 10px;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     text-align: center;
+    border: 1px solid #000;
   }
 
   .slideDescription p{
     color: #fff;
+  }
+
+  .center {
+    margin-left: 28vh;
+    margin-right: 28vh;
+    width: 180px;
+    height: 60px;
+    position: absolute;
+  }
+  
+  .btn {
+    width: 180px;
+    height: 60px;
+    cursor: pointer;
+    background: transparent;
+    border: 2px solid #000;
+    outline: none;
+    transition: 1s ease-in-out;
+  }
+  
+  svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    fill: none;
+    stroke: #fff;
+    stroke-dasharray: 150 480;
+    stroke-dashoffset: 150;
+    transition: 1s ease-in-out;
+  }
+  
+  .btn:hover {
+    transition: 1s ease-in-out;
+    background-color: rgba(7, 101, 133, 0.5); /* Set the background color with transparency */
+    span {
+      transition: 1s ease-in-out;
+      color: #fff;
+    }
+  }
+  
+  .btn:hover svg {
+    stroke-dashoffset: -480;
+  }
+  
+  .btn span {
+    color: #000;
+    font-size: 18px;
+    font-weight: 100;
   }
 }
 
