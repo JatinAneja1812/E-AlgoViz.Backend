@@ -172,7 +172,7 @@ const VisualizerCardWrapper = styled.div`
   
   .btn:hover {
     transition: 1s ease-in-out;
-    background-color: rgba(7, 101, 133, 0.5); /* Set the background color with transparency */
+    background-color: rgba(7, 101, 133, 1); /* Set the background color with transparency */
     span {
       transition: 1s ease-in-out;
       color: #fff;
