@@ -14,7 +14,7 @@ export default function Topbar() {
   const [maximisedWindow, setMaximisedWindow] = useState(false);
 
   const handleCloseOnClick = () => {
-    ipcRenderer.send("close-window");
+     
   };
 
   const handleMiniOnClick = () => {
