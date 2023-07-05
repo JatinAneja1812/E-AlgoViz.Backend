@@ -47,6 +47,7 @@ export default function Register(props) {
 
   useEffect(() => {
     userRef.current.focus();
+    return () => {};
   }, []);
 
   useEffect(() => {
@@ -68,15 +69,18 @@ export default function Register(props) {
 
   useEffect(() => {
     setValidName(USER_REGEX.test(username));
+    return () => {};
   }, [username]);
 
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
+    return () => {};
   }, [email]);
 
   useEffect(() => {
     setValidPwd(PWD_REGEX.test(pwd));
     setValidMatch(pwd === matchPwd);
+    return () => {};
   }, [pwd, matchPwd]);
 
   const register = async () => {

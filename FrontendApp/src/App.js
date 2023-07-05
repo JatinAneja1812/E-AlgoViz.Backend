@@ -11,6 +11,7 @@ export default function App() {
 
   useEffect(() => {
     usedRef.className = document.getElementsByClassName("right");
+    return () => {};
   }, [usedRef]);
 
   const changeState = (e) => {

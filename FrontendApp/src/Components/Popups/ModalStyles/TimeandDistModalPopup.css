@@ -1,0 +1,15 @@
+
+.TimeAndDistContainer{
+    height: 45px;
+    width: 280px;
+    background-color: white;
+    border: 2px solid black;
+    padding-left: 20px;
+    padding-bottom: 15px;
+}
+
+.btn{
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}

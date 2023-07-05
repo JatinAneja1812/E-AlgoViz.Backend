@@ -158,6 +158,15 @@ const VisualizerCardWrapper = styled.div`
     outline: none;
     transition: 1s ease-in-out;
   }
+  .btnDisabled {
+    width: 180px;
+    height: 60px;
+    cursor: pointer;
+    background: rgba(0,0,0,0.2);
+    border: 2px solid #000;
+    outline: none;
+    transition: 1s ease-in-out;
+  }
   
   svg {
     position: absolute;
