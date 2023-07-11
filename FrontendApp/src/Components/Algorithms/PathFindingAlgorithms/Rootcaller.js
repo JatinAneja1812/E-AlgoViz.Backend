@@ -6,11 +6,13 @@ import { solve_mbfs, getNodesInShortestPathOrderMBFS } from "./BFSmultiple"; // 
 
 import { solve_astar, getNodesInShortestPathOrderASTAR } from "./Astar";
 import {
-  solve_bestfs,
+  GreedyBFS,
   getNodesInShortestPathOrderBestFS,
 } from "./BestFirstSearch";
 
 import {depthFirstSearch, getNodesInShortestPathOrderDFS} from "./DepthFirstSearch";
+import { swarmAlgorithm, getNodesInShortestPathOrderSwarm } from "./SwarmAlgorithm";
+import { convergentSwarmAlgorithm, getNodesInShortestPathOrderConvergeSwarm } from "./ConvergentSwarm";
 
 function get_paths(
   state_grid,
@@ -27,7 +29,7 @@ function get_paths(
   var nodesInShortestPathOrder = [];
   //call for switching the path finding algo
   switch (algo_type) {
-    case "Djkshtra": {
+    case "Dijkstra": {
       visitedNodesInOrder = dijkstra(grid, start_node, end_node);
       nodesInShortestPathOrder = getNodesInShortestPathOrder(end_node);
       break;
@@ -39,7 +41,7 @@ function get_paths(
       break;
     }
     case "Greedy B-F Serach": {
-      visitedNodesInOrder = solve_bestfs(grid, start_node, end_node);
+      visitedNodesInOrder = GreedyBFS(grid, start_node, end_node);
       nodesInShortestPathOrder = getNodesInShortestPathOrderBestFS(end_node);
       break;
     }
@@ -56,6 +58,16 @@ function get_paths(
     case "Depth-First Search": {
       visitedNodesInOrder = depthFirstSearch(grid, start_node, end_node);
       nodesInShortestPathOrder = getNodesInShortestPathOrderDFS(end_node);
+      break;
+    }
+    case "Swarm Algorithm": {
+      visitedNodesInOrder = swarmAlgorithm(grid, start_node, end_node);
+      nodesInShortestPathOrder = getNodesInShortestPathOrderSwarm(end_node);
+      break;
+    }
+    case "Convergent Swarm": {
+      visitedNodesInOrder = convergentSwarmAlgorithm(grid, start_node, end_node);
+      nodesInShortestPathOrder = getNodesInShortestPathOrderConvergeSwarm(end_node);
       break;
     }
     default:

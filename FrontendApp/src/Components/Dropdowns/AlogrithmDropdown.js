@@ -36,7 +36,7 @@ export default function AlgorithmDropdown( props ) {
           <MenuItem value="">
             <em>Select Algorithms</em>
           </MenuItem>
-          <MenuItem value={"Djkshtra"}>Djkshtra</MenuItem>
+          <MenuItem value={"Dijkstra"}>Dijkstra</MenuItem>
           <MenuItem value={"A* Search"}>A* Search</MenuItem>
           <MenuItem value={"Greedy B-F Serach"}>Greedy Best-First Serach</MenuItem>
           <MenuItem value={"Breadth-First Search"}>Breadth-First Search </MenuItem>
@@ -44,7 +44,6 @@ export default function AlgorithmDropdown( props ) {
           <MenuItem value={"Depth-First Search"}>Depth-First Search</MenuItem>
           <MenuItem value={"Swarm Algorithm"}>Swarm Algorithm</MenuItem>
           <MenuItem value={"Convergent Swarm"}>Convergent Swarm</MenuItem>
-          <MenuItem value={"Bidirectional Swarm"}>Bidirectional Swarm</MenuItem>
         </Select>
       </FormControl>
     </div>

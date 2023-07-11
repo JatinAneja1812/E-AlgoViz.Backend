@@ -13,6 +13,7 @@ import InstructionButton from "../Buttons/InstructionButton";
 import ClearBoardButton from "../Buttons/ClearBoardButton";
 import ClearPathButton from "../Buttons/ClearPathButton";
 import SpeedDropdown from "../Dropdowns/SpeedDropdown"; 
+import DistAndTimeButton from "../Buttons/TimeAndDistButton";
 
 export default function AppNavBar(props) {
 
@@ -71,70 +72,12 @@ export default function AppNavBar(props) {
            
             <ClearBoardButton clearBoard={props.clearBoard} />
             <ClearPathButton clearPath={props.clearPath} />
+            <DistAndTimeButton changeTimeAndDistModalShow={props.changeTimeAndDistModalShow} />
+            
           </Box>
  
           <InstructionButton />
 
-
-          {/* <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton
-                onMouseEnter={handleOpenUserMenu}
-                sx={{ p: 0 }}
-              >
-                <Avatar alt={userName} src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "5px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              keepMounted
-              PaperProps={{
-                elevation: 0,
-                sx: {
-                  overflow: "visible",
-                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                  mt: 1.5,
-                  "& .MuiAvatar-root": {
-                    width: 32,
-                    height: 32,
-                    ml: -0.5,
-                    mr: 1,
-                  },
-                  "&:before": {
-                    content: '""',
-                    display: "block",
-                    position: "absolute",
-                    top: 0,
-                    right: 14,
-                    width: 10,
-                    height: 10,
-                    bgcolor: "background.paper",
-                    transform: "translateY(-50%) rotate(45deg)",
-                    zIndex: 0,
-                  },
-                },
-              }}
-              transformOrigin={{ horizontal: "right", vertical: "top" }}
-              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem onClick={props.changeTimeAndDistModalShow}>
-                <ListItemIcon>
-                  <AvTimerIcon fontSize="small" />
-                </ListItemIcon>
-                Total Distance & Time
-              </MenuItem>
-              <MenuItem onClick={() => navigate("/homepage")}>
-                <ListItemIcon>
-                  <Logout fontSize="small" />
-                </ListItemIcon>
-                   Home
-              </MenuItem>
-            </Menu>
-          </Box> */}
         </Toolbar>
       </Container>
     </AppBar>

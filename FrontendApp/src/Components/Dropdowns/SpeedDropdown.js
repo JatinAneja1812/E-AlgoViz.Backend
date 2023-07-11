@@ -5,7 +5,7 @@ import Select from "@mui/material/Select";
 
 export default function SpeedDropdown( props ) {
 
-  const [speed, setSpeed] = useState("");
+  const [speed, setSpeed] = useState("Fast");
 
   const handleChange = (event) => {
     setSpeed(event.target.value);
@@ -14,7 +14,7 @@ export default function SpeedDropdown( props ) {
 
   useEffect(() => {
     if(props.boardCleared){
-        setSpeed("");
+        setSpeed("Fast");
         props.setBoardClear(false);
     }
     return () => {};
@@ -35,9 +35,6 @@ export default function SpeedDropdown( props ) {
           inputProps={{ 'aria-label': 'Without label' }}
           placeholder="Speed"  
         >
-          <MenuItem value="">
-            <em>Speed</em>
-          </MenuItem>
           <MenuItem value={"Fastest"}>Fastest</MenuItem>
           <MenuItem value={"Fast"}>Fast</MenuItem>
           <MenuItem value={"Medium"}>Medium</MenuItem>

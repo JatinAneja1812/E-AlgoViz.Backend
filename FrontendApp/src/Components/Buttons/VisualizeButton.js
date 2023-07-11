@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import RouteIcon from "@mui/icons-material/Route";
 
 export default function VisualizeButton(props) {
-  useEffect(() => {
-    console.log(props.algorithms);
-    return () => {};
-  }, [props.algorithms]);
 
   const handleClick = (e) => {
     props.visualizeAlgorithm(0, props.algorithms);
@@ -21,11 +17,11 @@ export default function VisualizeButton(props) {
           marginLeft: "14px",
         }}
         variant="contained"
-        hidden={props.algorithms === "" ? true : false}
+        disabled={props.algorithms === "" ? true : false}
         onClick={handleClick}
         startIcon={<RouteIcon sx={{ width: 28, height: 28 }} />}
       >
-        Visualize {props.algorithms}
+        Visualize
       </Button>
     </Stack>
   );

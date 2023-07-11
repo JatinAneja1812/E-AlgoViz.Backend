@@ -2,19 +2,21 @@ import React, { useState, useEffect } from "react";
 import Node from "./Node/Node.js";
 import AppNavBar from "../../../Components/Menu/NavigationMenu.js";
 import Infobar from "../../../Components/InfomationBar/Infobar.js";
+import AlgorithmInfoBar from "../../../Components/InfomationBar/AlgorithmInfoBar.js";
 import { solve_algorithm } from "../../../Components/Algorithms/PathFindingAlgorithms/Rootcaller.js";
 import { solve_maze } from "../../../Components/Mazes/Rootcaller.js";
+import TimeAndDistModal from "../../../Components/Popups/TimeAndDistModal.js";
 import "./PathVisualizer.styles.css";
 import visualizerSpeedValue from "../../../Utility/Hooks/GetVisualizerSpeedValue.js";
 
-let START_NODE_ROW = 10;
-let START_NODE_COL = 15;
-let FINISH_NODE_ROW = 10;
-let FINISH_NODE_COL = 25;
+let START_NODE_ROW = 15;
+let START_NODE_COL = 10;
+let FINISH_NODE_ROW = 35;
+let FINISH_NODE_COL = 10;
 let MID_NODE_ROW = -1;
 let MID_NODE_COL = -1;
-let GRIDROWS = 21;
-let GRIDCOLS = 50;
+let GRIDCOLS = 21;
+let GRIDROWS = 50;
 
 let algo;
 let TIME = 0;
@@ -25,7 +27,7 @@ export default function PathAlgoVisualizer() {
   const [mouseIsPressed, setMousePressed] = useState(false);
   const [startIsSelected, setStartIsSelected] = useState(false);
   const [finishIsSelected, setFinishIsSelected] = useState(false);
-  const [nodeSize, setNodeSize] = useState((window.outerWidth - 20) / 50);
+  const [nodeSize] = useState((window.outerWidth - 21) / 50);
   const [boardCleared, setBoardClear] = useState(false);
   const [algorithms, setAlgorithms] = useState("");
   const [TimeDistShow, setTimeDistShow] = useState(false);
@@ -34,44 +36,52 @@ export default function PathAlgoVisualizer() {
   useEffect(() => {
     const g = getInitialGrid();
     setGrid(g);
-    setNodeSize((window.outerWidth - 21) / 50);
     return () => {};
   }, []);
 
   const clearBoard = () => {
-    const newGrid = grid;
+    const g = grid;
     TIME = 0;
     PATH_LENGTH = 0;
     MID_NODE_ROW = MID_NODE_COL = -1;
-    for (let row of newGrid) {
-      for (let node of row) {
+    START_NODE_ROW = 15;
+    START_NODE_COL = 10;
+    FINISH_NODE_ROW = 35;
+    FINISH_NODE_COL = 10;
+    GRIDCOLS = 21;
+    GRIDROWS = 50;
+    setMousePressed(false);
+    for (let i = 0; i < GRIDROWS; i++) {
+      for (let j = 0; j < GRIDCOLS; j++) {
+        var node = g[i][j];
+
+        document.getElementById(`node-${i}-${j}`).className = "node";
+        node.row = i;
+        node.col = j;
         node.isStart =
           node.row === START_NODE_ROW && node.col === START_NODE_COL;
         node.isFinish =
           node.row === FINISH_NODE_ROW && node.col === FINISH_NODE_COL;
-        node.distance = 1000000000;
         node.isMid = false;
         node.heuristic = 0;
-        node.isVisited = false;
-        node.previousNode = null;
         node.isWall = false;
+        node.isVisited = false;
         node.isVisited2 = false;
         node.isShortest = false;
         node.isWeight = false;
+        node.distance = 1000000000;
+        node.previousNode = null;
         node.src = 0;
-        if (node.isStart) {
-          document.getElementById(`node-${node.row}-${node.col}`).className =
-            "node-start";
-          continue;
-        }
-        if (node.isFinish) {
-          document.getElementById(`node-${node.row}-${node.col}`).className =
-            "node-finish";
-          continue;
-        }
       }
+      document.getElementById(
+        `node-${START_NODE_ROW}-${START_NODE_COL}`
+      ).className = "node-start";
+      document.getElementById(
+        `node-${FINISH_NODE_ROW}-${FINISH_NODE_COL}`
+      ).className = "node-finish";
     }
-    setGrid(newGrid);
+
+    setGrid(g);
     setBoardClear(true);
   };
 
@@ -87,7 +97,11 @@ export default function PathAlgoVisualizer() {
         node.isFinish =
           node.row === FINISH_NODE_ROW && node.col === FINISH_NODE_COL;
         node.isVisited2 = false;
-        node.isShortest = false;
+        if (node.isShortest) {
+          node.isShortest = false;
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node";
+        }
         node.distance = 1000000000;
         node.heuristic = 0;
         node.isVisited = false;
@@ -248,13 +262,6 @@ export default function PathAlgoVisualizer() {
     animateMaze(grid, visitedNodesInOrder, maze_type);
   };
 
-  useEffect(() => {
-    const g = getInitialGrid();
-    setGrid(g);
-    setNodeSize((window.outerWidth - 21) / 50);
-    return () => {};
-  }, []);
-
   return (
     <>
       <AppNavBar
@@ -271,47 +278,55 @@ export default function PathAlgoVisualizer() {
       />
 
       <Infobar />
+      <AlgorithmInfoBar algoTitle={algorithms} />
+
+      <TimeAndDistModal
+        show={TimeDistShow}
+        onHide={handleTimeDistModalShow}
+        timetaken={TIME}
+        pathtravelled={PATH_LENGTH}
+      />
 
       <div className="table">
         <div className="table-wrapper">
-              {grid.map((row, rowIdx) => (
-                <div key={rowIdx}>
-                  {row.map((node, nodeIdx) => {
-                    const {
-                      row,
-                      col,
-                      isStart, 
-                      isFinish,
-                      isWall,
-                      isWeight,
-                      isVisited,
-                      isVisited2,
-                      isMid,
-                      isShortest,
-                    } = node;
-                    return (
-                      <Node
-                        key={nodeIdx}
-                        row={row}
-                        col={col}
-                        isWall={isWall}
-                        isWeight={isWeight}
-                        isStart={isStart}
-                        isFinish={isFinish}
-                        isMid={isMid}
-                        isVisited={isVisited}
-                        isVisited2={isVisited2}
-                        isShortest={isShortest}
-                        mouseIsPressed={mouseIsPressed}
-                        onMouseDown={(row, col) => handleMouseDown(row, col)}
-                        onMouseEnter={(row, col) => handleMouseEnter(row, col)}
-                        onMouseUp={() => handleMouseUp()}
-                        nodeSize={nodeSize}
-                      />
-                    );
-                  })}
-                </div>
-              ))}
+          {grid.map((row, rowIdx) => (
+            <div key={rowIdx}>
+              {row.map((node, nodeIdx) => {
+                const {
+                  row,
+                  col,
+                  isStart,
+                  isFinish,
+                  isWall,
+                  isWeight,
+                  isVisited,
+                  isVisited2,
+                  isMid,
+                  isShortest,
+                } = node;
+                return (
+                  <Node
+                    key={nodeIdx}
+                    row={row}
+                    col={col}
+                    isWall={isWall}
+                    isWeight={isWeight}
+                    isStart={isStart}
+                    isFinish={isFinish}
+                    isMid={isMid}
+                    isVisited={isVisited}
+                    isVisited2={isVisited2}
+                    isShortest={isShortest}
+                    mouseIsPressed={mouseIsPressed}
+                    onMouseDown={(row, col) => handleMouseDown(row, col)}
+                    onMouseEnter={(row, col) => handleMouseEnter(row, col)}
+                    onMouseUp={() => handleMouseUp()}
+                    nodeSize={nodeSize}
+                  />
+                );
+              })}
+            </div>
+          ))}
         </div>
       </div>
     </>
@@ -321,11 +336,11 @@ export default function PathAlgoVisualizer() {
 const getInitialGrid = () => {
   const grid = [];
   for (let row = 0; row < 50; row++) {
-      const currentRow = [];
-      for (let col = 0; col < 21; col++) {
-          currentRow.push(createNode(col, row));
-      }
-      grid.push(currentRow);
+    const currentRow = [];
+    for (let col = 0; col < 21; col++) {
+      currentRow.push(createNode(col, row));
+    }
+    grid.push(currentRow);
   }
   return grid;
 };
@@ -334,8 +349,8 @@ const createNode = (col, row) => {
   return {
     col,
     row,
-    isStart: row === START_NODE_ROW && col === START_NODE_COL,
     isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
+    isStart: row === START_NODE_ROW && col === START_NODE_COL,
     isMid: false,
     distance: 1000000000, //unable to use Infinity here, cos deep copy does not work with infinity
     heuristic: 0,
@@ -352,11 +367,10 @@ const createNode = (col, row) => {
 const getNewGridWithWallToggled = (grid, row, col) => {
   const newGrid = grid.slice();
   const node = newGrid[row][col];
-  if (node.isStart || node.isFinish || node.isWeight)
-      return newGrid;
+  if (node.isStart || node.isFinish || node.isWeight) return newGrid;
   const newNode = {
-      ...node,
-      isWall: !node.isWall,
+    ...node,
+    isWall: !node.isWall,
   };
   newGrid[row][col] = newNode;
   return newGrid;
@@ -365,11 +379,10 @@ const getNewGridWithWallToggled = (grid, row, col) => {
 const getNewGridWithWeightToggled = (grid, row, col) => {
   const newGrid = grid.slice();
   const node = newGrid[row][col];
-  if (node.isStart || node.isFinish || node.isWall)
-      return newGrid;
+  if (node.isStart || node.isFinish || node.isWall) return newGrid;
   const newNode = {
-      ...node,
-      isWeight: !node.isWeight,
+    ...node,
+    isWeight: !node.isWeight,
   };
   newGrid[row][col] = newNode;
   return newGrid;
@@ -379,18 +392,18 @@ const getNewGridWithStartToggled = (grid, row, col) => {
   const newGrid = grid.slice();
   let previousStart = newGrid[START_NODE_ROW][START_NODE_COL];
   const change = {
-      ...previousStart,
-      isStart: false,
-  }
+    ...previousStart,
+    isStart: false,
+  };
   newGrid[START_NODE_ROW][START_NODE_COL] = change;
   START_NODE_ROW = row;
   START_NODE_COL = col;
   const node = newGrid[row][col];
   const newNode = {
-      ...node,
-      isWall: false,
-      isWeight: false,
-      isStart: true,
+    ...node,
+    isWall: false,
+    isWeight: false,
+    isStart: true,
   };
   newGrid[row][col] = newNode;
   return newGrid;
@@ -400,18 +413,18 @@ const getNewGridWithFinishToggled = (grid, row, col) => {
   const newGrid = grid.slice();
   let previousFinish = newGrid[FINISH_NODE_ROW][FINISH_NODE_COL];
   const change = {
-      ...previousFinish,
-      isFinish: false,
-  }
+    ...previousFinish,
+    isFinish: false,
+  };
   newGrid[FINISH_NODE_ROW][FINISH_NODE_COL] = change;
   FINISH_NODE_ROW = row;
   FINISH_NODE_COL = col;
   const node = newGrid[row][col];
   const newNode = {
-      ...node,
-      isWall: false,
-      isWeight: false,
-      isFinish: true,
+    ...node,
+    isWall: false,
+    isWeight: false,
+    isFinish: true,
   };
   newGrid[row][col] = newNode;
   return newGrid;
@@ -544,11 +557,11 @@ const animateAlgorithm = (
       }
 
       if (node.isStart) {
-        value += " node-start";
+        value += "node-start";
       } else if (node.isMid) {
-        value += " node-mid";
+        value += "node-mid";
       } else if (node.isFinish) {
-        value += " node-finish";
+        value += "node-finish";
       }
 
       //used to color the visited grids in order

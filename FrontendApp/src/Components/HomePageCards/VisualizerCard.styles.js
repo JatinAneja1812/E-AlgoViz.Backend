@@ -109,7 +109,7 @@ const VisualizerCardWrapper = styled.div`
   transform: translateZ(2rem);
   transition: opacity 0.3s linear;
   text-shadow: 0 0.1rem 1rem #000;
-  opacity: 0;
+  opacity: 0.3;
 
   .slideSubtitle,
   .slideTitle {
@@ -158,26 +158,6 @@ const VisualizerCardWrapper = styled.div`
     outline: none;
     transition: 1s ease-in-out;
   }
-  .btnDisabled {
-    width: 180px;
-    height: 60px;
-    cursor: pointer;
-    background: rgba(0,0,0,0.2);
-    border: 2px solid #000;
-    outline: none;
-    transition: 1s ease-in-out;
-  }
-  
-  svg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    fill: none;
-    stroke: #fff;
-    stroke-dasharray: 150 480;
-    stroke-dashoffset: 150;
-    transition: 1s ease-in-out;
-  }
   
   .btn:hover {
     transition: 1s ease-in-out;
@@ -196,6 +176,34 @@ const VisualizerCardWrapper = styled.div`
     color: #000;
     font-size: 18px;
     font-weight: 100;
+  }
+
+  .btnDisabled {
+    width: 180px;
+    height: 60px;
+    cursor: pointer;
+    background: rgba(7, 101, 133,0.6);
+    border: 2px solid #000;
+    outline: none;
+    color:#fff;
+    transition: 1s ease-in-out;
+  }
+
+  .btnDisabled span {
+    color: #000;
+    font-size: 18px;
+    font-weight: 100;
+  }
+
+  svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    fill: none;
+    stroke: #fff;
+    stroke-dasharray: 150 480;
+    stroke-dashoffset: 150;
+    transition: 1s ease-in-out;
   }
 }
 

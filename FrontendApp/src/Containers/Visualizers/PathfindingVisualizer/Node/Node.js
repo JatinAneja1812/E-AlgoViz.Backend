@@ -21,7 +21,6 @@ const Node = (props) => {
 
   const classNames = useMemo(() => {
     let extra = "";
-
     if (isShortest && isStart) extra = "node-start node-shortest-path-2";
     else if (isShortest && isMid) extra = "node-mid node-shortest-path-2";
     else if (isShortest && isFinish) extra = "node-finish node-shortest-path-2";

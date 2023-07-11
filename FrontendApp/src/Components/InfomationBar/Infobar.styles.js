@@ -4,7 +4,7 @@ const InfobarWrapper = styled.div`
     display: flex;
     height: 60px;
     width: 100%;
-    top:8vh;
+    top: 72px;
     position: relative;
     background-color: white;
     overflow: none;

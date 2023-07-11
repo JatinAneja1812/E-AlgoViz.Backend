@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useReducer, useRef } from "react";
-import { DescriptionEnum } from "../../Enums/DescriptionEnum";
+import { DescriptionEnum } from "../../Enums/HomeCardsDescriptionEnum";
 import { VisualizerCardWrapper } from "./VisualizerCard.styles";
 import { useNavigate } from "react-router-dom";
 import CircularStatic from "../../Utility/Hooks/LoadingWithLabel";
@@ -32,7 +32,7 @@ function useTilt(active) {
 
   useEffect(() => {
     if (!ref.current || !active) {
-      return () => {};
+      return;
     }
 
     const state = {
@@ -45,7 +45,7 @@ function useTilt(active) {
 
     const handleMouseMove = (e) => {
       if (!el) {
-        return () => {};
+        return;
       }
       if (!state.rect) {
         state.rect = el.getBoundingClientRect();
@@ -66,7 +66,7 @@ function useTilt(active) {
     };
   }, [active]);
 
-  return () => ref;
+  return ref;
 }
 
 const initialState = {
@@ -168,7 +168,7 @@ function Slide({ slide, offset }) {
             >
               {isLoading ? (
                 <div>
-                  <CircularStatic isLoading={isLoading} />
+                  <CircularStatic isLoading={isLoading}  />
                 </div>
               ) : (
                 <>

@@ -1,34 +1,56 @@
 export function depthFirstSearch(grid, startNode, finishNode) {
-    if (!startNode || !finishNode || startNode === finishNode) {
-      return false;
+  const visitedNodesInOrder = [];
+  // stack to keep track of the visited nodes
+  const stack = []; 
+  stack.push(startNode);
+  while (stack.length) {
+    const currNode = stack.pop();
+    // if the finsih node is reached then we return the visitedNodes array
+    if (currNode === finishNode) 
+      return visitedNodesInOrder;
+
+    // we skip the nodes which are walls, start node or finish node
+    if (!currNode.isWall && (currNode.isStart || !currNode.isVisited)) {
+      currNode.isVisited = true;
+      visitedNodesInOrder.push(currNode);
+      const { row, col } = currNode;
+      updateUnvisitedNeighbours(row, col, stack, grid,currNode);
     }
-    let unvisitedNodes = [];
-    let visitedNodesInOrder = [];
-    unvisitedNodes.push(startNode);
-    while (unvisitedNodes.length !== 0) {
-      let closestNode = unvisitedNodes.shift();
-      if (closestNode.isWall) continue;
-      if (closestNode === finishNode) return visitedNodesInOrder;
-      visitedNodesInOrder.push(closestNode);
-      closestNode.isVisited = true;
-      let unvisitedNeighbours = getUnvisitedNeighbours(closestNode, grid);
-      for (let unvisitedNeighbour of unvisitedNeighbours) {
-        unvisitedNeighbour.previousNode = closestNode;
-        unvisitedNodes.unshift(unvisitedNeighbour);
-      }
-    }
-    return visitedNodesInOrder;
   }
+}
+
   
-  function getUnvisitedNeighbours(node, grid) {
-    let neighbours = [];
-    let { row, col } = node;
-    if (col !== 0) neighbours.push(grid[row][col - 1]);
-    if (row !== 0) neighbours.push(grid[row - 1][col]);
-    if (col !== grid[0].length - 1) neighbours.push(grid[row][col + 1]);
-    if (row !== grid.length - 1) neighbours.push(grid[row + 1][col]);
-    return neighbours.filter((neighbour) => !neighbour.isVisited);
+function  updateUnvisitedNeighbours(row, col, stack, grid,currNode) {
+  let next;
+  if (row > 0) {
+    next = grid[row - 1][col];
+    if (!next.isVisited) {
+      next.previousNode = currNode;
+      stack.push(next);
+    }
   }
+  if (row < grid.length - 1) {
+    next = grid[row + 1][col];
+    if (!next.isVisited) {
+      next.previousNode = currNode;
+      stack.push(next);
+    }
+  }
+  if (col < grid[0].length - 1) {
+    next = grid[row][col + 1];
+    if (!next.isVisited) {
+      next.previousNode = currNode;
+      stack.push(next);
+    }
+  }
+  if (col > 0) {
+    next = grid[row][col - 1];
+    if (!next.isVisited) {
+      next.previousNode = currNode;
+      stack.push(next);
+    }
+  }
+}
 
   // Backtracks from the finishNode to find the shortest path.
  
