@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Topbar from "./Components/Topbar/Topbar";
 import './index.css';
 import App from './App';
-import HomePage from "./Containers/HomePage/Homepage"; 
+import HomePage from "./Containers/HomePage/Homepage.js"; 
+import PathAlgoVisualizer from './Containers/Visualizers/PathfindingVisualizer/PathVisualizer.js';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/homepage" element={<HomePage/>} />
+        <Route path="/pathfindingvisualizer" element={<PathAlgoVisualizer/>} />
       </Routes>
     </Router>
   </React.StrictMode>,

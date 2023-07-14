@@ -1,0 +1,196 @@
+.grid {
+    margin: 0 0 0;
+    font-size: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.container-1 {
+    margin: 0 auto;
+    text-align: center;
+    justify-content: space-around;
+}
+
+.popupmain {
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    height: 118%;
+    margin-top: -57px;
+    background: rgba(0, 0, 0, 0.203);
+    z-index: 1001;
+}
+
+.popupmainTutorial {
+    text-align: center;
+    position: fixed;
+    margin-left: -398px;
+    background: rgba(0, 0, 0, 0.203);
+    z-index: 99;
+}
+
+
+.popup {
+    width: 80%;
+    height: 95%;
+    background: linear-gradient(90deg, #dfdfdf, #ffffff 100%);
+    background-size: cover;
+    position: absolute;
+    box-shadow: 1px 0px 1px 3px white;
+    text-align: center;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.btnGroup {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#tutorial {
+    position: absolute;
+    z-index: 3;
+    background-color: rgba(255, 255, 255, 1);
+    width: 55%;
+    height: 72%;
+    border-radius: 4px;
+    text-align: center;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+#textGroup {
+    position: absolute;
+    z-index: 3;
+    background-color: rgba(255, 255, 255, 1);
+    margin-top: -3%;
+    width: 95%;
+    height: 72%;
+    color: black;
+    text-align: center;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    bottom: 0;
+    top: -154px;
+    left: 0;
+    right: 0;
+}
+
+#nextButton {
+    color: #ffffff;
+    background-color: #1971cf;
+    position: absolute;
+    right: 2%;
+    bottom: 2%;
+}
+
+#disabledNext{
+    color: #ffffff;
+    background-color: #868b8a;
+    position: absolute;
+    right: 2%;
+    bottom: 2%;
+}
+
+#previousButton {
+    color: #ffffff;
+    background-color: #1971cf;
+    position: absolute;
+    right: 12%;
+    bottom: 2%;
+}
+
+#skipButton {
+    color: #ffffff;
+    background-color:  #1971cf;
+    position: absolute;
+    left: 2%;
+    bottom: 2%;
+}
+
+#finishButton {
+    color: #ffffff;
+    background-color: #1971cf;
+    position: absolute;
+    right: 2%;
+    bottom: 2%;
+}
+
+#finishButton:hover,
+#nextButton:hover,
+#previousButton:hover,
+#skipButton:hover {
+    background-color: #438bd8;
+}
+
+#tutorialCounter {
+    position: absolute;
+    right: 2%;
+    top: 2%;
+}
+
+#mainTutorialImage {
+    width: 25%;
+    padding-top: 5px;
+    background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Ficonscout.com%2Ficon%2Froute-1613303&psig=AOvVaw04jGY6o-41duSOHFKDoM2n&ust=1663789625399000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCOiH_NaRpPoCFQAAAAAdAAAAABAI");
+}
+
+#secondTutorialImage {
+    padding-top: 5px;
+}
+#fouthTutorialImage{
+    padding-top: 5px;
+    height: 37vh;
+}
+
+#thirdTutorialImage {
+    margin-left: 50px;
+    border: 1px solid #CCC;
+    top: -12vh;
+    position: relative;
+}
+
+#textGroup>h3 {
+    font-size: 250%;
+    text-shadow: 1px 1px 1px rgb(80, 79, 79), 2px 2px 1px rgb(75, 112, 118);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 500;
+    padding-bottom: 0px;
+}
+
+#textGroup>h4 {
+    font-size: 20px;
+    font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 0px 20px 0px 20px;
+}
+
+#textGroup>p {
+    font-size: 110%;
+    font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 0px 20px 0px 20px;
+}
+
+#textGroup>ul li {
+    list-style: none;
+    padding-bottom: 5px;
+    padding-right: 40px;
+    font-size: 14px;
+}
+

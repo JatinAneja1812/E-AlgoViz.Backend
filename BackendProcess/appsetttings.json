@@ -1,0 +1,9 @@
+{
+  "Jwt": {
+    "Key": "Ls9Sl73hyxRui1QB0Z3LRFKYFDLW4ysN9oiGnxMwKCM=",
+    "Issuer": "JatinAneja"
+  },
+  "Encryption": {
+    "EncryptionKey": "Jatin123AppSettings"
+  }
+}

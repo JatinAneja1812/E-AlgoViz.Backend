@@ -1,6 +1,3 @@
-// This is the Main of the application. It has 2 parts starting main electron application  running as create-react-app on localhost:3000
-// and Serve at using Node.js and express.js on localhost:8080
-
 const path = require("path");
 const {
   app,
@@ -8,33 +5,31 @@ const {
   ipcMain,
   Tray,
   Menu,
-  nativeImage,
-  shell,
-  BrowserView,
-  session,
-  screen,
+  shell
 } = require("electron");
-const { ConnectionBuilder } = require("electron-cgi");
 const isDev = require("electron-is-dev");
-const menuTemplate = require("../src/Components/Menu/ElectronMenuTemplate");
+const child = require('child_process').execFile;
+const fetch = require('electron-fetch').default
 
 let mainWindow = null;
+let tray = null;
 
 let connString = isDev
   ? path.normalize(path.join(__dirname, "\\Backend\\BackendProcess.exe"))
   : path.normalize(
       path.join(process.resourcesPath, "\\Backend\\BackendProcess.exe")
     );
-let connection = new ConnectionBuilder().connectTo(connString).build();
 
-connection.onDisconnect = () => {
-  console.log("lost");
-  alert("Connection lost, restarting...");
-  connection = new ConnectionBuilder().connectTo(connString).build();
-};
+child(connString, function(err, data) {
+  if(err){
+      console.error(err);
+      return;
+  }
+});
+
 
 function createWindow() {
-  if (BrowserWindow.getAllWindows().length != 0) {
+  if (BrowserWindow.getAllWindows().length !== 0) {
     return;
   }
   // Create the browser window.
@@ -56,10 +51,7 @@ function createWindow() {
   });
 
   mainWindow.maximize();
-  // mainWindow.setResizable(false);
   mainWindow.on("unmaximize", () => mainWindow.maximize());
-  // and load the index.html of the app.
-  // win.loadFile("index.html");
   mainWindow.loadURL(
     isDev
       ? "http://localhost:3000"
@@ -71,53 +63,56 @@ function createWindow() {
   }
 
   mainWindow.once("ready-to-show", () => mainWindow.show());
-
-  // reload on Maximizing and on clicking Algorith visualizer on Topbar
   mainWindow.on("maximize", () => {
     mainWindow.reload();
   });
-
-  // Emitted when the window is closed.
   mainWindow.on("closed", function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     mainWindow = null;
   });
   mainWindow.webContents.on("new-window", (event, url) => {
     event.preventDefault();
     mainWindow.loadURL(url);
   });
-
 }
 
-// const menuContents = Menu.buildFromTemplate(menuTemplate(mainWindow));
+function createTray(){
+  tray = new Tray(path.join('src/imgs/icons','AppIcon.png'))
 
-// let menuItem = menuContents.getMenuItemById("ViewMenu");
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Help/Documentation',
+      click: _ => {
+        shell.openExternal('https://your-documentation-url.com');  //TODO: PROVICE APP DOCUMENETATION and USER GUIDE
+      }
+    },
+    {
+      label: 'Support/Contact',
+      click: _ => {
+        shell.openExternal('mailto:e-algovishelp@gmail.com');
+      }
+    },
+    {
+      label:'Quit',
+      click: _ => app.quit()
+    }
+  ])
+  tray.setContextMenu(contextMenu)
+  tray.setToolTip('E-AlgoVis')
+}
 
-// menuItem.submenu.append(
-//   new MenuItem({
-//     label: "Dark Mode",
-//     click: () => {
-//       mainWindow.webContents.executeJavaScript(`
-//       var element = document.body; element.classList.toggle("dark-mode");`);
-//       mainWindow.webContents.executeJavaScript(`
-//       document.getElementsByClassName("container").classList.toggle("darkContainer");`);
-//     },
-//   })
-// );
-
-// Menu.setApplicationMenu(menuContents);
-
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.whenReady().then((_) => {
   createWindow();
+  createTray();
 });
 
 ipcMain.on("close-window", (_) => {
-  app.quit();
+  if (process.platform !== 'darwin') {
+    // For platforms other than macOS
+    if (tray) {
+      tray.destroy();
+    }
+    app.quit();
+  }
 });
 
 ipcMain.on("minimise-window", (_) => {
@@ -144,10 +139,27 @@ ipcMain.on("greeting", async (event, data) => {
   );
   if (BrowserWindow.getAllWindows().length === 1) {
     try {
-      const greeting = await connection.send("greeting", "John");
-      console.log(greeting);
+      console.log("In Fetch");
+      console.log(data);
+      fetch(
+        "http://localhost:5000/api/frontend/hello?",
+        {
+          method: "GET",
+          headers: {
+            Accept: "text/plain",
+            "Content-Type": "text/plain",
+          },
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          console.log(result);
+        });
     } catch (err) {
-      console.log(err); //err is the serialized exception thrown in the .NET handler for the greeting request
+      console.log(err);
     }
   }
 });
+

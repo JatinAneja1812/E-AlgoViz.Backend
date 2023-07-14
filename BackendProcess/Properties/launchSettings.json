@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SentinelCollector.BackendProcess": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

@@ -46,7 +46,7 @@ export default function CustomAvatar(props) {
     return(
         <AvatarWrapper>
             <Stack direction="row" spacing={2}>
-                <Tooltip className='AvatarToolTip'>
+                <Tooltip className='AvatarToolTip' title="Avatar ToolTip">
                     <IconButton
                         onMouseEnter={handleOpenUserMenu}
                         sx={{ p: 0 }}
