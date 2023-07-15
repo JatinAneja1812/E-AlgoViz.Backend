@@ -10,7 +10,7 @@ const slides = [
     subtitle: "Visualizer",
     description: DescriptionEnum.SORTING_ALGORITHM_TEXT.toString(),
     image:
-      "https://media.istockphoto.com/id/901172818/vector/financial-data-graph-chart-vector-illustration-trend-lines-columns-market-economy-information.jpg?s=612x612&w=0&k=20&c=lHK7Vbt6ifSUTLWjxRHNM2tqI1YPntzhVjkpFVT22uA=",
+      "https://upload.wikimedia.org/wikipedia/commons/4/46/Comb_sort_demo.gif",
   },
   {
     title: "Pathfinding Algorithm",

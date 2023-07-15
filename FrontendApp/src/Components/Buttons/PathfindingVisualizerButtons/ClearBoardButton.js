@@ -15,6 +15,7 @@ export default function ClearBoardButton(props) {
         style={{background:"transparent", marginLeft:'14px'}}
         variant="contained"
         onClick={handleClear}
+        disabled={props.isRunning ? true : false}
         startIcon={
           <CleaningServicesIcon
           sx={{ width: 28, height: 28 , fontSize: "medium"}}

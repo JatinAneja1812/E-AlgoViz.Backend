@@ -15,6 +15,7 @@ export default function ClearPathButton(props) {
         style={{background:"transparent", marginLeft:'14px'}}
         variant="contained"
         onClick={handleClear}
+        disabled={props.isRunning ? true : false}
         startIcon={
           <RouteIcon
           sx={{ width: 28, height: 28 , fontSize: "medium"}}

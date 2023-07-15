@@ -14,6 +14,7 @@ import ClearBoardButton from "../Buttons/PathfindingVisualizerButtons/ClearBoard
 import ClearPathButton from "../Buttons/PathfindingVisualizerButtons/ClearPathButton";
 import SpeedDropdown from "../Dropdowns/PathfindingVisualizerDropdowns/SpeedDropdown"; 
 import DistAndTimeButton from "../Buttons/PathfindingVisualizerButtons/TimeAndDistButton";
+import ReturnButton from "../Buttons/ReturnButton";
 
 export default function AppNavBar(props) {
 
@@ -53,30 +54,36 @@ export default function AppNavBar(props) {
               algorithms={props.algorithms}
               boardCleared={props.boardCleared}
               setBoardClear={props.setBoardClear}
+              isRunning={props.isRunning}
              />
             <MazeDropdown
               visualizeMaze={props.visualizeMaze}
               boardCleared={props.boardCleared}
               setBoardClear={props.setBoardClear}
+              isRunning={props.isRunning}
 
             />
             <SpeedDropdown
              boardCleared={props.boardCleared}
              setBoardClear={props.setBoardClear}
              setVisualizerSpeed={props.setVisualizerSpeed}
+             isRunning={props.isRunning}
             />
             <VisualizeButton 
               visualizeAlgorithm={props.visualizeAlgorithm} 
               algorithms={props.algorithms}
+              setRunning={props.setRunning}
+              isRunning={props.isRunning}
             />
            
-            <ClearBoardButton clearBoard={props.clearBoard} />
-            <ClearPathButton clearPath={props.clearPath} />
-            <DistAndTimeButton changeTimeAndDistModalShow={props.changeTimeAndDistModalShow} />
+            <ClearBoardButton clearBoard={props.clearBoard} isRunning={props.isRunning}/>
+            <ClearPathButton clearPath={props.clearPath} isRunning={props.isRunning} />
+            <DistAndTimeButton changeTimeAndDistModalShow={props.changeTimeAndDistModalShow} isRunning={props.isRunning} />
             
           </Box>
  
           <InstructionButton />
+          <ReturnButton />
 
         </Toolbar>
       </Container>

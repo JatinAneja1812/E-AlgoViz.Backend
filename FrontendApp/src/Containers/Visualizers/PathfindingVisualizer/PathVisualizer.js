@@ -32,6 +32,7 @@ export default function PathAlgoVisualizer() {
   const [algorithms, setAlgorithms] = useState("");
   const [TimeDistShow, setTimeDistShow] = useState(false);
   const [visualizerSpeed, setVisualizerSpeed] = useState("");
+  const [isRunning, setRunning] = useState(false);
 
   useEffect(() => {
     const g = getInitialGrid();
@@ -250,7 +251,184 @@ export default function PathAlgoVisualizer() {
       type,
       speed
     );
+   
   };
+
+  const animateShortestPath = (
+    state_grid,
+    nodesInShortestPathOrder,
+    type,
+    speed
+  ) => {
+    //this variable is used to check in which index mid node occurs, so that we can change colors
+    let m = 100000000;
+    for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
+      const node = nodesInShortestPathOrder[i];
+      if (i === 1) continue;
+      if (
+        MID_NODE_ROW !== -1 &&
+        node.row === MID_NODE_ROW &&
+        node.col === MID_NODE_COL
+      ) {
+        m = i;
+        break;
+      }
+    }
+  
+    //animator code begins here
+    if (type === 0) {
+      for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
+        setTimeout(() => {
+          const node = nodesInShortestPathOrder[i];
+          const orig_node = state_grid[node.row][node.col];
+          orig_node.isShortest = orig_node.isVisited = true;
+  
+          let value = "";
+          if (i >= m) {
+            value = "node-shortest-path-2";
+          } else {
+            value = "node-shortest-path";
+          }
+          if (node.isStart) {
+            value += " node-start";
+          } else if (node.isMid) {
+            value += " node-mid";
+          } else if (node.isFinish) {
+            value += " node-finish";
+          }
+          document.getElementById(
+            `node-${node.row}-${node.col}`
+          ).className = `node ${value}`;
+        }, speed * i);
+      }
+    } else {
+      for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
+        const node = nodesInShortestPathOrder[i];
+        const orig_node = state_grid[node.row][node.col];
+        orig_node.isShortest = orig_node.isVisited = true;
+        if (node.isStart) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-start node-shortest-path_f";
+        } else if (node.isMid) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-mid node-shortest-path_f";
+        } else if (node.isFinish) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-finish node-shortest-path_f";
+        } else {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-shortest-path_f";
+        }
+      }
+    }
+    setRunning(false);
+  };
+  
+  const animateAlgorithm = (
+    state_grid,
+    visitedNodesInOrder,
+    nodesInShortestPathOrder,
+    type,
+    speed
+  ) => {
+    //this variable is used to check in which index mid node occurs, so that we can change colors
+    let m = 10000000;
+    for (let i = 0; i < visitedNodesInOrder.length; i++) {
+      const node = visitedNodesInOrder[i];
+      if (i === 1) continue;
+      if (
+        MID_NODE_ROW !== -1 &&
+        node.row === MID_NODE_ROW &&
+        node.col === MID_NODE_COL
+      ) {
+        m = i;
+        break;
+      }
+    }
+  
+    //animator code begins here
+    if (type === 0) {
+      for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+        // use to color the final path, yellow in the end
+        if (i === visitedNodesInOrder.length) {
+          setTimeout(() => {
+            animateShortestPath(
+              state_grid,
+              nodesInShortestPathOrder,
+              type,
+              speed
+            );
+          }, speed * i);
+          return;
+        }
+  
+        //yellow blinker to indicate current position
+        const node = visitedNodesInOrder[i];
+        setTimeout(() => {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node_current";
+        }, speed * i - 15);
+        setTimeout(() => {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node";
+        }, speed * i - 5);
+  
+        //condition to check if I have to change color
+        let value = "";
+        if (i >= m) {
+          value = "node_vis_2";
+        } else {
+          value = "node_vis";
+        }
+  
+        if (node.isStart) {
+          value += "node-start";
+        } else if (node.isMid) {
+          value += "node-mid";
+        } else if (node.isFinish) {
+          value += "node-finish";
+        }
+  
+        //used to color the visited grids in order
+        setTimeout(() => {
+          const orig_node = state_grid[node.row][node.col];
+          orig_node.isVisited = true;
+          if (node.isStart === true) orig_node.isStart = true;
+          document.getElementById(
+            `node-${node.row}-${node.col}`
+          ).className = `node ${value}`;
+        }, speed * i);
+      }
+    } else {
+      for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+        if (i === visitedNodesInOrder.length) {
+          animateShortestPath(state_grid, nodesInShortestPathOrder, type, speed);
+          return;
+        }
+        const node = visitedNodesInOrder[i];
+        const orig_node = state_grid[node.row][node.col];
+        let value = "";
+        if (i >= m) {
+          value = "node_vis_f_2";
+          orig_node.isVisited2 = true;
+        } else {
+          value = "node_vis_f";
+          orig_node.isVisited = true;
+        }
+  
+        if (node.isStart) {
+          value += " node-start";
+        } else if (node.isMid) {
+          value += " node-mid";
+        } else if (node.isFinish) {
+          value += " node-finish";
+        }
+        document.getElementById(
+          `node-${node.row}-${node.col}`
+        ).className = `node ${value}`;
+      }
+    }
+  };  
 
   function handleMaze(maze_type) {
     return solve_maze(grid, GRIDROWS, GRIDCOLS, maze_type);
@@ -275,6 +453,8 @@ export default function PathAlgoVisualizer() {
         visualizeMaze={visualizeMaze}
         setVisualizerSpeed={setVisualizerSpeed}
         changeTimeAndDistModalShow={handleTimeDistModalShow}
+        setRunning={setRunning}
+        isRunning={isRunning}
       />
 
       <Infobar />
@@ -428,181 +608,6 @@ const getNewGridWithFinishToggled = (grid, row, col) => {
   };
   newGrid[row][col] = newNode;
   return newGrid;
-};
-
-const animateShortestPath = (
-  state_grid,
-  nodesInShortestPathOrder,
-  type,
-  speed
-) => {
-  //this variable is used to check in which index mid node occurs, so that we can change colors
-  let m = 100000000;
-  for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
-    const node = nodesInShortestPathOrder[i];
-    if (i === 1) continue;
-    if (
-      MID_NODE_ROW !== -1 &&
-      node.row === MID_NODE_ROW &&
-      node.col === MID_NODE_COL
-    ) {
-      m = i;
-      break;
-    }
-  }
-
-  //animator code begins here
-  if (type === 0) {
-    for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
-      setTimeout(() => {
-        const node = nodesInShortestPathOrder[i];
-        const orig_node = state_grid[node.row][node.col];
-        orig_node.isShortest = orig_node.isVisited = true;
-
-        let value = "";
-        if (i >= m) {
-          value = "node-shortest-path-2";
-        } else {
-          value = "node-shortest-path";
-        }
-        if (node.isStart) {
-          value += " node-start";
-        } else if (node.isMid) {
-          value += " node-mid";
-        } else if (node.isFinish) {
-          value += " node-finish";
-        }
-        document.getElementById(
-          `node-${node.row}-${node.col}`
-        ).className = `node ${value}`;
-      }, speed * i);
-    }
-  } else {
-    for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
-      const node = nodesInShortestPathOrder[i];
-      const orig_node = state_grid[node.row][node.col];
-      orig_node.isShortest = orig_node.isVisited = true;
-      if (node.isStart) {
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          "node node-start node-shortest-path_f";
-      } else if (node.isMid) {
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          "node node-mid node-shortest-path_f";
-      } else if (node.isFinish) {
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          "node node-finish node-shortest-path_f";
-      } else {
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          "node node-shortest-path_f";
-      }
-    }
-  }
-};
-
-const animateAlgorithm = (
-  state_grid,
-  visitedNodesInOrder,
-  nodesInShortestPathOrder,
-  type,
-  speed
-) => {
-  //this variable is used to check in which index mid node occurs, so that we can change colors
-  let m = 10000000;
-  for (let i = 0; i < visitedNodesInOrder.length; i++) {
-    const node = visitedNodesInOrder[i];
-    if (i === 1) continue;
-    if (
-      MID_NODE_ROW !== -1 &&
-      node.row === MID_NODE_ROW &&
-      node.col === MID_NODE_COL
-    ) {
-      m = i;
-      break;
-    }
-  }
-
-  //animator code begins here
-  if (type === 0) {
-    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
-      // use to color the final path, yellow in the end
-      if (i === visitedNodesInOrder.length) {
-        setTimeout(() => {
-          animateShortestPath(
-            state_grid,
-            nodesInShortestPathOrder,
-            type,
-            speed
-          );
-        }, speed * i);
-        return;
-      }
-
-      //yellow blinker to indicate current position
-      const node = visitedNodesInOrder[i];
-      setTimeout(() => {
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          "node node_current";
-      }, speed * i - 15);
-      setTimeout(() => {
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          "node";
-      }, speed * i - 5);
-
-      //condition to check if I have to change color
-      let value = "";
-      if (i >= m) {
-        value = "node_vis_2";
-      } else {
-        value = "node_vis";
-      }
-
-      if (node.isStart) {
-        value += "node-start";
-      } else if (node.isMid) {
-        value += "node-mid";
-      } else if (node.isFinish) {
-        value += "node-finish";
-      }
-
-      //used to color the visited grids in order
-      setTimeout(() => {
-        const orig_node = state_grid[node.row][node.col];
-        orig_node.isVisited = true;
-        if (node.isStart === true) orig_node.isStart = true;
-        document.getElementById(
-          `node-${node.row}-${node.col}`
-        ).className = `node ${value}`;
-      }, speed * i);
-    }
-  } else {
-    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
-      if (i === visitedNodesInOrder.length) {
-        animateShortestPath(state_grid, nodesInShortestPathOrder, type, speed);
-        return;
-      }
-      const node = visitedNodesInOrder[i];
-      const orig_node = state_grid[node.row][node.col];
-      let value = "";
-      if (i >= m) {
-        value = "node_vis_f_2";
-        orig_node.isVisited2 = true;
-      } else {
-        value = "node_vis_f";
-        orig_node.isVisited = true;
-      }
-
-      if (node.isStart) {
-        value += " node-start";
-      } else if (node.isMid) {
-        value += " node-mid";
-      } else if (node.isFinish) {
-        value += " node-finish";
-      }
-      document.getElementById(
-        `node-${node.row}-${node.col}`
-      ).className = `node ${value}`;
-    }
-  }
 };
 
 const animateMaze = (state_grid, visitedNodesInOrder, maze_type) => {

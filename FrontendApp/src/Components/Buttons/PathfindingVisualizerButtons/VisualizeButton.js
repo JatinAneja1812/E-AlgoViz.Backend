@@ -6,7 +6,9 @@ import RouteIcon from "@mui/icons-material/Route";
 export default function VisualizeButton(props) {
 
   const handleClick = (e) => {
+    props.setRunning(true);
     props.visualizeAlgorithm(0, props.algorithms);
+   
   };
 
   return (
@@ -17,7 +19,7 @@ export default function VisualizeButton(props) {
           marginLeft: "14px",
         }}
         variant="contained"
-        disabled={props.algorithms === "" ? true : false}
+        disabled={props.algorithms === "" ? true : props.isRunning ? true : false}
         onClick={handleClick}
         startIcon={<RouteIcon sx={{ width: 28, height: 28 }} />}
       >

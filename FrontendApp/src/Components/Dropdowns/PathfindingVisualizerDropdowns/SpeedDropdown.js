@@ -30,6 +30,7 @@ export default function SpeedDropdown( props ) {
           value={speed}
           label="Speed"
           onChange={handleChange}
+          disabled={props.isRunning ? true : false}
           style={{color:"#ffffff", border: "#ffffff"}}
           displayEmpty
           inputProps={{ 'aria-label': 'Without label' }}

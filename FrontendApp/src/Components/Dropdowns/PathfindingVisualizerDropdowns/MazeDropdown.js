@@ -27,6 +27,7 @@ export default function MazeDropdown(props) {
           id="demo-simple-select-autowidth"
           value={maze}
           label="Algorithm"
+          disabled={props.isRunning ? true : false}
           onChange={handleChange}
           style={{color:"#ffffff", border: "#ffffff"}}
           displayEmpty

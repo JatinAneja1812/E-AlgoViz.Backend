@@ -28,6 +28,7 @@ export default function AlgorithmDropdown( props ) {
           value={props.algorithms}
           label="Algorithm"
           onChange={handleChange}
+          disabled={props.isRunning ? true : false}
           style={{color:"#ffffff", border: "#ffffff"}}
           displayEmpty
           inputProps={{ 'aria-label': 'Without label' }}

@@ -15,6 +15,7 @@ export default function DistAndTimeButton(props) {
         style={{background:"transparent", marginLeft:'14px'}}
         variant="contained"
         onClick={handleModalOpen}
+        disabled={props.isRunning ? true : false}
         startIcon={
           <TimerIcon
           sx={{ width: 28, height: 28 , fontSize: "medium"}}
