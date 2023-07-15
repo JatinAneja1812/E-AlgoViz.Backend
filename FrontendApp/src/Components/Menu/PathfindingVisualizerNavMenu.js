@@ -6,14 +6,14 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
-import AlgorithmDropdown from "../Dropdowns/AlogrithmDropdown";
-import MazeDropdown from "../Dropdowns/MazeDropdown";
-import VisualizeButton from "../Buttons/VisualizeButton";
-import InstructionButton from "../Buttons/InstructionButton";
-import ClearBoardButton from "../Buttons/ClearBoardButton";
-import ClearPathButton from "../Buttons/ClearPathButton";
-import SpeedDropdown from "../Dropdowns/SpeedDropdown"; 
-import DistAndTimeButton from "../Buttons/TimeAndDistButton";
+import AlgorithmDropdown from "../Dropdowns/PathfindingVisualizerDropdowns/AlogrithmDropdown";
+import MazeDropdown from "../Dropdowns/PathfindingVisualizerDropdowns/MazeDropdown";
+import VisualizeButton from "../Buttons/PathfindingVisualizerButtons/VisualizeButton";
+import InstructionButton from "../Buttons/PathfindingVisualizerButtons/InstructionButton";
+import ClearBoardButton from "../Buttons/PathfindingVisualizerButtons/ClearBoardButton";
+import ClearPathButton from "../Buttons/PathfindingVisualizerButtons/ClearPathButton";
+import SpeedDropdown from "../Dropdowns/PathfindingVisualizerDropdowns/SpeedDropdown"; 
+import DistAndTimeButton from "../Buttons/PathfindingVisualizerButtons/TimeAndDistButton";
 
 export default function AppNavBar(props) {
 

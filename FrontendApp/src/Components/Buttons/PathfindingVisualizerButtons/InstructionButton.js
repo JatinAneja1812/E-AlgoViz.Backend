@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
-import InstructionMainPopup from "../Popups/InstructionMainPopup";
+import InstructionMainPopup from "../../Popups/InstructionMainPopup";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 export default function VisualizeButton() {

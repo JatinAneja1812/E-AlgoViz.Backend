@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AlgoInfoWrapper from "./AlgorithmInfoBar.styles";
+import AlgoInfoWrapper from "./PathfindingAlgorithmInfoBar.styles";
 import { AlgorithmDescriptionEnum } from "../../Enums/AlgoDescriptionEnum";
 
 export default function AlgorithmInfoBar(props) {
