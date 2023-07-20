@@ -5,7 +5,7 @@ import { Tooltip } from "antd";
 import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from "react-router-dom";
 
-export default function ReturnButton(){
+export default function ReturnButton(props){
 
     let navigate = useNavigate();
 
@@ -23,6 +23,14 @@ export default function ReturnButton(){
       };
     }, [arrow]);
   
+    const handleDisableState = () => {
+        if(props.isPathfindingVisualizerRunning){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     return (
     <Stack direction="row" spacing={6}>
         <Tooltip placement="top" title={"Home"} arrow={mergedArrow}>
@@ -32,9 +40,11 @@ export default function ReturnButton(){
               marginLeft: "95px",
               color: "#fff",
               top: "-1px",
+              cursor: "pointer",
               fontSize: "50px",
               marginRight: "-6rem",
             }}
+            disabled={handleDisableState()} // Corrected usage of disabled prop
             variant="contained"
             onClick={() => navigate('/homepage')}
           >

@@ -29,7 +29,7 @@ export default function MazeDropdown(props) {
           label="Algorithm"
           disabled={props.isRunning ? true : false}
           onChange={handleChange}
-          style={{color:"#ffffff", border: "#ffffff"}}
+          style={{ color: props.isRunning ? "#CCC" : "#FFF", border: "#ffffff", width: "100%"}}
           displayEmpty
           inputProps={{ 'aria-label': 'Without label' }}
           

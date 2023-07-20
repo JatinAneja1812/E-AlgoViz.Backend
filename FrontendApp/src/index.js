@@ -6,6 +6,7 @@ import './index.css';
 import App from './App';
 import HomePage from "./Containers/HomePage/Homepage.js"; 
 import PathAlgoVisualizer from './Containers/Visualizers/PathfindingVisualizer/PathVisualizer.js';
+import SortAlgoVisualizer from './Containers/Visualizers/SortingVisualizers/SortAlgoVisualizer';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Route path="/" element={<App />} />
         <Route path="/homepage" element={<HomePage/>} />
         <Route path="/pathfindingvisualizer" element={<PathAlgoVisualizer/>} />
+        <Route path="/sortingVisualizer" element={<SortAlgoVisualizer/>} />
       </Routes>
     </Router>
   </React.StrictMode>,

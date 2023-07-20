@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AlgoInfoWrapper from "./PathfindingAlgorithmInfoBar.styles";
-import { AlgorithmDescriptionEnum } from "../../Enums/AlgoDescriptionEnum";
+import { PathfindingAlgoDescriptionEnum } from "../../../Enums/PathfindingAlgoDescriptionEnum";
 
 export default function AlgorithmInfoBar(props) {
   const [algoDescription, setAlgoDescription] = useState("");
@@ -8,31 +8,31 @@ export default function AlgorithmInfoBar(props) {
   useEffect(() => {
     switch (props.algoTitle) {
       case "Dijkstra":
-        setAlgoDescription(AlgorithmDescriptionEnum.DIJKSTRA.toString());
+        setAlgoDescription(PathfindingAlgoDescriptionEnum.DIJKSTRA.toString());
         break;
       case "Breadth-First Search":
-        setAlgoDescription(AlgorithmDescriptionEnum.BREADTH_FIRST_SEARCH.toString());
+        setAlgoDescription(PathfindingAlgoDescriptionEnum.BREADTH_FIRST_SEARCH.toString());
         break;
       case "Greedy B-F Serach":
-        setAlgoDescription(AlgorithmDescriptionEnum.GREEDY_BREADTH_FIRST_SEARCH.toString());
+        setAlgoDescription(PathfindingAlgoDescriptionEnum.GREEDY_BREADTH_FIRST_SEARCH.toString());
         break;
       case "BFS-Bidirectional":
-        setAlgoDescription(AlgorithmDescriptionEnum.BREADTH_FIRST_SEARCH_BIDIRECTIONAL.toString());
+        setAlgoDescription(PathfindingAlgoDescriptionEnum.BREADTH_FIRST_SEARCH_BIDIRECTIONAL.toString());
         break;
       case "A* Search":
-        setAlgoDescription(AlgorithmDescriptionEnum.ASTART_SEARCH.toString());
+        setAlgoDescription(PathfindingAlgoDescriptionEnum.ASTART_SEARCH.toString());
         break;
       case "Depth-First Search":
-        setAlgoDescription(AlgorithmDescriptionEnum.DEPTH_FIRST_SEARCH.toString());
+        setAlgoDescription(PathfindingAlgoDescriptionEnum.DEPTH_FIRST_SEARCH.toString());
         break;
       case "Swarm Algorithm":
-        setAlgoDescription(AlgorithmDescriptionEnum.SWARM_ALGORITHM.toString());
+        setAlgoDescription(PathfindingAlgoDescriptionEnum.SWARM_ALGORITHM.toString());
         break;
       case "Convergent Swarm":
-        setAlgoDescription(AlgorithmDescriptionEnum.CONVERGENT_SWARM_ALGORITHM.toString());
+        setAlgoDescription(PathfindingAlgoDescriptionEnum.CONVERGENT_SWARM_ALGORITHM.toString());
         break;
       case "Bidirectional Swarm":
-        setAlgoDescription(AlgorithmDescriptionEnum.BIDIRECTIONAL_SWARM_ALGORITHM.toString());
+        setAlgoDescription(PathfindingAlgoDescriptionEnum.BIDIRECTIONAL_SWARM_ALGORITHM.toString());
         break;
       default:
         setAlgoDescription("Welcome to Pathfinding Algorithm Visualizer");

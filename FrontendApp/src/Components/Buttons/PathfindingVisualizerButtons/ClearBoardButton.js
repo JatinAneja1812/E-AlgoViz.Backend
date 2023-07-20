@@ -12,7 +12,11 @@ export default function ClearBoardButton(props) {
   return (
     <Stack direction="row" spacing={6}>
       <Button
-        style={{background:"transparent", marginLeft:'14px'}}
+        style={{
+          background: "transparent",
+          marginLeft: "14px",
+          color: props.isRunning ? "#CCC" : "#FFF"
+        }}
         variant="contained"
         onClick={handleClear}
         disabled={props.isRunning ? true : false}

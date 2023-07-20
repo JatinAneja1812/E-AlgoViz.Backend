@@ -1,5 +1,5 @@
 import React from "react";
-import InfobarWrapper from "./PathfindingToolsInfobar.styles";
+import InfobarWrapper from "./PathfindingComponentsInfobar.styles";
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';

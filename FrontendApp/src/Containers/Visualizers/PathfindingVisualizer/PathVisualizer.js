@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Node from "./Node/Node.js";
 import AppNavBar from "../../../Components/Menu/PathfindingVisualizerNavMenu.js";
-import Infobar from "../../../Components/InfomationBar/PathfindingToolsInfobar.js";
-import AlgorithmInfoBar from "../../../Components/InfomationBar/PathfindingAlgorithmInfoBar.js";
+import Infobar from "../../../Components/InfomationBar/PathfindingVisualizerTools/PathfindingComponentsInfobar.js";
+import AlgorithmInfoBar from "../../../Components/InfomationBar/PathfindingVisualizerTools/PathfindingAlgorithmInfoBar.js";
 import { solve_algorithm } from "../../../Components/Algorithms/PathFindingAlgorithms/Rootcaller.js";
 import { solve_maze } from "../../../Components/Mazes/Rootcaller.js";
 import TimeAndDistModal from "../../../Components/Popups/TimeAndDistModal.js";

@@ -99,7 +99,7 @@ function Slide({ slide, offset }) {
     switch (Title) {
       case "Pathfinding Algorithm":
         setIsLoading(true);
-        const timer = setTimeout(async () => {
+        const timer1 = setTimeout(async () => {
           try {
             const path = "/pathfindingvisualizer";
             const timeout = setTimeout(() => {
@@ -111,11 +111,27 @@ function Slide({ slide, offset }) {
           } catch (error) {
             navigate("/homepage");
             setIsLoading(false);
-            return () => clearTimeout(timer) && setIsLoading(false);
+            return () => clearTimeout(timer1) && setIsLoading(false);
           }
         }, 5000);
         break;
       case "Sorting Algorithm":
+         setIsLoading(true);
+        const timer2 = setTimeout(async () => {
+          try {
+            const path = "/sortingVisualizer";
+            const timeout = setTimeout(() => {
+              navigate(path);
+              setIsLoading(false);
+            }, 3000);
+  
+            return () => clearTimeout(timeout) && setIsLoading(false);
+          } catch (error) {
+            navigate("/homepage");
+            setIsLoading(false);
+            return () => clearTimeout(timer2) && setIsLoading(false);
+          }
+        }, 5000);
         break;
       default:
         break;

@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
-import AlgorithmDropdown from "../Dropdowns/PathfindingVisualizerDropdowns/AlogrithmDropdown";
+import AlgorithmDropdown from "../Dropdowns/PathfindingVisualizerDropdowns/AlgorithmDropdown";
 import MazeDropdown from "../Dropdowns/PathfindingVisualizerDropdowns/MazeDropdown";
 import VisualizeButton from "../Buttons/PathfindingVisualizerButtons/VisualizeButton";
 import InstructionButton from "../Buttons/PathfindingVisualizerButtons/InstructionButton";
@@ -22,7 +22,7 @@ export default function AppNavBar(props) {
 
   return (
     <AppBar
-      style={{position: "absolute", top: "4vh"}}
+      style={{position: "absolute", top: "4vh", background:"#076585"}}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -33,9 +33,9 @@ export default function AppNavBar(props) {
               noWrap
               component="a"
               onClick={() => navigate('/homepage')}
-              style={{ cursor: 'pointer' }}
-              sx={{
+              style={{
                 mr: 2,
+                cursor: 'pointer',
                 display: { xs: 'none', md: 'flex' },
                 fontFamily: 'monospace',
                 fontWeight: 800,
@@ -49,6 +49,7 @@ export default function AppNavBar(props) {
           </div>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <div style={{width:"15px"}} />
             <AlgorithmDropdown 
               setAlgorithms={props.setAlgorithms}
               algorithms={props.algorithms}
@@ -83,7 +84,7 @@ export default function AppNavBar(props) {
           </Box>
  
           <InstructionButton />
-          <ReturnButton />
+          <ReturnButton isPathfindingVisualizerRunning={props.isRunning}/>
 
         </Toolbar>
       </Container>
