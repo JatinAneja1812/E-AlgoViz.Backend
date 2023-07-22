@@ -67,20 +67,21 @@ const Blocks = (props) => {
     <div className="back">
       <Typography
         style={{
-          marginTop: "12vh",
-          fontSize: "30px",
-          marginLeft: "75vw",
+          marginTop: "8vh",
+          fontSize: "27px",
+          marginLeft: "70vw",
           fontFamily: "freight-big-pro",
           fontWeight: "600",
           letterSpacing: "1.5px",
         }}
       >
-        {props.statusMessage}
+        Number of Iterations: {props.iterations}
       </Typography>
+
       <div className="blocks">
         <div
           className="blockHeight"
-          style={{ width: 1, height: 630, overflow: "hidden" }}
+          style={{ width: 1, height: 600, overflow: "hidden" }}
         />
         {props.blocks.map((block, i) => {
           // changing the color of the block if needed
@@ -109,7 +110,7 @@ const Blocks = (props) => {
           }
 
           // calculating the height of the current block based on the number of total blocks
-          const height = (block * 630) / props.blocks.length;
+          const height = (block * 600) / props.blocks.length;
           let margin = 4;
 
           if (window.innerWidth <= 500) {
@@ -133,7 +134,7 @@ const Blocks = (props) => {
               <div
                 style={{
                   color: "black",
-                  fontWeight: "bold"
+                  fontWeight: "bold",
                 }}
               >
                 {block} {/* Display the number on top of the block */}

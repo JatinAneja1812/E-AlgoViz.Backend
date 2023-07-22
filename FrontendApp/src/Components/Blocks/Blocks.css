@@ -15,7 +15,7 @@
   position: absolute;
   width: 94vw;
   text-align: center;
-  margin-top: calc(100vh - 18em - 400px - 14vh);
+  margin-top: calc(100vh - 19em - 400px - 14vh);
   border-bottom: 3px solid white;
   overflow: hidden;
   -webkit-box-align: end;

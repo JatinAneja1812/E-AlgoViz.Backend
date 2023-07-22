@@ -11,8 +11,8 @@ export default function SortingVisToolbar(props) {
             <CustomSlider
               className="speed"
               sliderVal={props.speed}
-              min={5}
-              max={150}
+              min={1}
+              max={100}
               speed={props.speed}
               handleSpeed={props.handleSpeed}
               sorting={props.sorting}

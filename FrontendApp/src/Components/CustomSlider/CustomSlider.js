@@ -8,8 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import "./CustomSlider.css";
 
 export default function CustomSlider(props) {
-  const min = props.className === "speed" ? 5 : 5;
-  const max = props.className === "speed" ? 150 : 100;
+  const min = props.className === "speed" ? 1 : 1;
+  const max = props.className === "speed" ? 100 : 50;
   const [value, setValue] = useState(
     props.className === "speed" ? props.speed : props.size
   );

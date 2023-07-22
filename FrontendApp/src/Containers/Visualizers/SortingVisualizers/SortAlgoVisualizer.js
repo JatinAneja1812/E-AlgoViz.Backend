@@ -1,9 +1,33 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import SortingVisualizerAppNavBar from "../../../Components/Menu/SortingVisualizerNavMenu";
 import SortingVisToolbar from "../../../Components/InfomationBar/SortingVisualizerTools/SortingVisualizerToolBar";
 import SortAlgoInfoBar from "../../../Components/InfomationBar/SortingVisualizerTools/SortingAlgoInfoBar";
 import Blocks from "../../../Components/Blocks/Blocks";
+import Typography from "antd/es/typography/Typography";
 import handleSortingAlgorithm from "../../../Utility/LibraryFunctions/HandleSortAlgorithms";
+
+const styles = {
+  statuContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "250px",
+    marginTop: "-6vh",
+    marginLeft: "44%",
+    background: "rgb(7, 101, 133)",
+    borderRadius: "20px",
+    transform: "perspective(1000px) rotateX(20deg)",
+    boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.6)",
+  },
+  statusText: {
+    fontSize: "30px",
+    fontFamily: "freight-big-pro",
+    fontWeight: "600",
+    color: "#fff",
+    letterSpacing: "1.5px",
+  },
+};
+
 
 export default function SortAlgoVisualizer() {
   const [algorithm, setAlgorithm] = useState("");
@@ -13,9 +37,10 @@ export default function SortAlgoVisualizer() {
   const [sortedValue, setSortedValue] = useState([]);
   const [sorting, setSorting] = useState(false);
   const [statusMessage, setStatusMessage] = useState("Unsorted");
+  const [iterations, setIterations] = useState(0);
   const [isSorted, setIsSorted] = useState(false);
   const [isDataReset, resetData] = useState(false);
-  const [speed, setSpeed] = useState(100);
+  const [speed, setSpeed] = useState(50);
   const [size, setSize] = useState(40);
   const [quickIndex, setQuickIndex] = useState(() => null);
   const [isSortingPaused, setIsSortingPaused] = useState(false);
@@ -67,8 +92,8 @@ export default function SortAlgoVisualizer() {
     setSize(restrainedSize);
   };
 
-   // The Immdediately invoked function expression acts like a while loop
-    // that stops once all stored values have been executed
+  // The Immdediately invoked function expression acts like a while loop
+  // that stops once all stored values have been executed
   const sortArray = (values) => {
     let i = 0;
     let timeoutId = null;
@@ -83,6 +108,7 @@ export default function SortAlgoVisualizer() {
       }
 
       const [j, k, arr, inPlace, quickIndex] = values[i];
+      setIterations((count) => count + 1); // Increment iterations when sorting is complete
       setCompare([j, k]);
       setSwap([]);
 
@@ -100,6 +126,7 @@ export default function SortAlgoVisualizer() {
       } else {
         setStatusMessage("Sorted");
         setSorting(false);
+        
       }
 
       if (quickIndex >= 0) {
@@ -116,7 +143,7 @@ export default function SortAlgoVisualizer() {
       return;
     }
     setIsSortingPaused(false);
-
+    setIterations(0); // Initialize iterations to 0
     sortArray(handleSortingAlgorithm(algorithm, blocks));
     setSorting(true);
     setIsSorted(true);
@@ -128,6 +155,7 @@ export default function SortAlgoVisualizer() {
     setAlgorithm("");
     createNewArray(size);
     setIsSorted(false);
+    setIterations(0);
     setSorting(false);
     setStatusMessage("Unsorted");
   };
@@ -135,9 +163,10 @@ export default function SortAlgoVisualizer() {
   // Event handler to randomize the array when button is pressed
   const handleReset = () => {
     setSortedValue([]);
-    setSpeed(100);
+    setSpeed(50);
     setSize(40);
     setAlgorithm("");
+    setIterations(0);
     setStatusMessage("Unsorted");
     createNewArray(size);
     setIsSorted(false);
@@ -183,13 +212,17 @@ export default function SortAlgoVisualizer() {
       <SortAlgoInfoBar algoTitle={algorithm} />
       <Blocks
         algorithm={algorithm}
+        iterations={iterations}
         blocks={blocks}
         compare={sorting && compare}
         swap={sorting && swap}
         sortedValue={sortedValue}
         quickIndex={quickIndex}
-        statusMessage={statusMessage}
       />
+
+    <div style={styles.statuContainer}>
+      <Typography style={styles.statusText}>{statusMessage}</Typography>
+    </div>
     </>
   );
 }
