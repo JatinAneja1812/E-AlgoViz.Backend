@@ -69,7 +69,7 @@ const Blocks = (props) => {
         style={{
           marginTop: "8vh",
           fontSize: "27px",
-          marginLeft: "70vw",
+          marginRight: "73vw",
           fontFamily: "freight-big-pro",
           fontWeight: "600",
           letterSpacing: "1.5px",

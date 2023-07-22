@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
-import InstructionMainPopup from "./InstructionMainPopup";
+import InstructionMainPopup from "./PathfindingVisInstructionPopup";
 import "./ModalStyles/InstructionPopup1Styles.css";
 
 const InstructionModalPopup1 = (props) => {

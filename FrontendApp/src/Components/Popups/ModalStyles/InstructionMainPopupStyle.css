@@ -149,21 +149,66 @@
 #mainTutorialImage {
     width: 25%;
     padding-top: 5px;
-    background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Ficonscout.com%2Ficon%2Froute-1613303&psig=AOvVaw04jGY6o-41duSOHFKDoM2n&ust=1663789625399000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCOiH_NaRpPoCFQAAAAAdAAAAABAI");
 }
 
 #secondTutorialImage {
+    height: 40vh;
     padding-top: 5px;
-}
-#fouthTutorialImage{
-    padding-top: 5px;
-    height: 37vh;
 }
 
 #thirdTutorialImage {
     margin-left: 50px;
     border: 1px solid #CCC;
     top: -12vh;
+    position: relative;
+}
+
+#fouthTutorialImage{
+    padding-top: 5px;
+    height: 32vh;
+}
+
+#sortMainTutorialImage {
+    width: 57%;
+    height: 35vh;
+    top: -2vh;
+    position: relative;
+}
+
+#SortAlgoImg1{
+    padding-top: 5px;
+    height: 41vh;
+    width: 10vw;
+    border: 1px solid #CCC;
+    position: relative;
+}
+
+#SortAlgoImg2{
+    margin-left: 50px;
+    border: 1px solid #CCC;
+    top: -7vh;
+    height: 34vh;
+    position: relative;
+}
+
+#sortVisBoardImg {
+    width: 57%;
+    height: 35vh;
+    top: 2vh;
+    border: 1px solid #CCC;
+    position: relative;
+}
+
+#sortVisToolsImg {
+    padding-top: 11vh;
+    width: 56vw;
+}
+
+#sortVisToolsImg2 {
+    height: 10vh;
+    width: 27vw;
+    top: 9vh;
+    border: 1px solid #CCC;
     position: relative;
 }
 

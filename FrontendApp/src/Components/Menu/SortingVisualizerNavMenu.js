@@ -11,6 +11,7 @@ import RandomizeBoard from "../Buttons/SortingVisualizerButtons/RandomizeBoard";
 import SortButton from "../Buttons/SortingVisualizerButtons/SortButton";
 import ResetBoard from "../Buttons/SortingVisualizerButtons/ResetBoard";
 import ReturnButton from "../Buttons/ReturnButton";
+import SortingVisInstructionButton from "../Buttons/SortingVisualizerButtons/SortingVisInstructionsButton";
 
 export default function SortingVisualizerAppNavBar(props) {
   let navigate = useNavigate();
@@ -78,6 +79,7 @@ export default function SortingVisualizerAppNavBar(props) {
             
           </Box>
 
+          <SortingVisInstructionButton />
           <ReturnButton />
         </Toolbar>
       </Container>
