@@ -91,6 +91,17 @@ const TopbarWrapper = styled.div`
     cursor: pointer;
     -webkit-app-region: no-drag;
   }
+
+  .App-reload {
+    height: 2vh;
+    float: right;
+    position: absolute;
+    top: 1.1vh;
+    right: 9.4vw;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+  }
+
 `;
 
 export default TopbarWrapper;

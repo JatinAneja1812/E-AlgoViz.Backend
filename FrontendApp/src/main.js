@@ -66,6 +66,7 @@ function createWindow() {
   mainWindow.on("maximize", () => {
     mainWindow.reload();
   });
+  
   mainWindow.on("closed", function () {
     mainWindow = null;
   });
@@ -119,6 +120,10 @@ ipcMain.on("minimise-window", (_) => {
   if (BrowserWindow.getAllWindows().length === 1) {
     BrowserWindow.getAllWindows()[0].minimize();
   }
+});
+
+ipcMain.on("reload-window", (_) => {
+  mainWindow.reload();
 });
 
 ipcMain.on("maximise-window", (_) => {
