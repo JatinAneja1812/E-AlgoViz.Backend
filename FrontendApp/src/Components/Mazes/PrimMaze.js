@@ -1,22 +1,20 @@
-
-
-let start = 0;
-let end = 0;
-
 export function Prim(grid){
-
-    grid.map((row,index)=>row.map((cell,idx)=>{
-        if(cell.type==='start'){
-            start = [index,idx];
-            return [];
-        }else if(cell.type==='finish'){
-            end = [index,idx];
-            return [];
-        }else{
-            cell.type='wall';
-        }
-        
-    }));
+    let start = null;
+    let end = null;
+    
+    grid.forEach((row, index) => {
+        row.forEach((cell, idx) => {
+            if (cell.type === 'start') {
+                start = [index, idx];
+                return start;
+            } else if (cell.type === 'finish') {
+                end = [index, idx];
+                return end;
+            } else {
+                cell.type = 'wall';
+            }
+        });
+    });
 
     const isWall = grid.map(row=>row.map(cell=>true));
     const visited = grid.map(row=>row.map(cell=>false));

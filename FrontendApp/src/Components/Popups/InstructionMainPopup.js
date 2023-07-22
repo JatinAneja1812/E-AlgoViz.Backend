@@ -1,16 +1,16 @@
 import React from "react";
 import Button from "@mui/material/Button";
-import path from "../Asset/Images/pathImage.gif";
-import algorithms from "../Asset/Images/algorithms.png";
-import walls from "../Asset/Images/walls.gif";
-import switchWeightAndWalls from "../Asset/Images/SwitchWeightandWalls.png";
-import mazeImage from "../Asset/Images/MazesImages.png";
-import distAndTimeBtn from "../Asset/Images/DistandTimeBtn.png";
-import distAndTimeModal from "../Asset/Images/TimeAndDistModal.png";
-import enjoy from "../Asset/Images/enjoy.png";
-import dragging from "../Asset/Images/dragging.gif";
-import clearingTools from "../Asset/Images/clearingVisualizer.png";
-import speedTool from "../Asset/Images/speedImage.png";
+import path from "../Asset/PathfindingComponentsImages/pathImage.gif"
+import algorithms from "../Asset/PathfindingComponentsImages/algorithms.png";
+import walls from "../Asset/PathfindingComponentsImages/walls.gif";
+import switchWeightAndWalls from "../Asset/PathfindingComponentsImages/SwitchWeightandWalls.png";
+import mazeImage from "../Asset/PathfindingComponentsImages/MazesImages.png";
+import distAndTimeBtn from "../Asset/PathfindingComponentsImages/DistandTimeBtn.png";
+import distAndTimeModal from "../Asset/PathfindingComponentsImages/TimeAndDistModal.png";
+import enjoy from "../Asset/PathfindingComponentsImages/enjoy.png";
+import dragging from "../Asset/PathfindingComponentsImages/dragging.gif";
+import clearingTools from "../Asset/PathfindingComponentsImages/clearingVisualizer.png";
+import speedTool from "../Asset/PathfindingComponentsImages/speedImage.png";
 import "../Popups/ModalStyles/InstructionMainPopupStyle.css";
 
 var counter = 1;

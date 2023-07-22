@@ -21,14 +21,14 @@ export default function AlgorithmDropdown( props ) {
   return (
     <div>
       <FormControl variant="standard" sx={{ m: 0.5, minWidth: 120 }}>
-
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
           value={props.algorithms}
           label="Algorithm"
           onChange={handleChange}
-          style={{color:"#ffffff", border: "#ffffff"}}
+          disabled={props.isRunning ? true : false}
+          style={{ color: props.isRunning ? "#CCC" : "#FFF", border: "#ffffff", width: "100%"}}
           displayEmpty
           inputProps={{ 'aria-label': 'Without label' }}
           placeholder="Select Algorithm"  

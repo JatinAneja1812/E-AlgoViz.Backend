@@ -10,7 +10,7 @@ const slides = [
     subtitle: "Visualizer",
     description: DescriptionEnum.SORTING_ALGORITHM_TEXT.toString(),
     image:
-      "https://media.istockphoto.com/id/901172818/vector/financial-data-graph-chart-vector-illustration-trend-lines-columns-market-economy-information.jpg?s=612x612&w=0&k=20&c=lHK7Vbt6ifSUTLWjxRHNM2tqI1YPntzhVjkpFVT22uA=",
+      "https://upload.wikimedia.org/wikipedia/commons/4/46/Comb_sort_demo.gif",
   },
   {
     title: "Pathfinding Algorithm",
@@ -99,7 +99,7 @@ function Slide({ slide, offset }) {
     switch (Title) {
       case "Pathfinding Algorithm":
         setIsLoading(true);
-        const timer = setTimeout(async () => {
+        const timer1 = setTimeout(async () => {
           try {
             const path = "/pathfindingvisualizer";
             const timeout = setTimeout(() => {
@@ -111,11 +111,27 @@ function Slide({ slide, offset }) {
           } catch (error) {
             navigate("/homepage");
             setIsLoading(false);
-            return () => clearTimeout(timer) && setIsLoading(false);
+            return () => clearTimeout(timer1) && setIsLoading(false);
           }
         }, 5000);
         break;
       case "Sorting Algorithm":
+         setIsLoading(true);
+        const timer2 = setTimeout(async () => {
+          try {
+            const path = "/sortingVisualizer";
+            const timeout = setTimeout(() => {
+              navigate(path);
+              setIsLoading(false);
+            }, 3000);
+  
+            return () => clearTimeout(timeout) && setIsLoading(false);
+          } catch (error) {
+            navigate("/homepage");
+            setIsLoading(false);
+            return () => clearTimeout(timer2) && setIsLoading(false);
+          }
+        }, 5000);
         break;
       default:
         break;

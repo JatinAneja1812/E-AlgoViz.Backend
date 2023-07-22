@@ -1,5 +1,5 @@
 
-const AlgorithmDescriptionEnum = {
+const PathfindingAlgoDescriptionEnum = {
 
     DIJKSTRA: "Dijkstra's algorithm is a graph traversal algorithm that finds the shortest path between a starting node and all other nodes in a weighted graph.",
     BREADTH_FIRST_SEARCH: "Breadth-First Search is a graph traversal algorithm that explores all nodes of a graph in breadth-first order, visiting neighboring nodes before moving on to deeper levels.",
@@ -12,4 +12,4 @@ const AlgorithmDescriptionEnum = {
     BIDIRECTIONAL_SWARM_ALGORITHM: "The Bidirectional Swarm Algorithm is a graph traversal algorithm that simultaneously explores from both the source and destination nodes to find the shortest path in a weighted graph."
 }
 
-export { AlgorithmDescriptionEnum };
+export { PathfindingAlgoDescriptionEnum };
