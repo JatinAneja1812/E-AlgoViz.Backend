@@ -5,6 +5,7 @@ import TopbarWrapper from "./Topbar.styles";
 import exitImg from "../../imgs/X.svg";
 import underscoreImg from "../../imgs/underscore.svg";
 import unmaximiseImg from "../../imgs/unmaximise.svg";
+import reloadImg from "../../imgs/reload.svg";
 
 const { Text } = Typography;
 const { Header } = Layout;
@@ -14,7 +15,7 @@ export default function Topbar() {
   const [maximisedWindow, setMaximisedWindow] = useState(false);
 
   const handleCloseOnClick = () => {
-     
+    ipcRenderer.send("close-window");
   };
 
   const handleMiniOnClick = () => {
@@ -25,6 +26,10 @@ export default function Topbar() {
     ipcRenderer.send("maximise-window");
   };
 
+  const handleReloadOnClick = () => {
+    ipcRenderer.send("reload-window");
+  };
+  
   // const handleClick = () => {
   //   console.log("Clicked");
   //   ipcRenderer.send("greeting");
@@ -54,6 +59,12 @@ export default function Topbar() {
           className="App-minimise"
           alt="mini"
           onClick={handleMiniOnClick}
+        />
+        <img
+          src={reloadImg}
+          className="App-reload"
+          alt="reload"
+          onClick={handleReloadOnClick}
         />
         {maximisedWindow === false && (
           <img
