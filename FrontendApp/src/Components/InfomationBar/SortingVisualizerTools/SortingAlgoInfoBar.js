@@ -46,14 +46,17 @@ export default function SortAlgoInfoBar(props) {
       case "Shell Sort":
         setAlgoDescription(SortingAlgoDescriptionEnum.SHELL_SORT.toString());
         break;
-      case "Comb Sort":
-        setAlgoDescription(SortingAlgoDescriptionEnum.COMB_SORT.toString());
+      case "Tim Sort":
+        setAlgoDescription(SortingAlgoDescriptionEnum.TIM_SORT.toString());
         break;
       case "Bogo Sort":
         setAlgoDescription(SortingAlgoDescriptionEnum.BOGO_SORT.toString());
         break;
-      case "Stooge Sort":
-        setAlgoDescription(SortingAlgoDescriptionEnum.STOOGE_SORT.toString());
+      case "Cube Sort":
+        setAlgoDescription(SortingAlgoDescriptionEnum.CUBE_SORT.toString());
+        break;
+      case "Cycle Sort":
+        setAlgoDescription(SortingAlgoDescriptionEnum.CYCLE_SORT.toString());
         break;
       default:
         setAlgoDescription("Welcome to Sorting Algorithm Visualizer");

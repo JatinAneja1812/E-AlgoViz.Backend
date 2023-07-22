@@ -135,11 +135,11 @@ export default function SortAlgoVisualizer() {
   // Event handler to randomize the array when button is pressed
   const handleReset = () => {
     setSortedValue([]);
+    setSpeed(100);
+    setSize(40);
     setAlgorithm("");
     setStatusMessage("Unsorted");
     createNewArray(size);
-    setSpeed(100);
-    setSize(40);
     setIsSorted(false);
     setSorting(false);
   };

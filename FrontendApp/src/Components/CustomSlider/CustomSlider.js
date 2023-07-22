@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Slider from "@material-ui/core/Slider";
 import Input from "@material-ui/core/Input";
@@ -10,7 +10,7 @@ import "./CustomSlider.css";
 export default function CustomSlider(props) {
   const min = props.className === "speed" ? 5 : 5;
   const max = props.className === "speed" ? 150 : 100;
-  const [value, setValue] = React.useState(
+  const [value, setValue] = useState(
     props.className === "speed" ? props.speed : props.size
   );
 
@@ -75,6 +75,11 @@ export default function CustomSlider(props) {
     }
     return sentence;
   };
+
+  // Update the value state when props.speed or props.size changes
+  useEffect(() => {
+    setValue(props.className === "speed" ? props.speed : props.size);
+  }, [props.speed, props.size, props.className]);
 
   return (
     <div style={{ display: "flex", alignItems: "center", color: sliderColor }}>
