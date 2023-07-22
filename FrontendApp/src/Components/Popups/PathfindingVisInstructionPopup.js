@@ -86,7 +86,7 @@ function nextPreviousClick(counter) {
   }
 }
 
-const InstructionMainPopup = (props) => {
+export default function InstructionMainPopup(props) {
   const handleSkip = () => {
     counter = 1;
     props.setShowTutorial(false);
@@ -142,5 +142,3 @@ const InstructionMainPopup = (props) => {
     </div>
   );
 };
-
-export default InstructionMainPopup;

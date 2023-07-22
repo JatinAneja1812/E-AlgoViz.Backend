@@ -6,7 +6,7 @@ import Blocks from "../../../Components/Blocks/Blocks";
 import Typography from "antd/es/typography/Typography";
 import handleSortingAlgorithm from "../../../Utility/LibraryFunctions/HandleSortAlgorithms";
 
-const styles = {
+const statusStyles = {
   statuContainer: {
     display: "flex",
     justifyContent: "center",
@@ -27,7 +27,6 @@ const styles = {
     letterSpacing: "1.5px",
   },
 };
-
 
 export default function SortAlgoVisualizer() {
   const [algorithm, setAlgorithm] = useState("");
@@ -106,7 +105,6 @@ export default function SortAlgoVisualizer() {
       if (isSorted) {
         return;
       }
-
       const [j, k, arr, inPlace, quickIndex] = values[i];
       setIterations((count) => count + 1); // Increment iterations when sorting is complete
       setCompare([j, k]);
@@ -126,14 +124,12 @@ export default function SortAlgoVisualizer() {
       } else {
         setStatusMessage("Sorted");
         setSorting(false);
-        
       }
 
       if (quickIndex >= 0) {
         setQuickIndex(quickIndex);
       }
     };
-
     processNextStep();
   };
 
@@ -220,8 +216,8 @@ export default function SortAlgoVisualizer() {
         quickIndex={quickIndex}
       />
 
-    <div style={styles.statuContainer}>
-      <Typography style={styles.statusText}>{statusMessage}</Typography>
+    <div style={statusStyles.statuContainer}>
+      <Typography style={statusStyles.statusText}>{statusMessage}</Typography>
     </div>
     </>
   );

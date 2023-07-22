@@ -2,10 +2,10 @@ import React, { useState, useMemo } from "react";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import { Tooltip } from "antd";
-import InstructionMainPopup from "../../Popups/PathfindingVisInstructionPopup";
+import SortingVisInstructionPopup from "../../Popups/SortingVisInstructionsPopup";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
-export default function InstructionButton() {
+export default function SortingVisInstructionButton() {
   const [showtutorial, setShowTutorial] = useState(false);
   const [counter] = useState(0);
   const [arrow] = useState("Show");
@@ -29,7 +29,7 @@ export default function InstructionButton() {
   return (
     <>
       {showtutorial && (
-        <InstructionMainPopup
+        <SortingVisInstructionPopup
           showtutorial={showtutorial}
           setShowTutorial={setShowTutorial}
           counter={counter}
