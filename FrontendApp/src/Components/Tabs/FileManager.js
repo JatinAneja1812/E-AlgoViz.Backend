@@ -14,6 +14,7 @@ import {
   getMetadata,
   list,
   getDownloadURL,
+  deleteObject
 } from "firebase/storage";
 import FilesTable from "../Tables/FilesTable";
 
@@ -25,9 +26,11 @@ export default function FileManager() {
   const [isUploading, setIsUploading] = useState(false);
   const [currUserName, setCurrUserName] = useState(null);
   const [fileDetails, setFileDetails] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+ const [isLoading, setIsLoading] = useState(false); 
+ const [isLoading2, setIsLoading2] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState(false);
+  const [selectedRows, setSelectedRows] = useState([]);
   const uploadTest = useRef([]);
   const userName = currUserName;
 
@@ -138,7 +141,7 @@ export default function FileManager() {
   };
 
   const getFileDetailsFromStorage = async () => {
-    setIsLoading(true);
+    
     try {
       const storageRef = ref(storage, "uploads");
       const listResult = await list(storageRef);
@@ -164,10 +167,16 @@ export default function FileManager() {
           uploadedFileInfo.push(fileInfo);
         }
       }
-      console.log(uploadedFileInfo)
+
+      let count = 0
+      uploadedFileInfo.forEach(function (data) {
+          data.key = count
+          count += 1
+      });
+
       setFileDetails(uploadedFileInfo);
       setIsOpen(false);
-      setIsLoading(false);
+      
     } catch (error) {
       setIsOpen(true);
       setError(error);
@@ -178,7 +187,9 @@ export default function FileManager() {
   useEffect(() => {
     const fetchFileDetails = async () => {
       try {
+        setIsLoading(true);
         await getFileDetailsFromStorage();
+        setIsLoading(false);
       } catch (error) {
         setIsOpen(true);
         setError(error);
@@ -187,6 +198,49 @@ export default function FileManager() {
     fetchFileDetails();
     return;
   }, []);
+
+  const handleFileDownload = (record) => {
+    try {
+      const downloadURL = record.downloadURL;
+      const fileName = record.fileName;
+      
+      // Create a temporary anchor element to trigger the download
+      const downloadLink = document.createElement("a");
+      downloadLink.href = downloadURL;
+      downloadLink.target = "_blank"; // Open the download in a new tab
+      downloadLink.download = fileName; // Set the downloaded file name
+      
+      // Append the anchor element to the DOM (not visible to the user)
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      // Remove the anchor element from the DOM after the download is initiated
+      document.body.removeChild(downloadLink);
+    } catch (error) {
+      setError(error);
+      setIsOpen(true);
+    }
+  };
+  
+  const handleRemove = async (recordsToRemove) => {
+    setIsLoading2(true);
+    const recordsArray = Array.isArray(recordsToRemove) ? recordsToRemove : [recordsToRemove];
+    try {
+
+      for (const record of recordsArray) {
+        console.log(record)
+        const storageRef = ref(storage, `uploads/${userName}/${record.fileName}`);
+        await deleteObject(storageRef);
+      }
+      
+      getFileDetailsFromStorage();
+      
+    } catch (error) {
+      setError(error);
+      setIsOpen(true);
+      setIsLoading2(false);
+    }
+    setIsLoading2(false);
+  }
 
   const UploadTabPane = () => (
     <UploadWrapper>
@@ -242,12 +296,17 @@ export default function FileManager() {
   );
 
   const DownloadTabPane = () => (
-   
     
     <DownloadWrapper>
      <FilesTable 
         isLoading={isLoading}
+        isLoading2={isLoading2}
         filesUploaded={fileDetails}
+        setSelectedRows={setSelectedRows}
+        selectedRows={selectedRows}
+        handleFileDownload={handleFileDownload}
+        handleRemove={handleRemove}
+        userName={userName}
      />
     </DownloadWrapper>
   );
@@ -287,7 +346,6 @@ export default function FileManager() {
           >
             <UploadTabPane />
           </Tabs.TabPane>
-         
         </Tabs>
       </FileManagerWrapper>
     </>

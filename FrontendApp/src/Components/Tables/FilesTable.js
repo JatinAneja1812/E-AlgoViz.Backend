@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Popconfirm, Space, Spin, Row } from "antd";
+import { Button, Popconfirm, Row } from "antd";
 import TableWrapper from "./FilesTable.styles";
 import { FilesTableColumn } from "./Columns/FilesTableColumns";
 import { DeleteOutlined, DownloadOutlined } from "@ant-design/icons";
@@ -10,6 +10,7 @@ const NO_DATA_MESSAGE = "No files/documents found.";
 
 export default function FilesTable(props) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
   const [currentPage, setCurrentPage] = useState(1); // 1 is a default current page for the table
   const [currentPageSize, setPageSize] = useState("12"); // 12 is a default page size for the table (must be a string)
 
@@ -49,10 +50,17 @@ export default function FilesTable(props) {
   };
 
   const Loader = () => (
-    <Space size="middle">
-      <Spin size="large" />
-    </Space>
+    <div id="load">
+      <div>G</div>
+      <div>N</div>
+      <div>I</div>
+      <div>D</div>
+      <div>A</div>
+      <div>O</div>
+      <div>L</div>
+    </div>
   );
+  
 
   const operationColumns = [
     {
@@ -63,26 +71,24 @@ export default function FilesTable(props) {
       render: (_, record) => {
         return (
           <>
-            <Popconfirm
-              title="Download?"
-              okText={"Yes"}
-              cancelText={"No"}
-              onConfirm={() => props.handleDownload(record)}
+            <Button
+              type="link"
+              style={{
+                background: "rgb(7, 101, 133)",
+                color: "#fff",
+              }}
+              onClick={() => props.handleFileDownload(record)}
+              icon={
+                <DownloadOutlined
+                  style={{
+                    fontSize: "large",
+                    color: "#fff",
+                  }}
+                />
+              }
             >
-              <Button
-                type="link"
-                icon={
-                  <DownloadOutlined
-                    style={{
-                      fontSize: "large",
-                      color: "#F01704",
-                    }}
-                  />
-                }
-              >
-                Downlaod
-              </Button>
-            </Popconfirm>
+              Downlaod
+            </Button>
           </>
         );
       },
@@ -93,13 +99,16 @@ export default function FilesTable(props) {
       align: "center",
       width: 20,
       render: (_, record) => {
+        if (record.uploadedBy !== props.userName) {
+          return;
+        }
         return (
           <>
             <Popconfirm
               title="Are you sure?"
               okText={"Yes"}
               cancelText={"No"}
-              onConfirm={() => props.deleteFile(record)}
+              onConfirm={() => props.handleRemove(record)}
             >
               <Button
                 type="link"
@@ -121,7 +130,8 @@ export default function FilesTable(props) {
 
   const columns = FilesTableColumn.columns.concat(operationColumns);
 
-  const onSelectChange = (newSelectedRowKeys) => {
+  const onSelectChange = (newSelectedRowKeys, selectedRows) => {
+    props.setSelectedRows(selectedRows);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -129,18 +139,12 @@ export default function FilesTable(props) {
     selectedRowKeys,
     onChange: onSelectChange,
     hideSelectAll: false,
-    renderCell: (checked, record, index, originNode) =>
-      renderRowSelection(originNode),
-  };
-
-  const renderRowSelection = (originNode) => {
-    return originNode;
   };
 
   return (
     <Row>
       <TableWrapper
-        key={FilesTableColumn.tableKey}
+        key="Key"
         dataSource={props.filesUploaded}
         columns={columns}
         pagination={
@@ -172,11 +176,13 @@ export default function FilesTable(props) {
         bordered
         rowSelection={rowSelection}
         onChange={handleTableChange}
-        loading={props.isLoading ? Loader : false}
+        loading={props.isLoading2}
         locale={
           props.isLoading
-            ? { emptyText: <h1>Loading...</h1> }
-            : props.serverError == null
+            ? {
+                emptyText: Loader,
+              }
+            : props.error == null
             ? {
                 emptyText: (
                   <h1 style={{ fontSize: "14px", color: "#000000" }}>
