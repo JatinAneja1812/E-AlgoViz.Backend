@@ -7,6 +7,7 @@ import App from './App';
 import HomePage from "./Containers/HomePage/Homepage.js"; 
 import PathAlgoVisualizer from './Containers/Visualizers/PathfindingVisualizer/PathVisualizer.js';
 import SortAlgoVisualizer from './Containers/Visualizers/SortingVisualizers/SortAlgoVisualizer';
+import FilesHub from './Containers/SharedResources/FilesHub';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
@@ -18,6 +19,7 @@ ReactDOM.render(
         <Route path="/homepage" element={<HomePage/>} />
         <Route path="/pathfindingvisualizer" element={<PathAlgoVisualizer/>} />
         <Route path="/sortingVisualizer" element={<SortAlgoVisualizer/>} />
+        <Route path="/filesUploadandDownload" element={<FilesHub/>} />
       </Routes>
     </Router>
   </React.StrictMode>,
