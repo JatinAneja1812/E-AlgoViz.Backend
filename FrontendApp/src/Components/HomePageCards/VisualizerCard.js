@@ -25,6 +25,12 @@ const slides = [
     image:
       "https://img.freepik.com/premium-vector/abstract-gear-wheel-mechanism-background_41981-299.jpg",
   },
+  {
+    title: "Knowledge Hub: Exam Papers and Notes",
+    subtitle: "Share and Access Educational Resources",
+    description: DescriptionEnum.FILE_STORAGE.toString(),
+    image: "https://i.gifer.com/IH6W.gif",
+  },
 ];
 
 function useTilt(active) {
@@ -96,6 +102,7 @@ function Slide({ slide, offset }) {
   const ref = useTilt(active);
   
   const VisualizerClick = (Title) => {
+    console.log(Title)
     switch (Title) {
       case "Pathfinding Algorithm":
         setIsLoading(true);
@@ -130,6 +137,25 @@ function Slide({ slide, offset }) {
             navigate("/homepage");
             setIsLoading(false);
             return () => clearTimeout(timer2) && setIsLoading(false);
+          }
+        }, 5000);
+        break;
+      case "Knowledge Hub: Exam Papers and Notes":
+        console.log()
+         setIsLoading(true);
+        const timer3 = setTimeout(async () => {
+          try {
+            const path = "/filesUploadandDownload";
+            const timeout = setTimeout(() => {
+              navigate(path);
+              setIsLoading(false);
+            }, 3000);
+  
+            return () => clearTimeout(timeout) && setIsLoading(false);
+          } catch (error) {
+            navigate("/homepage");
+            setIsLoading(false);
+            return () => clearTimeout(timer3) && setIsLoading(false);
           }
         }, 5000);
         break;
