@@ -26,8 +26,8 @@ export default function FileManager() {
   const [isUploading, setIsUploading] = useState(false);
   const [currUserName, setCurrUserName] = useState(null);
   const [fileDetails, setFileDetails] = useState([]);
- const [isLoading, setIsLoading] = useState(false); 
- const [isLoading2, setIsLoading2] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading2, setIsLoading2] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -129,12 +129,14 @@ export default function FileManager() {
           }
         };
       }
+      getFileDetailsFromStorage();
       return fileDetails;
     } catch (error) {
       uploadTest.current = [];
       setIsUploading(false);
       setUploadArray([]);
       setButtonDisabled(false);
+      getFileDetailsFromStorage();
       console.error("Error uploading files:", error);
       throw error;
     }
@@ -227,7 +229,6 @@ export default function FileManager() {
     try {
 
       for (const record of recordsArray) {
-        console.log(record)
         const storageRef = ref(storage, `uploads/${userName}/${record.fileName}`);
         await deleteObject(storageRef);
       }
@@ -307,6 +308,7 @@ export default function FileManager() {
         handleFileDownload={handleFileDownload}
         handleRemove={handleRemove}
         userName={userName}
+        getFileDetailsFromStorage={getFileDetailsFromStorage}
      />
     </DownloadWrapper>
   );
