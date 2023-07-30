@@ -5,8 +5,9 @@ import Topbar from "./Components/Topbar/Topbar";
 import './index.css';
 import App from './App';
 import HomePage from "./Containers/HomePage/Homepage.js"; 
-import PathAlgoVisualizer from './Containers/Visualizers/PathfindingVisualizer/PathVisualizer.js';
+import PathAlgoVisualizer from './Containers/Visualizers/PathfindingVisualizer/PathVisualizer';
 import SortAlgoVisualizer from './Containers/Visualizers/SortingVisualizers/SortAlgoVisualizer';
+import PrimeNumberVisualizer from './Containers/Visualizers/PrimeNumbersVisualizer/PrimeNumberVisualizer';
 import FilesHub from './Containers/SharedResources/FilesHub';
 import reportWebVitals from './reportWebVitals';
 
@@ -19,6 +20,7 @@ ReactDOM.render(
         <Route path="/homepage" element={<HomePage/>} />
         <Route path="/pathfindingvisualizer" element={<PathAlgoVisualizer/>} />
         <Route path="/sortingVisualizer" element={<SortAlgoVisualizer/>} />
+        <Route path="/primeNumberVisualizer" element={<PrimeNumberVisualizer/>} />
         <Route path="/filesUploadandDownload" element={<FilesHub/>} />
       </Routes>
     </Router>

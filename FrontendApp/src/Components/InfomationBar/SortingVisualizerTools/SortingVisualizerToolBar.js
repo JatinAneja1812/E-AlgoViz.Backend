@@ -1,6 +1,6 @@
 import React from "react";
 import SortingVisToolbarWrapper from "./SortingVisualizerToolBar.styles";
-import CustomSlider from "../../CustomSlider/CustomSlider";
+import CustomSlider from "../../CustomSlider/SortingVisualizerSliders/CustomSlider";
 
 export default function SortingVisToolbar(props) {
   return (

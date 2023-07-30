@@ -274,7 +274,7 @@ export default function FileManager() {
           >
             <strong>
               Click or drag Single/Multiple "*.pdf or *.txt " files to this area
-              to import it to Unity
+              to import it to <span style={{color: "blue"}}>E-AlgoVis</span> File Manager
             </strong>
           </p>
           <p
