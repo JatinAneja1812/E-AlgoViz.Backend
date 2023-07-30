@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PrimeNumberVisualizerNavMenu from "../../../Components/Menu/PrimeNumberVisualizerNavMenu";
 import PrimeNumberVisualizerTools from "../../../Components/InfomationBar/PrimeNumberVisualizerTools/PrimeNumberVisualizerTools";
 import Cells from "./Cells/Cells.js";
+import "./PrimeNumberVisualizer.css"
 
 export default function PrimeNumberVisualizer() {
   const [number, setNumber] = useState(100);
@@ -175,7 +176,9 @@ export default function PrimeNumberVisualizer() {
         checked={checked}
       />
 
-      <Cells cells={cells} />
+      <div className="scrollable-container">
+        <Cells cells={cells} />
+      </div>
     </div>
   );
 }

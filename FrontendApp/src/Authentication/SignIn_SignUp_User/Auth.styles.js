@@ -92,10 +92,10 @@ const LoginWrapper = styled.div`
     transition: all 250ms ease-in-out;
     }
 
-    .form .form-group :hover {
-    background-color: #ffffff;
-    box-shadow: 0px 0px 14px 0.2px #26a0da;
-    }
+    // .form .form-group :hover {
+    // background-color: #ffffff;
+    // box-shadow: 0px 0px 14px 0.2px #26a0da;
+    // }
 
     .form .form-group :focus {
     outline: none;

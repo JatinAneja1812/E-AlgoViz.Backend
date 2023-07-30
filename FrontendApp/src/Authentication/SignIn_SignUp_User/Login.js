@@ -8,9 +8,11 @@ import { useNavigate } from "react-router-dom";
 import  LoginIcon from "@mui/icons-material/Login";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import ErrorNotification from "../../Components/Snackbar/ErrorSnackbar";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 import Reset from "../ResetUser/Reset";
 import LiquidButtonWrapper from "../../Utility/Styles/CustomButtonStyles/LiquidButton.styles.js";
 import { startSession, endSession} from "../Storage/Session";
+import { Row, Col } from "antd";
 
 export default function Login(props) {
   const userRef = useRef();
@@ -22,6 +24,7 @@ export default function Login(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [userReset, setUserReset] = useState(false);
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
@@ -121,19 +124,32 @@ export default function Login(props) {
                   required
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input
-                  disabled={isLoading ? true : false}
-                  type="password"
-                  placeholder="Password"
-                  id="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  onKeyDown={handleKeypress}
-                  required
-                />
-              </div>
+              <div className="form-group"  style={{position: "relative", left: "11px"}}>
+              <label htmlFor="password">Password</label>
+              <Row>
+                <Col>
+                  <input
+                    disabled={isLoading ? true : false}
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    id="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    onKeyDown={handleKeypress}
+                    required
+                  />
+                </Col>
+                <Col>
+                  <div style={{position: "relative", top: "10px", left: "5px"}}>
+                    {showPassword ? (
+                      <VisibilityOff onClick={() => setShowPassword(false)} />
+                    ) : (
+                      <Visibility onClick={() => setShowPassword(true)} />
+                    )}
+                  </div>
+                </Col>
+                </Row>
+            </div>
             </div>
           </div>
           <div className="footer">
