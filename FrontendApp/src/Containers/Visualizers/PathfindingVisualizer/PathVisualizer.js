@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback  } from "react";
 import Node from "./Node/Node.js";
 import AppNavBar from "../../../Components/Menu/PathfindingVisualizerNavMenu.js";
 import Infobar from "../../../Components/InfomationBar/PathfindingVisualizerTools/PathfindingComponentsInfobar.js";
@@ -130,40 +130,33 @@ export default function PathAlgoVisualizer() {
     setGrid(newGrid);
   };
 
-  const handleMouseDown = (row, col) => {
+  const handleMouseDown = useCallback((row, col) => {
     if (row === START_NODE_ROW && col === START_NODE_COL) {
-      const newGrid = getNewGridWithStartToggled(grid, row, col);
-      setGrid(newGrid);
       setMousePressed(true);
       setStartIsSelected(true);
       return;
     }
     if (row === FINISH_NODE_ROW && col === FINISH_NODE_COL) {
-      const newGrid = getNewGridWithFinishToggled(grid, row, col);
-      setGrid(newGrid);
       setMousePressed(true);
       setFinishIsSelected(true);
       return;
     }
     if (document.getElementById("weightToggle").checked === true) {
-      const newGrid = getNewGridWithWeightToggled(grid, row, col);
-      setGrid(newGrid);
       setMousePressed(true);
       return;
     }
-    const newGrid = getNewGridWithWallToggled(grid, row, col);
-    setGrid(newGrid);
     setMousePressed(true);
-  };
+    setGrid(getNewGridWithWallToggled(grid, row, col));
+  }, [grid]);
 
-  const handleMouseEnter = (row, col) => {
+  const handleMouseEnter = useCallback((row, col) => {
     if (!mouseIsPressed) return;
+
     if (startIsSelected) {
-      const currGrid = grid;
       if (
-        !currGrid[row][col].isFinish &&
-        !currGrid[row][col].isWall &&
-        !currGrid[row][col].isWeight
+        !grid[row][col].isFinish &&
+        !grid[row][col].isWall &&
+        !grid[row][col].isWeight
       ) {
         const newGrid = getNewGridWithStartToggled(grid, row, col);
         setGrid(newGrid);
@@ -171,11 +164,10 @@ export default function PathAlgoVisualizer() {
       return;
     }
     if (finishIsSelected) {
-      const currGrid = grid;
       if (
-        !currGrid[row][col].isStart &&
-        !currGrid[row][col].isWall &&
-        !currGrid[row][col].isWeight
+        !grid[row][col].isStart &&
+        !grid[row][col].isWall &&
+        !grid[row][col].isWeight
       ) {
         const newGrid = getNewGridWithFinishToggled(grid, row, col);
         setGrid(newGrid);
@@ -187,15 +179,15 @@ export default function PathAlgoVisualizer() {
       setGrid(newGrid);
       return;
     }
-    const newGrid = getNewGridWithWallToggled(grid, row, col);
-    setGrid(newGrid);
-  };
 
-  const handleMouseUp = () => {
+    setGrid(getNewGridWithWallToggled(grid, row, col));
+  }, [grid, mouseIsPressed, startIsSelected, finishIsSelected]);
+
+  const handleMouseUp = useCallback(() => {
     setMousePressed(false);
     setStartIsSelected(false);
     setFinishIsSelected(false);
-  };
+  }, []);
 
   const handleTimeDistModalShow = (e) => {
     setTimeDistShow(!TimeDistShow);
@@ -545,68 +537,80 @@ const createNode = (col, row) => {
 };
 
 const getNewGridWithWallToggled = (grid, row, col) => {
-  const newGrid = grid.slice();
-  const node = newGrid[row][col];
-  if (node.isStart || node.isFinish || node.isWeight) return newGrid;
-  const newNode = {
-    ...node,
-    isWall: !node.isWall,
-  };
-  newGrid[row][col] = newNode;
+  if (grid[row][col].isStart || grid[row][col].isFinish || grid[row][col].isWeight) {
+    return grid;
+  }
+
+  const newGrid = grid.map((rowArray) =>
+    rowArray.map((node) => {
+      if (node.row === row && node.col === col) {
+        return { ...node, isWall: !node.isWall };
+      }
+      return node;
+    })
+  );
+
   return newGrid;
 };
 
 const getNewGridWithWeightToggled = (grid, row, col) => {
-  const newGrid = grid.slice();
-  const node = newGrid[row][col];
-  if (node.isStart || node.isFinish || node.isWall) return newGrid;
-  const newNode = {
-    ...node,
-    isWeight: !node.isWeight,
-  };
-  newGrid[row][col] = newNode;
+  if (grid[row][col].isStart || grid[row][col].isFinish || grid[row][col].isWall) {
+    return grid;
+  }
+
+  const newGrid = grid.map((rowArray) =>
+    rowArray.map((node) => {
+      if (node.row === row && node.col === col) {
+        return { ...node, isWeight: !node.isWeight };
+      }
+      return node;
+    })
+  );
+
   return newGrid;
 };
 
 const getNewGridWithStartToggled = (grid, row, col) => {
-  const newGrid = grid.slice();
-  let previousStart = newGrid[START_NODE_ROW][START_NODE_COL];
-  const change = {
-    ...previousStart,
-    isStart: false,
-  };
-  newGrid[START_NODE_ROW][START_NODE_COL] = change;
+  if (row === START_NODE_ROW && col === START_NODE_COL) {
+    return grid;
+  }
+
+  const newGrid = grid.map((rowArray) =>
+    rowArray.map((node) => {
+      if (node.row === START_NODE_ROW && node.col === START_NODE_COL) {
+        return { ...node, isStart: false };
+      } else if (node.row === row && node.col === col) {
+        return { ...node, isWall: false, isWeight: false, isStart: true };
+      }
+      return node;
+    })
+  );
+
   START_NODE_ROW = row;
   START_NODE_COL = col;
-  const node = newGrid[row][col];
-  const newNode = {
-    ...node,
-    isWall: false,
-    isWeight: false,
-    isStart: true,
-  };
-  newGrid[row][col] = newNode;
+
   return newGrid;
 };
 
 const getNewGridWithFinishToggled = (grid, row, col) => {
-  const newGrid = grid.slice();
-  let previousFinish = newGrid[FINISH_NODE_ROW][FINISH_NODE_COL];
-  const change = {
-    ...previousFinish,
-    isFinish: false,
-  };
-  newGrid[FINISH_NODE_ROW][FINISH_NODE_COL] = change;
+  if (row === FINISH_NODE_ROW && col === FINISH_NODE_COL) {
+    return grid;
+  }
+
+  const newGrid = grid.map((rowArray) =>
+    rowArray.map((node) => {
+      if (node.row === FINISH_NODE_ROW && node.col === FINISH_NODE_COL) {
+        return { ...node, isFinish: false };
+      } else if (node.row === row && node.col === col) {
+        return { ...node, isWall: false, isWeight: false, isFinish: true };
+      }
+      return node;
+    })
+  );
+
   FINISH_NODE_ROW = row;
   FINISH_NODE_COL = col;
-  const node = newGrid[row][col];
-  const newNode = {
-    ...node,
-    isWall: false,
-    isWeight: false,
-    isFinish: true,
-  };
-  newGrid[row][col] = newNode;
+
   return newGrid;
 };
 
