@@ -9,7 +9,6 @@ import { palette } from "styled-theme";
 const TableWrapper = styled(Table)`
     flex: auto;
     overflow: hidden;
-    background-color: Whitesmoke;
     color: #000;
     
     .anticon.anticon-search {
@@ -39,7 +38,7 @@ const TableWrapper = styled(Table)`
       }
     
       .ant-table-bordered.ant-table-thead > tr > th, .ant-table-bordered.ant-table-tbody > tr > td {
-        border-right: 0px solid Whitesmoke !omportant;
+        border-right: 0px solid Whitesmoke !Important;
       }
     
       .ant-table-thead > tr > th {

@@ -208,14 +208,14 @@ export default function FilesTable(props) {
   return (
     <>
       <Row
-        style={{ background: " rgb(7, 101, 133)", border: "1px solid #ececec" }}
+        style={{ background: " rgb(7, 101, 133)", borderRadius: "10px", }}
       >
         <Button
           style={{
             background: "transparent",
             border: "1px solid #ececec",
-            borderRadius: "0",
-            color: "#fff",
+            borderRadius: "10px",
+            color: selectedRowKeys.length < 2 ? "#CCC" : "#fff",
           }}
           loading={props.isLoading2}
           disabled={selectedRowKeys.length < 2}
