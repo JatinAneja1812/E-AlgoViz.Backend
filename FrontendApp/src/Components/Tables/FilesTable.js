@@ -140,8 +140,6 @@ export default function FilesTable(props) {
           visibility: props.userName ? "visible" : "hidden",
           width: "28px",
           height: "17px",
-          // The visibility is set to hidden for users who are not logged in
-          // so that they can't see the checkbox
         }}
         disabled={
           props.filesUploaded.length === 0 ||
@@ -173,7 +171,6 @@ export default function FilesTable(props) {
           checked={selectedRowKeys.includes(record.key)}
           onChange={(e) => {
             const key = record.key;
-
             if (e.target.checked) {
               setSelectedRowKeys([...selectedRowKeys, key]);
             } else {

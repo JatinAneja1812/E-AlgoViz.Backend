@@ -2,6 +2,7 @@ import React, { useEffect, useState, useReducer, useRef } from "react";
 import { DescriptionEnum } from "../../Enums/HomeCardsDescriptionEnum";
 import { VisualizerCardWrapper } from "./VisualizerCard.styles";
 import { useNavigate } from "react-router-dom";
+import uploadFiles from "../../imgs/uploadFiles.gif";
 import CircularStatic from "../../Utility/Hooks/LoadingWithLabel";
 
 const slides = [
@@ -19,17 +20,17 @@ const slides = [
     image: "https://i.gifer.com/7qRB.gif",
   },
   {
-    title: "Machine Learning Algorithm",
+    title: "Prime Numbers Algorithm",
     subtitle: "Visualizer",
-    description: "",
+    description: DescriptionEnum.PRIME_NUMBER_ALGO_TEXT.toString(),
     image:
-      "https://img.freepik.com/premium-vector/abstract-gear-wheel-mechanism-background_41981-299.jpg",
+      "https://scx2.b-cdn.net/gfx/news/2018/whyprimenumb.gif",
   },
   {
     title: "Knowledge Hub: Exam Papers and Notes",
     subtitle: "Share and Access Educational Resources",
     description: DescriptionEnum.FILE_STORAGE.toString(),
-    image: "https://i.gifer.com/IH6W.gif",
+    image: uploadFiles,
   },
 ];
 
@@ -123,7 +124,7 @@ function Slide({ slide, offset }) {
         }, 5000);
         break;
       case "Sorting Algorithm":
-         setIsLoading(true);
+        setIsLoading(true);
         const timer2 = setTimeout(async () => {
           try {
             const path = "/sortingVisualizer";
@@ -140,10 +141,28 @@ function Slide({ slide, offset }) {
           }
         }, 5000);
         break;
+      case "Prime Numbers Algorithm":
+        setIsLoading(true);
+        const timer3 = setTimeout(async () => {
+          try {
+            const path = "/primeNumberVisualizer";
+            const timeout = setTimeout(() => {
+              navigate(path);
+              setIsLoading(false);
+            }, 3000);
+
+            return () => clearTimeout(timeout) && setIsLoading(false);
+          } catch (error) {
+            navigate("/homepage");
+            setIsLoading(false);
+            return () => clearTimeout(timer3) && setIsLoading(false);
+          }
+        }, 5000);
+        break;
       case "Knowledge Hub: Exam Papers and Notes":
         console.log()
          setIsLoading(true);
-        const timer3 = setTimeout(async () => {
+        const timer4 = setTimeout(async () => {
           try {
             const path = "/filesUploadandDownload";
             const timeout = setTimeout(() => {
@@ -155,7 +174,7 @@ function Slide({ slide, offset }) {
           } catch (error) {
             navigate("/homepage");
             setIsLoading(false);
-            return () => clearTimeout(timer3) && setIsLoading(false);
+            return () => clearTimeout(timer4) && setIsLoading(false);
           }
         }, 5000);
         break;
