@@ -8,8 +8,9 @@ import HomePage from "./Containers/HomePage/Homepage.js";
 import PathAlgoVisualizer from './Containers/Visualizers/PathfindingVisualizer/PathVisualizer';
 import SortAlgoVisualizer from './Containers/Visualizers/SortingVisualizers/SortAlgoVisualizer';
 import PrimeNumberVisualizer from './Containers/Visualizers/PrimeNumbersVisualizer/PrimeNumberVisualizer';
-import FilesHub from './Containers/SharedResources/FilesHub';
+import FilesHub from './Containers/FileManagementSystem/FilesHub';
 import reportWebVitals from './reportWebVitals';
+import BSTVisualizer from './Containers/Visualizers/BinarySearchTreeVisualizer/BSTVisualizer';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -21,6 +22,7 @@ ReactDOM.render(
         <Route path="/pathfindingvisualizer" element={<PathAlgoVisualizer/>} />
         <Route path="/sortingVisualizer" element={<SortAlgoVisualizer/>} />
         <Route path="/primeNumberVisualizer" element={<PrimeNumberVisualizer/>} />
+        <Route path="/bstVisualizer" element={<BSTVisualizer/>} />
         <Route path="/filesUploadandDownload" element={<FilesHub/>} />
       </Routes>
     </Router>

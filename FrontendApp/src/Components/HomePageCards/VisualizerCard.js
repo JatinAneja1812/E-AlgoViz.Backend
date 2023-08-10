@@ -3,6 +3,7 @@ import { DescriptionEnum } from "../../Enums/HomeCardsDescriptionEnum";
 import { VisualizerCardWrapper } from "./VisualizerCard.styles";
 import { useNavigate } from "react-router-dom";
 import uploadFiles from "../../imgs/uploadFiles.gif";
+import bstVis from "../../imgs/bst.gif";
 import CircularStatic from "../../Utility/Hooks/LoadingWithLabel";
 
 const slides = [
@@ -12,6 +13,12 @@ const slides = [
     description: DescriptionEnum.SORTING_ALGORITHM_TEXT.toString(),
     image:
       "https://upload.wikimedia.org/wikipedia/commons/4/46/Comb_sort_demo.gif",
+  },
+  {
+    title: "Binary Search Tree Algorithm",
+    subtitle: "Visualizer",
+    description: DescriptionEnum.BST_ALGO_TEXT.toString(),
+    image: bstVis,
   },
   {
     title: "Pathfinding Algorithm",
@@ -103,7 +110,6 @@ function Slide({ slide, offset }) {
   const ref = useTilt(active);
   
   const VisualizerClick = (Title) => {
-    console.log(Title)
     switch (Title) {
       case "Pathfinding Algorithm":
         setIsLoading(true);
@@ -160,8 +166,7 @@ function Slide({ slide, offset }) {
         }, 5000);
         break;
       case "Knowledge Hub: Exam Papers and Notes":
-        console.log()
-         setIsLoading(true);
+        setIsLoading(true);
         const timer4 = setTimeout(async () => {
           try {
             const path = "/filesUploadandDownload";
@@ -175,6 +180,24 @@ function Slide({ slide, offset }) {
             navigate("/homepage");
             setIsLoading(false);
             return () => clearTimeout(timer4) && setIsLoading(false);
+          }
+        }, 5000);
+        break;
+      case "Binary Search Tree Algorithm":
+        setIsLoading(true);
+        const timer5 = setTimeout(async () => {
+          try {
+            const path = "/bstVisualizer";
+            const timeout = setTimeout(() => {
+              navigate(path);
+              setIsLoading(false);
+            }, 3000);
+  
+            return () => clearTimeout(timeout) && setIsLoading(false);
+          } catch (error) {
+            navigate("/homepage");
+            setIsLoading(false);
+            return () => clearTimeout(timer5) && setIsLoading(false);
           }
         }, 5000);
         break;
