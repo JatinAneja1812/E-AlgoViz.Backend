@@ -7,7 +7,7 @@
     display: flex;
     position: relative;
     height: 68vh;
-    top: 7vh;
+    top: 0vh;
     margin: 10px;
     border: 2px solid #000;
     overflow: auto; /* Enable scrolling */

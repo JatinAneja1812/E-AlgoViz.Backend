@@ -17,6 +17,7 @@ export default function InsertRandomNodeButton(props) {
     >
       <Button
         sx={{ fontSize: "12px", padding: "4px 8px" }}
+        id="RandomInsertButton"
         style={{
           fontSize: "12px",
           padding: "4px 8px",

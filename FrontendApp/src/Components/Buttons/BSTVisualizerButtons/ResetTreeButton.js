@@ -16,7 +16,7 @@ export default function ResetTreeButton(props) {
           width: "9vw",
           height: "5vh",
           top: "5px",
-        //   color: props.isDisabled ? "#CCC" : "#FFF"
+          color:"#FFF"
         }}
         variant="contained"
         onClick={props.handleTreeReset}

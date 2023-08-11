@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import InsertNodeButton from "../../Buttons/BSTVisualizerButtons/InsertNodeButton";
 import InsertRandomNodeButton from "../../Buttons/BSTVisualizerButtons/InsertRandomNodeButton";
 import BSTNotification from "../../Popups/BSTNotification";
+import InsertMultipleNodesButton from "../../Buttons/BSTVisualizerButtons/InsertMultipleNodesButton";
 
 export default function BSTTools(props) {
   return (
@@ -14,6 +15,8 @@ export default function BSTTools(props) {
         <InsertNodeButton handleAdd={props.addNode} />
 
         <InsertRandomNodeButton handleRandomInsert={props.BSTRandomInsert} />
+
+        <InsertMultipleNodesButton handleMultipleInsert={props.addMultipleNode} />
       </Box>
 
       <BSTNotification />

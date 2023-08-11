@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 
-const BSTNode = ({ tree, searchNumber, speed, canvasWidth, canvasHeight, scale, translateX, translateY }) => {
+const BSTNode = ({ tree, searchNumber, speed, canvasWidth, canvasHeight, scale,  traversalOrder }) => {
   const canvasRef = useRef(null);
   const [context, setContext] = useState(null);
   const [scaleFactor] = useState(1);
@@ -11,11 +11,11 @@ const BSTNode = ({ tree, searchNumber, speed, canvasWidth, canvasHeight, scale, 
     }
   }, [canvasWidth, canvasHeight]);
 
-  const visualizeTree = (tree) => {
-    preOrderHelperMethod(tree);
+  const BuildTree = (tree) => {
+    buildTreeHelperMethod(tree);
   };
 
-  const preOrderHelperMethod = (tree) => {
+  const buildTreeHelperMethod  = (tree) => {
     drawCircle(tree.xAxis, tree.yAxis, tree.value, "white", "black", "black");
 
     if (tree.left != null) {
@@ -26,7 +26,7 @@ const BSTNode = ({ tree, searchNumber, speed, canvasWidth, canvasHeight, scale, 
         tree.left.parentYAxis,
         "black"
       );
-      preOrderHelperMethod(tree.left);
+      buildTreeHelperMethod(tree.left);
     }
 
     if (tree.right != null) {
@@ -37,7 +37,7 @@ const BSTNode = ({ tree, searchNumber, speed, canvasWidth, canvasHeight, scale, 
         tree.right.parentYAxis,
         "black"
       );
-      preOrderHelperMethod(tree.right);
+      buildTreeHelperMethod(tree.right);
     }
   };
 
@@ -94,19 +94,60 @@ const BSTNode = ({ tree, searchNumber, speed, canvasWidth, canvasHeight, scale, 
     }
   };
 
+  const preOrderTraversal = (node) => {
+    if (node === null) return;
+  
+    visualizeNode(tree, "red", "black", "white");
+    preOrderTraversal(node.left);
+    preOrderTraversal(node.right);
+  };
 
-  const visualizeSearchNumber = (tree, searchNumber) => {
-    drawCircle(tree.xAxis, tree.yAxis, tree.value, "red", "red", "white");
+  const inOrderTraversal = (node) => {
+    if (node === null) return;
 
+    inOrderTraversal(node.left);
+    visualizeNode(tree, "red", "black", "white");
+    inOrderTraversal(node.right);
+  };
+
+  const postOrderTraversal = (node) => {
+    if (node === null) return;
+
+    postOrderTraversal(node.left);
+    postOrderTraversal(node.right);
+    visualizeNode(tree, "red", "black", "white");
+  };
+
+  const visualizeNode = (node, backgroundColor, circleColor, fontColor, duration = 500) => {
+    drawCircle(node.xAxis, node.yAxis, node.value, backgroundColor, circleColor, fontColor);
+  
     setTimeout(() => {
-      drawCircle(tree.xAxis, tree.yAxis, tree.value, "white", "red", "red");
-    }, 500);
+      resetNodeAppearance(node, backgroundColor, circleColor, fontColor);
+    }, duration);
+  };
+  
+  const resetNodeAppearance = (node, backgroundColor, circleColor, fontColor) => {
+    drawCircle(node.xAxis, node.yAxis, node.value, backgroundColor, circleColor, fontColor);
+  };
+
+
+  const visualizeSearchNumber = (tree, searchNumber, traversalOrder) => {
+
+    const traversalFunction = {
+      "preorder": preOrderTraversal,
+      "inorder": inOrderTraversal,
+      "postorder": postOrderTraversal,
+    };
+
+    const selectedTraversal = traversalFunction[traversalOrder];
+    if (selectedTraversal) {
+      selectedTraversal(tree);
+    }
 
     if (tree.value === searchNumber) {
-      setTimeout(() => {
-        drawCircle(tree.xAxis, tree.yAxis, tree.value, "green", "black", "white");
-      }, speed);
+      visualizeNode(tree, "green", "black", "white");
     } else if (tree.value > searchNumber && tree.left != null) {
+      visualizeNode(tree, "red", "black", "white");
       setTimeout(() => {
         drawLine(
           tree.left.xAxis,
@@ -115,9 +156,10 @@ const BSTNode = ({ tree, searchNumber, speed, canvasWidth, canvasHeight, scale, 
           tree.left.parentYAxis,
           "red"
         );
-        visualizeSearchNumber(tree.left, searchNumber);
+        visualizeSearchNumber(tree.left, searchNumber, traversalOrder);
       }, speed);
     } else if (tree.value < searchNumber && tree.right != null) {
+      visualizeNode(tree, "red", "black", "white");
       setTimeout(() => {
         drawLine(
           tree.right.xAxis,
@@ -126,7 +168,7 @@ const BSTNode = ({ tree, searchNumber, speed, canvasWidth, canvasHeight, scale, 
           tree.right.parentYAxis,
           "red"
         );
-        visualizeSearchNumber(tree.right, searchNumber);
+        visualizeSearchNumber(tree.right, searchNumber, traversalOrder);
       }, speed);
     }
   };
@@ -139,10 +181,10 @@ const BSTNode = ({ tree, searchNumber, speed, canvasWidth, canvasHeight, scale, 
         ref={canvasRef}
         width={canvasWidth}
         height={canvasHeight}
-        style={{ transform: `scale(${scale}) translate(${translateX}px, ${translateY}px)` }}
+        style={{ transform: `scale(${scale}) translate(${10}px, ${0}px)` }}
       />
-      {context != null && visualizeTree(tree)}
-      {searchNumber != null && visualizeSearchNumber(tree, searchNumber)}
+      {context != null && BuildTree(tree)}
+      {searchNumber != null && visualizeSearchNumber(tree, searchNumber, traversalOrder)}
     </span>
   );
 };

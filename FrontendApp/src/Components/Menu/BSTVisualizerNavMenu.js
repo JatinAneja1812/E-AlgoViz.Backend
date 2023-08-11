@@ -53,7 +53,7 @@ export default function BSTVisualizerNavMenu(props) {
 
                 <BSTSpeedDropdown speed={props.speed} setSpeed={props.setSpeed} />
 
-                <BSTSearchTypeDropdown setTravasalOrder={props.setTravasalOrder} travasalOrder={props.travasalOrder} />
+                <BSTSearchTypeDropdown setTraversalOrder={props.setTraversalOrder} traversalOrder={props.traversalOrder} />
                 
                 <ResetTreeButton handleTreeReset={props.BSTReset}/>
                 

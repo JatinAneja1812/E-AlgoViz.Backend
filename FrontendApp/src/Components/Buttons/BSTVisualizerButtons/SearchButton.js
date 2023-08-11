@@ -36,7 +36,8 @@ export default function SearchNodeButton(props) {
           background: "rgb(7, 101, 133)",
           width: "11vw",
           height: "5vh",
-          right: "14px"
+          right: "14px",
+          color: "#FFF"
         }}
         variant="contained"
         onClick={props.handleNodeSearch}

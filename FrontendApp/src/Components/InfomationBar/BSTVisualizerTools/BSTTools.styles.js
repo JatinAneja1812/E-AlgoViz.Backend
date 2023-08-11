@@ -10,7 +10,7 @@ const BSTToolbarWrapper = styled.div`
     top: -35px;
     position: relative;
     background-color: white;
-    overflow: none;
+    overflow: hidden;
   }
 
   .rotate-icon {

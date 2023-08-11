@@ -5,9 +5,9 @@ import BSTTools from "../../../Components/InfomationBar/BSTVisualizerTools/BSTTo
 import BSTNode from "./Node/BSTNode";
 import "./BSTVisualizer.css";
 import { BSTVisualizerSpeedEnum } from "../../../Enums/BSTVisualizerSpeed";
-import Nodata from "../../../imgs/NoData.svg"
+import Nodata from "../../../imgs/NoData.svg";
 import { BSTSearchTypeEnum } from "../../../Enums/BSTSearchTypeEnum";
-
+import BSTTreeOrder from "../../../Components/InfomationBar/BSTVisualizerTools/BSTTreeOrders";
 
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -78,8 +78,9 @@ function BSTVisualizer() {
   const [searchNumber, setSearchNumber] = useState(null);
   const [scale, setScale] = useState(1);
   const [speed, setSpeed] = useState(BSTVisualizerSpeedEnum.FAST);
-  const [travasalOrder, setTravasalOrder] = useState(BSTSearchTypeEnum.PRE_ORDER);
-
+  const [traversalOrder, setTraversalOrder] = useState(
+    BSTSearchTypeEnum.PRE_ORDER.toString()
+  );
   const [treeContainerDimensions, setTreeContainerDimensions] = useState({
     width: 0,
     height: 0,
@@ -93,24 +94,39 @@ function BSTVisualizer() {
     }
   }, []);
 
+  // Function to traverse the BST and collect elements in a given order
+  const traverseTree = (node, order, elements) => {
+    if (order === "preorder") elements.push(node.value);
+    if (node.left) traverseTree(node.left, order, elements);
+    if (order === "inorder") elements.push(node.value);
+    if (node.right) traverseTree(node.right, order, elements);
+    if (order === "postorder") elements.push(node.value);
+  };
+
+  // Function to get the elements in a given order
+  const getElementsInOrder = (order) => {
+    if (!tree) return [];
+    const elements = [];
+    traverseTree(tree, order, elements);
+    return elements;
+  };
+
   const handleWheel = (e) => {
     // Increase or decrease scale based on the scroll direction
     const newScale = e.deltaY > 0 ? scale * 0.9 : scale * 1.1;
-
     // Set a range for the scale to prevent extreme zooming
     const clampedScale = Math.min(Math.max(newScale, 0.5), 3);
-
     setScale(clampedScale);
   };
 
   const addNode = (num = null) => {
     let userInput = num ?? parseInt(document.getElementById("userInput").value);
 
-    if(userInput == null || userInput === "") return;
+    if (userInput == null || userInput === "") return;
     if (isNaN(userInput)) return; // Input validation
 
     if (tree == null) {
-      const initialX = Math.floor(treeContainerDimensions.width / 2);
+      const initialX = Math.floor(treeContainerDimensions.width / 2) - 10;
       const initialY = Math.floor(treeContainerDimensions.height / 5);
 
       setTree(createBSTNode(userInput, initialX, initialY, null, null));
@@ -124,6 +140,16 @@ function BSTVisualizer() {
       if (newNode) {
         setCanvasDimensions(newNode.xAxis, newNode.yAxis);
       }
+    }
+  };
+
+  const addMultipleNode = async (num = null) => {
+    let size = num ?? parseInt(document.getElementById("sizeInput").value);
+
+    for (let i = 0; i < size; i++) {
+      setTimeout(() => {
+        document.getElementById("RandomInsertButton").click();
+      }, i * 1000); // Delay is based on the index of the iteration
     }
   };
 
@@ -162,10 +188,11 @@ function BSTVisualizer() {
   const BSTReset = () => {
     document.getElementById("userInput").value = "";
     document.getElementById("userSearchInput").value = "";
+    document.getElementById("sizeInput").value = "";
     setTree(null);
     setSearchNumber(null);
     setSpeed(BSTVisualizerSpeedEnum.FAST);
-    setTravasalOrder(BSTSearchTypeEnum.PRE_ORDER);
+    setTraversalOrder(BSTSearchTypeEnum.PRE_ORDER);
   };
 
   const searchNodeInTree = () => {
@@ -190,10 +217,15 @@ function BSTVisualizer() {
         searchNodeInTree={searchNodeInTree}
         setSpeed={setSpeed}
         speed={speed}
-        setTravasalOrder={setTravasalOrder}
-        travasalOrder={travasalOrder}
+        setTraversalOrder={setTraversalOrder}
+        traversalOrder={traversalOrder}
       />
-      <BSTTools addNode={addNode} BSTRandomInsert={BSTRandomInsert} />
+      <BSTTools
+        addNode={addNode}
+        BSTRandomInsert={BSTRandomInsert}
+        addMultipleNode={addMultipleNode}
+      />
+      <BSTTreeOrder getElementsInOrder={getElementsInOrder} />
 
       {/* Final Tree */}
       <div id="treeContainer" onWheel={handleWheel} className="treeContainer">
@@ -206,12 +238,21 @@ function BSTVisualizer() {
               canvasWidth={treeContainerDimensions.width}
               canvasHeight={treeContainerDimensions.height - 100}
               searchNumber={searchNumber}
+              traversalOrder={traversalOrder}
             />
           ) : (
             <label className="emptyDivText">
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
                 <img src={Nodata} alt="no data " />
-                <div class="ant-empty-description">Please insert the element to begin!</div>
+                <div class="ant-empty-description">
+                  Please insert the element to begin!
+                </div>
               </div>
             </label>
           )}

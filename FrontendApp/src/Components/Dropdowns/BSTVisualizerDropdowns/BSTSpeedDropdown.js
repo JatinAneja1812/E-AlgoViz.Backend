@@ -17,8 +17,7 @@ export default function BSTSpeedDropdown( props ) {
           size="small"
           value={props.speed}
           onChange={handleChange}
-          disabled={props.isSearching ? true : false}
-          style={{ color: props.isSearching ? "#CCC" : "#FFF", border: "#ffffff", width: "100%", marginTop: "1px", height: "46px"}}
+          style={{ color:"#FFF", border: "#FFF", width: "100%", marginTop: "1px", height: "46px"}}
           displayEmpty
           inputProps={{ 'aria-label': 'Without label' }}
           placeholder="Speed"  

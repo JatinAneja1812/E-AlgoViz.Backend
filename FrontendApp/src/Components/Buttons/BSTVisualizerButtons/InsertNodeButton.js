@@ -9,7 +9,7 @@ export default function InsertNodeButton(props) {
   return (
     <Stack
       direction="row"
-      spacing={3}
+      spacing={1}
       alignItems="center"
       style={{
         top: "9px",

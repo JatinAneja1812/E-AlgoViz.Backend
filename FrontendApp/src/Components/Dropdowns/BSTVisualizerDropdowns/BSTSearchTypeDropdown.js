@@ -6,7 +6,7 @@ import { BSTSearchTypeEnum } from "../../../Enums/BSTSearchTypeEnum";
 
 export default function BSTSearchTypeDropdown(props) {
   const handleChange = (event) => {
-    props.setTravasalOrder(event.target.value);
+    props.setTraversalOrder(event.target.value);
   };
 
   return (
@@ -14,12 +14,11 @@ export default function BSTSearchTypeDropdown(props) {
       <FormControl sx={{ m: 0.5, minWidth: 140 }}>
         <Select
           size="small"
-          value={props.travasalOrder}
+          value={props.traversalOrder}
           onChange={handleChange}
-          disabled={props.isSearching ? true : false}
           style={{
-            color: props.isSearching ? "#CCC" : "#FFF",
-            border: "#ffffff",
+            color: "#FFF",
+            border: "#FFF",
             width: "100%",
             marginTop: "1px",
             left: "15px",
@@ -29,9 +28,9 @@ export default function BSTSearchTypeDropdown(props) {
           inputProps={{ "aria-label": "Without label" }}
           placeholder="Search order"
         >
-          <MenuItem value={BSTSearchTypeEnum.PRE_ORDER}>Pre-Order Search</MenuItem>
-          <MenuItem value={BSTSearchTypeEnum.IN_ORDER}>In-Order Search</MenuItem>
-          <MenuItem value={BSTSearchTypeEnum.POST_ORDER}>Post-Order Search</MenuItem>
+          <MenuItem value={BSTSearchTypeEnum.PRE_ORDER.toString()}>Pre-Order Search</MenuItem>
+          <MenuItem value={BSTSearchTypeEnum.IN_ORDER.toString()}>In-Order Search</MenuItem>
+          <MenuItem value={BSTSearchTypeEnum.POST_ORDER.toString()}>Post-Order Search</MenuItem>
         </Select>
       </FormControl>
     </div>
