@@ -1,4 +1,4 @@
-import { SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined, FilePdfOutlined,FileTextOutlined,FileWordOutlined } from "@ant-design/icons";
 import SearchInputDropdown from "../../Dropdowns/SearchInputDropDown";
 import {
   CompareDates,
@@ -19,7 +19,18 @@ const FilesTableColumn = {
       filterDropdown: SearchInputDropdown,
       filterIcon: <SearchOutlined />,
       render: (object) => {
-        return object.fileName.toString();
+        return (
+          <>
+            {object.fileType === "application/pdf" ? (
+              <FilePdfOutlined style={{ marginRight: 14, color: "#1677ff", fontSize: "21px" }} />
+            ) : object.fileType === "text/plain" ? (
+              <FileTextOutlined style={{ marginRight: 14, color: "#1677ff", fontSize: "21px" }} />
+            ) : (
+              <FileWordOutlined style={{ marginRight: 14, color: "#1677ff", fontSize: "21px" }} />
+            )}
+            {object.fileName.toString()}
+          </>
+        );
       },
       onFilter: (value, record) => {
         return value.length === 0
@@ -64,7 +75,11 @@ const FilesTableColumn = {
       key: "fileType",
       filterDropdown: SearchInputDropdown,
       render: (object) => {
-        return object.fileType.toString();
+        if (object.fileType === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+          return "application/msword";
+        } else {
+          return object.fileType.toString();
+        }
       },
       filterIcon: <SearchOutlined />,
       onFilter: (value, record) => {
