@@ -4,12 +4,12 @@ import Stack from "@mui/material/Stack";
 import { Tooltip } from "antd";
 import HomeIcon from "@mui/icons-material/Home";
 import { useNavigate } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function ReturnButton(props) {
   let navigate = useNavigate();
 
   const [arrow] = useState("Show");
-
   const mergedArrow = useMemo(() => {
     if (arrow === "Hide") {
       return false;
@@ -34,7 +34,15 @@ export default function ReturnButton(props) {
 
   return (
     <Stack direction="row" spacing={6}>
-      <Tooltip placement="top" title={"Home"} arrow={mergedArrow}>
+      <Tooltip
+        placement="top"
+        title={() =>
+          props.iconText === "chatRoomNavIcon"
+            ? "ChatRoom Home"
+            : "Home"
+        }
+        arrow={mergedArrow}
+      >
         <IconButton
           style={{
             background: "transparent",
@@ -44,12 +52,22 @@ export default function ReturnButton(props) {
             cursor: "pointer",
             fontSize: "50px",
             marginRight: "-6rem",
+            position: "relative",
+            left: props.iconText === "chatRoomNavIcon" ? "19vh" : "0vh"
           }}
           disabled={handleDisableState()} // Corrected usage of disabled prop
           variant="contained"
-          onClick={() => navigate("/homepage")}
+          onClick={() =>
+            props.iconText === "chatRoomNavIcon"
+              ? navigate("/chatRoomApp")
+              : navigate("/homepage")
+          }
         >
-          <HomeIcon style={{ width: "1.5em", height: "1.5em" }} />
+          {props.iconText === "chatRoomNavIcon" ? (
+            <ArrowBackIcon style={{ width: "1.5em", height: "1.5em" }} />
+          ) : (
+            <HomeIcon style={{ width: "1.5em", height: "1.5em" }} />
+          )}
         </IconButton>
       </Tooltip>
     </Stack>
