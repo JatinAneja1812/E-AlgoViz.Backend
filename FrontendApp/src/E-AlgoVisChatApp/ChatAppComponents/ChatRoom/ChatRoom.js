@@ -11,9 +11,10 @@ import {
   sendMessage,
   deleteMessage,
 } from "../../../Authentication/Firebase/Firebase";
+import { Popconfirm } from "antd";
 import ErrorNotification from "../../../Components/Snackbar/ErrorSnackbar";
 import { formatTimestamp } from "../../../Utility/LibraryFunctions/FormatedTimeStamp";
-import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 
 export default function ChatRoom() {
   const [chatRooms, setChatRooms] = useState([]);
@@ -100,7 +101,21 @@ export default function ChatRoom() {
           <div className="delete-button">
             <div className="timestamp">{formattedTimestamp}</div>
             {isOwnMessage && (
-              <Button startIcon={<DeleteTwoToneIcon style={{fontSize: "20px", color: "red"}} />} onClick={handleDelete}  size="small" />
+              <Popconfirm
+                title="Are you sure?"
+                okText={"Yes"}
+                cancelText={"No"}
+                onConfirm={() => handleDelete()}
+              >
+                <Button
+                  startIcon={
+                    <DeleteTwoToneIcon
+                      style={{ fontSize: "20px", color: "red" }}
+                    />
+                  }
+                  size="small"
+                />
+              </Popconfirm>
             )}
           </div>
         </div>

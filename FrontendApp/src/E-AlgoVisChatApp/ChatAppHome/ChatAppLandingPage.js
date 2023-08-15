@@ -126,8 +126,8 @@ export default function ChatAppLandingPage() {
                   </div>
                 )}
                 {sortedChatRooms.map((room) => (
-                  <li key={room.id} className="ChatRoomCard">
-                    <div onClick={() => navigate(`/chatRoom/${room.id}`)} className="ChatRoomLink">
+                  <li key={room.id} className="ChatRoomCard" onClick={() => navigate(`/chatRoom/${room.id}`)}>
+                    <div className="ChatRoomLink">
                       <h2>{room.title}</h2>
                       <h2>{room.title}</h2>
                     </div>
