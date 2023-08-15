@@ -11,6 +11,8 @@ import PrimeNumberVisualizer from './Containers/Visualizers/PrimeNumbersVisualiz
 import FilesHub from './Containers/FileManagementSystem/FilesHub';
 import reportWebVitals from './reportWebVitals';
 import BSTVisualizer from './Containers/Visualizers/BinarySearchTreeVisualizer/BSTVisualizer';
+import ChatAppLandingPage from './E-AlgoVisChatApp/ChatAppHome/ChatAppLandingPage';
+import ChatRoom from './E-AlgoVisChatApp/ChatAppComponents/ChatRoom/ChatRoom';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,6 +26,8 @@ ReactDOM.render(
         <Route path="/primeNumberVisualizer" element={<PrimeNumberVisualizer/>} />
         <Route path="/bstVisualizer" element={<BSTVisualizer/>} />
         <Route path="/filesUploadandDownload" element={<FilesHub/>} />
+        <Route path="/chatRoomApp" element={<ChatAppLandingPage/>} />
+        <Route path="/chatRoom/:id" element={<ChatRoom/>} />
       </Routes>
     </Router>
   </React.StrictMode>,

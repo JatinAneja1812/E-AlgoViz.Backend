@@ -50,6 +50,7 @@ export default function CustomAvatar(props) {
                     <IconButton
                         onMouseEnter={handleOpenUserMenu}
                         sx={{ p: 0 }}
+                        style={{cursor: "pointer"}}
                     >
                         <Avatar className='Avatar' alt={userName} src="/static/images/avatar/2.jpg" /> 
                     </IconButton>

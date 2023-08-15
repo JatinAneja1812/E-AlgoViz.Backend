@@ -1,17 +1,18 @@
 import loginImg from "../../imgs/LoginImage.svg";
 import { LoginWrapper } from "./Auth.styles.js";
 import React, { useState, useEffect, useRef } from "react";
-import { auth } from "../Firebase/Firebase";
+import { auth, db } from "../Firebase/Firebase";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Link from "@mui/material/Link";
 import { useNavigate } from "react-router-dom";
-import  LoginIcon from "@mui/icons-material/Login";
+import LoginIcon from "@mui/icons-material/Login";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { getDocs, collection } from "firebase/firestore";
 import ErrorNotification from "../../Components/Snackbar/ErrorSnackbar";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import Reset from "../ResetUser/Reset";
 import LiquidButtonWrapper from "../../Utility/Styles/CustomButtonStyles/LiquidButton.styles.js";
-import { startSession, endSession} from "../Storage/Session";
+import { startSession, endSession } from "../Storage/Session";
 import { Row, Col } from "antd";
 
 export default function Login(props) {
@@ -23,23 +24,47 @@ export default function Login(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [userReset, setUserReset] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
   }, []);
-  
 
   const handleLogin = () => {
     setIsLoading(true);
-  
+
     const timer = setTimeout(async () => {
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
         const user = userCredential.user;
         if (user.emailVerified) {
-          // Allow 
+          // Allow
+          const usersCollection = collection(db, "users");
+
+          getDocs(usersCollection)
+            .then((querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                const userData = doc.data();
+                if (userData.uid === user.uid) {
+                  sessionStorage.setItem("avatarColor", userData.avatarColor);
+                }
+              });
+            })
+            .catch((error) => {
+              setError(error);
+              setEmail("");
+              setPassword("");
+              setIsOpen(true);
+              navigate("/");
+              endSession();
+              setIsLoading(false);
+            });
+
           const path = "/homepage";
           startSession(user);
           const timeout = setTimeout(() => {
@@ -47,20 +72,17 @@ export default function Login(props) {
             setIsLoading(false);
           }, 3000);
           return () => clearTimeout(timeout) && setIsLoading(false);
-        } 
-        else 
-        {
+        } else {
           setError("Please verify your email before logging in.");
           setEmail("");
           setPassword("");
           setIsOpen(true);
           navigate("/");
           setIsLoading(false);
-          
           return () => clearTimeout(timer) && setIsLoading(false);
         }
       } catch (error) {
-        setError('Wrong Credential. Try Again.');
+        setError("Wrong Credential. Try Again.");
         setEmail("");
         setPassword("");
         setIsOpen(true);
@@ -71,7 +93,6 @@ export default function Login(props) {
       }
     }, 15000);
   };
-
 
   const handleReset = () => {
     setUserReset(true);
@@ -94,8 +115,8 @@ export default function Login(props) {
         />
       )}
 
-      {userReset && <Reset setUserReset={setUserReset}  userReset={userReset}/>}
-      
+      {userReset && <Reset setUserReset={setUserReset} userReset={userReset} />}
+
       <LoginWrapper>
         <div className="TitleLogin">
           <h1>E-Algo-ViZ</h1>
@@ -124,49 +145,62 @@ export default function Login(props) {
                   required
                 />
               </div>
-              <div className="form-group"  style={{position: "relative", left: "11px"}}>
-              <label htmlFor="password">Password</label>
-              <Row>
-                <Col>
-                  <input
-                    disabled={isLoading ? true : false}
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Password"
-                    id="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                    onKeyDown={handleKeypress}
-                    required
-                  />
-                </Col>
-                <Col>
-                  <div style={{position: "relative", top: "10px", left: "5px"}}>
-                    {showPassword ? (
-                      <VisibilityOff onClick={() => setShowPassword(false)} />
-                    ) : (
-                      <Visibility onClick={() => setShowPassword(true)} />
-                    )}
-                  </div>
-                </Col>
+              <div
+                className="form-group"
+                style={{ position: "relative", left: "11px" }}
+              >
+                <label htmlFor="password">Password</label>
+                <Row>
+                  <Col>
+                    <input
+                      disabled={isLoading ? true : false}
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Password"
+                      id="password"
+                      onChange={(e) => setPassword(e.target.value)}
+                      value={password}
+                      onKeyDown={handleKeypress}
+                      required
+                    />
+                  </Col>
+                  <Col>
+                    <div
+                      style={{ position: "relative", top: "10px", left: "5px" }}
+                    >
+                      {showPassword ? (
+                        <VisibilityOff onClick={() => setShowPassword(false)} />
+                      ) : (
+                        <Visibility onClick={() => setShowPassword(true)} />
+                      )}
+                    </div>
+                  </Col>
                 </Row>
-            </div>
+              </div>
             </div>
           </div>
           <div className="footer">
             <LiquidButtonWrapper>
-              <LoadingButton 
+              <LoadingButton
                 disabled={isLoading ? true : !email || !password ? true : false}
                 className="liquidButton"
-                icon={null}         
+                icon={null}
                 loadingPosition="end"
                 variant="contained"
-                style={{fontSize: "16px", color: "white"}}
+                style={{ fontSize: "16px", color: "white" }}
                 onClick={handleLogin}
                 loading={isLoading === false ? false : true}
               >
                 <span className="liquidButton__text">LOGIN</span>
-                <span className="liquidButton__icon"><LoginIcon style={{color: "white"}} /></span>
-                <span className={isLoading ? "disabledLiquidButton__liquid" : "liquidButton__liquid"} ></span>
+                <span className="liquidButton__icon">
+                  <LoginIcon style={{ color: "white" }} />
+                </span>
+                <span
+                  className={
+                    isLoading
+                      ? "disabledLiquidButton__liquid"
+                      : "liquidButton__liquid"
+                  }
+                ></span>
               </LoadingButton>
             </LiquidButtonWrapper>
           </div>

@@ -83,10 +83,17 @@ export default function Register(props) {
     return () => {};
   }, [pwd, matchPwd]);
 
+  function generateRandomColor() {
+    const colors = ["#007bff", "#dc3545", "#e83e8c", "#6f42c1", "#28a745", "#ffc107", "#8b4513", "#fd7e14", "#00008b"];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  }
+
   const register = async () => {
+    const avatarColor = generateRandomColor(); // Generate a random color
     if (!username) alert("Please enter name");
     
-    await registerWithEmailAndPassword(username, email, pwd)
+    await registerWithEmailAndPassword(username, email, pwd, avatarColor)
     .then((message) => {
       // handle successful registration message
       // eslint-disable-next-line eqeqeq

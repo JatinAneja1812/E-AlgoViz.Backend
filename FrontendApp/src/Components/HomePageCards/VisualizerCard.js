@@ -3,6 +3,7 @@ import { DescriptionEnum } from "../../Enums/HomeCardsDescriptionEnum";
 import { VisualizerCardWrapper } from "./VisualizerCard.styles";
 import { useNavigate } from "react-router-dom";
 import uploadFiles from "../../imgs/uploadFiles.gif";
+import InAppMessageing from "../../imgs/InAppMessaging.gif";
 import bstVis from "../../imgs/bst.gif";
 import CircularStatic from "../../Utility/Hooks/LoadingWithLabel";
 
@@ -38,6 +39,12 @@ const slides = [
     subtitle: "Share and Access Educational Resources",
     description: DescriptionEnum.FILE_STORAGE.toString(),
     image: uploadFiles,
+  },
+  {
+    title: "E-AlgoVis ChatRooms",
+    subtitle: "Connect & Collaborate",
+    description: DescriptionEnum.CHAT_APP.toString(),
+    image: InAppMessageing,
   },
 ];
 
@@ -198,6 +205,24 @@ function Slide({ slide, offset }) {
             navigate("/homepage");
             setIsLoading(false);
             return () => clearTimeout(timer5) && setIsLoading(false);
+          }
+        }, 5000);
+        break;
+      case "E-AlgoVis ChatRooms":
+        setIsLoading(true);
+        const timer6 = setTimeout(async () => {
+          try {
+            const path = "/chatRoomApp";
+            const timeout = setTimeout(() => {
+              navigate(path);
+              setIsLoading(false);
+            }, 3000);
+  
+            return () => clearTimeout(timeout) && setIsLoading(false);
+          } catch (error) {
+            navigate("/homepage");
+            setIsLoading(false);
+            return () => clearTimeout(timer6) && setIsLoading(false);
           }
         }, 5000);
         break;

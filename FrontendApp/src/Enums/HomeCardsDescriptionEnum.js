@@ -7,6 +7,8 @@ const DescriptionEnum = {
     FILE_STORAGE: "Access our comprehensive File Repository to upload and download exam papers, notes, and study materials. Organize and preserve valuable educational resources, creating a central hub for seamless file storage and retrieval. Collaborate with fellow learners and educators to build a repository of knowledge for a fruitful academic journey.",
     PRIME_NUMBER_ALGO_TEXT: "Explore the beauty of prime numbers at your own pace by setting your desired number range. Observe as the algorithm diligently identifies prime numbers within the specified range, providing you with a clear and interactive visualization of its workings. Uncover the patterns and marvel at the magic of prime numbers with our customizable and informative tool.",
     BST_ALGO_TEXT:"Experience the elegance of a Binary Search Tree Visualizer - an interactive tool to observe nodes being inserted, organized, and searched in a hierarchical structure. Explore the efficiency and simplicity of this essential data structure for maintaining sorted data.",
+    CHAT_APP: "Real-time chat for seamless communication and collaboration. Engage in discussions, share insights, and enhance learning through interactive chatrooms.",
+
 }
 
 export { DescriptionEnum };
