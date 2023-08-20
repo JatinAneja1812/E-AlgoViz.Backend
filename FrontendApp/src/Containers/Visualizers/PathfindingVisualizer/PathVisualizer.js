@@ -193,9 +193,9 @@ export default function PathAlgoVisualizer() {
     setTimeDistShow(!TimeDistShow);
   };
 
-  const handleAlgorithm = (grid, algo_type) => {
+  const handleAlgorithm = async (grid, algo_type) => {
     var startTime = Date.now();
-    var res = solve_algorithm(
+    var res = await solve_algorithm(
       grid,
       START_NODE_ROW,
       START_NODE_COL,
@@ -227,10 +227,10 @@ export default function PathAlgoVisualizer() {
     return sum;
   };
 
-  const visualizeAlgorithm = (type, algo_type) => {
+  const visualizeAlgorithm = async (type, algo_type) => {
     algo = algo_type;
     clearPath();
-    const ret = handleAlgorithm(grid, algo);
+    const ret = await handleAlgorithm(grid, algo);
     const visitedNodesInOrder = ret[0];
     const nodesInShortestPathOrder = ret[1];
 
@@ -554,6 +554,7 @@ const getNewGridWithWallToggled = (grid, row, col) => {
 };
 
 const getNewGridWithWeightToggled = (grid, row, col) => {
+  console.log("reahced")
   if (grid[row][col].isStart || grid[row][col].isFinish || grid[row][col].isWall) {
     return grid;
   }

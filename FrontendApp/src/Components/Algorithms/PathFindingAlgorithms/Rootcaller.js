@@ -14,7 +14,7 @@ import {depthFirstSearch, getNodesInShortestPathOrderDFS} from "./DepthFirstSear
 import { swarmAlgorithm, getNodesInShortestPathOrderSwarm } from "./SwarmAlgorithm";
 import { convergentSwarmAlgorithm, getNodesInShortestPathOrderConvergeSwarm } from "./ConvergentSwarm";
 
-function get_paths(
+async function get_paths(
   state_grid,
   start_row,
   start_col,
@@ -30,8 +30,15 @@ function get_paths(
   //call for switching the path finding algo
   switch (algo_type) {
     case "Dijkstra": {
-      visitedNodesInOrder = dijkstra(grid, start_node, end_node);
-      nodesInShortestPathOrder = getNodesInShortestPathOrder(end_node);
+      try {
+        visitedNodesInOrder = await dijkstra(grid, start_node, end_node);
+        var endNode =  visitedNodesInOrder.find(node => node.row === end_node.row && node.col === end_node.col);
+        nodesInShortestPathOrder = getNodesInShortestPathOrder(endNode);
+        // Continue with the code that depends on visitedNodesInOrder and nodesInShortestPathOrder
+      } catch (error) {
+        // Handle any errors that might occur during the dijkstra function
+        console.error(error);
+      }
       break;
     }
 
@@ -52,6 +59,7 @@ function get_paths(
     }
     case "A* Search": {
       visitedNodesInOrder = solve_astar(grid, start_node, end_node);
+      console.log(visitedNodesInOrder)
       nodesInShortestPathOrder = getNodesInShortestPathOrderASTAR(end_node);
       break;
     }
@@ -62,6 +70,7 @@ function get_paths(
     }
     case "Swarm Algorithm": {
       visitedNodesInOrder = swarmAlgorithm(grid, start_node, end_node);
+      console.log(visitedNodesInOrder)
       nodesInShortestPathOrder = getNodesInShortestPathOrderSwarm(end_node);
       break;
     }
@@ -74,11 +83,13 @@ function get_paths(
       break;
   }
 
+  console.log(visitedNodesInOrder)
+  console.log(nodesInShortestPathOrder)
   return [visitedNodesInOrder, nodesInShortestPathOrder];
   //return the path both the visited node as well as the shortest one
 }
 
-function middle_case(
+async function middle_case(
   state_grid,
   start_row,
   start_col,
@@ -94,7 +105,7 @@ function middle_case(
   var nodesInShortestPathOrder2 = [];
   var ret;
 
-  ret = get_paths(
+  ret = await get_paths(
     state_grid,
     start_row,
     start_col,
@@ -105,7 +116,7 @@ function middle_case(
   visitedNodesInOrder = ret[0];
   nodesInShortestPathOrder = ret[1];
 
-  ret = get_paths(state_grid, mid_row, mid_col, end_row, end_col, algo_type);
+  ret = await get_paths(state_grid, mid_row, mid_col, end_row, end_col, algo_type);
   visitedNodesInOrder2 = ret[0];
   nodesInShortestPathOrder2 = ret[1];
 
@@ -119,7 +130,7 @@ function middle_case(
   return [visitedNodesInOrder, nodesInShortestPathOrder];
 }
 
-export function solve_algorithm(
+export async function solve_algorithm(
   state_grid,
   start_row,
   start_col,
@@ -130,7 +141,7 @@ export function solve_algorithm(
   algo_type
 ) {
   if (mid_row === -1) {
-    return get_paths(
+    return await get_paths(
       state_grid,
       start_row,
       start_col,
@@ -139,7 +150,7 @@ export function solve_algorithm(
       algo_type
     );
   } else {
-    return middle_case(
+    return await middle_case(
       state_grid,
       start_row,
       start_col,

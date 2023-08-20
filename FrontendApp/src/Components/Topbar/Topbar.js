@@ -29,11 +29,6 @@ export default function Topbar() {
   const handleReloadOnClick = () => {
     ipcRenderer.send("reload-window");
   };
-  
-  // const handleClick = () => {
-  //   console.log("Clicked");
-  //   ipcRenderer.send("greeting");
-  // };
 
   useEffect(() => {
     ipcRenderer.removeAllListeners("maximised-window");

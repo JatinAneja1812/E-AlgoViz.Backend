@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Interfaces.PathfindingAlgorithms.Interface.IDijkstra;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Serivces.PathfindingAlgorithms.Service.Dijkstra;
 
 namespace BackendProcess
 {
@@ -22,7 +24,7 @@ namespace BackendProcess
                 );
             });
 
-            // services.AddTransient<IPowershellUtility, PowershellUtility.PowershellUtility>();
+             services.AddTransient<IDijkstra, Dijkstra>();
 
 
             //services.AddAutoMapper(typeof(UserConfigurationProfile));

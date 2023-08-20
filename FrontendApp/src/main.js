@@ -137,30 +137,34 @@ ipcMain.on("maximise-window", (_) => {
   }
 });
 
-ipcMain.on("greeting", async (event, data) => {
+ipcMain.on("visualizeDijkstra", async (event, grid, startNode, endNode) => {
   console.log("Clicked");
-  console.log(
-    path.normalize(path.join(__dirname, "\\Backend\\BackendProcess.exe"))
-  );
+
   if (BrowserWindow.getAllWindows().length === 1) {
     try {
-      console.log("In Fetch");
-      console.log(data);
+      const dijkstraVisualizerDTO = {
+        grid: grid,
+        startNode: startNode,
+        endNode: endNode
+      };
+
       fetch(
-        "http://localhost:5000/api/frontend/hello?",
+        "http://localhost:8080/api/frontend/Dijkstra",
         {
-          method: "GET",
+          method: "POST",
           headers: {
-            Accept: "text/plain",
-            "Content-Type": "text/plain",
+            Accept: "*/*",
+            'Content-Type': 'application/json'
           },
+          body: JSON.stringify(dijkstraVisualizerDTO)
         }
       )
         .then((res) => {
           return res.text();
         })
         .then((result) => {
-          console.log(result);
+         
+          event.sender.send("dijkstraResult", result);
         });
     } catch (err) {
       console.log(err);

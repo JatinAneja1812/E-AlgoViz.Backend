@@ -10,12 +10,19 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.9" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="6.0.16" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
 	<PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
 	<PackageReference Include="System.Runtime.Handles" Version="4.3.0" />
 	<PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
 	<PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DTOs\DTOs.csproj" />
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
+    <ProjectReference Include="..\Serivces\Serivces.csproj" />
   </ItemGroup>
 
 </Project>

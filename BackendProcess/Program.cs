@@ -11,7 +11,7 @@ namespace BackendProcess
         {
             var host = new WebHostBuilder()
             .UseKestrel()
-            .UseUrls("http://*:5000")
+            .UseUrls("http://*:8080")
             .UseStartup<Startup>()
             .Build();
 

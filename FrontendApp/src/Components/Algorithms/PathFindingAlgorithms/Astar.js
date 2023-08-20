@@ -95,11 +95,13 @@ export function solve_astar(grid, start_node, end_node) {
 // Backtracks from the finishNode to find the shortest path.
 // Only works when called *after* the dijkstra method above.
 export function getNodesInShortestPathOrderASTAR(finishNode) {
+  console.log(finishNode)
   let currentNode = finishNode;
   while (currentNode !== null) {
     nodesInShortestPathOrder.unshift(currentNode);
     currentNode = currentNode.previousNode;
   }
+  console.log(nodesInShortestPathOrder)
   return nodesInShortestPathOrder;
   // it will return the array of nodes leading towards shortest path
 }

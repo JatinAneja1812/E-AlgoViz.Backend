@@ -1,4 +1,16 @@
 {
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    },
+    "EventLog": {
+      "LogLevel": {
+        "Default": "Information"
+      }
+    }
+  },
   "Jwt": {
     "Key": "Ls9Sl73hyxRui1QB0Z3LRFKYFDLW4ysN9oiGnxMwKCM=",
     "Issuer": "JatinAneja"
