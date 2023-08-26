@@ -137,17 +137,15 @@ ipcMain.on("maximise-window", (_) => {
   }
 });
 
-ipcMain.on("greeting", async (event, data) => {
-  console.log("Clicked");
-  console.log(
-    path.normalize(path.join(__dirname, "\\Backend\\BackendProcess.exe"))
-  );
+
+// APIS 
+
+ipcMain.on("GetAlgorithmsList", async (event) => {
+
   if (BrowserWindow.getAllWindows().length === 1) {
     try {
-      console.log("In Fetch");
-      console.log(data);
       fetch(
-        "http://localhost:5000/api/frontend/hello?",
+        "http://localhost:5000/api/frontend/AlgorithmsInfo",
         {
           method: "GET",
           headers: {
@@ -160,11 +158,12 @@ ipcMain.on("greeting", async (event, data) => {
           return res.text();
         })
         .then((result) => {
-          console.log(result);
+          event.sender.send("resultList", result);
         });
     } catch (err) {
       console.log(err);
     }
   }
 });
+
 

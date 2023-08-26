@@ -11,11 +11,23 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="6.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
 	<PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
 	<PackageReference Include="System.Runtime.Handles" Version="4.3.0" />
 	<PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
 	<PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AlgorithmsVisualizer.Repository.Classes\AlgorithmsVisualizer.Repository.Classes.csproj" />
+    <ProjectReference Include="..\AlgorithmsVisualizer.Repository.Interfaces\AlgorithmsVisualizer.Repository.Interfaces.csproj" />
+    <ProjectReference Include="..\AlgorithmsVisualizer.Services.Classes\AlgorithmsVisualizer.Services.Classes.csproj" />
+    <ProjectReference Include="..\AlgorithmsVisualizer.Services.Interfaces\AlgorithmsVisualizer.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\VisualizerDatabase\VisualizerDatabase.csproj" />
   </ItemGroup>
 
 </Project>

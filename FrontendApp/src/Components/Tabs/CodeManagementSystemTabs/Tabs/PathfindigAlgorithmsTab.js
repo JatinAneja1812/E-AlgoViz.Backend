@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PathfindingAlgorithmTabWrapper } from "../AlgorithmsTabs.styles";
 
-export default function PathfindigAlgorithmsTab() {
 
+
+export default function PathfindigAlgorithmsTab(props) {
+
+    console.log(props.PathfindingAlgorithms)
 
   return (
     <PathfindingAlgorithmTabWrapper>
@@ -25,7 +28,6 @@ export default function PathfindigAlgorithmsTab() {
         <button class="Tab_button1" data-target="info6">
           Button 6
         </button>
-
       </div>
       <div class="info-container">
         <div id="info1" class="info">

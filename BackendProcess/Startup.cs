@@ -1,6 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AlgorithmsVisualizer.Repository.Classes;
+using AlgorithmsVisualizer.Repository.Interfaces;
+using AlgorithmsVisualizer.Services.Classes;
+using AlgorithmsVisualizer.Services.Interfaces;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using VisualizerDatabase.VisualizerContext;
 
 namespace BackendProcess
 {
@@ -22,17 +27,17 @@ namespace BackendProcess
                 );
             });
 
-            // services.AddTransient<IPowershellUtility, PowershellUtility.PowershellUtility>();
-
+            services.AddTransient<IAlgorithmsInfo, AlgorithmsInfo>();
+            services.AddTransient<IAlgorithmsInfoRepo, AlgorithmsInfoRepo>();
 
             //services.AddAutoMapper(typeof(UserConfigurationProfile));
-            //services.AddDbContext<SentinelCollectorContext>();
 
-            //using (SentinelCollectorContext dbContext = new SentinelCollectorContext())
-            //{
-            //    dbContext.Database.Migrate();
-            //    //dbContext.Database.EnsureCreated();
-            //}
+            services.AddDbContext<VisContext>();
+
+            using (VisContext dbContext = new VisContext())
+            {
+                dbContext.Database.EnsureCreated();
+            }
 
             services.AddControllers();
         }

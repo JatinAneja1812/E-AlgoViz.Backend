@@ -1,17 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { Tabs, Button, message, Spin } from "antd";
+import { Tabs } from "antd";
 import { AlgorithmTypeTabsWrapper } from "./AlgorithmsTabs.styles";
 import PathfindigAlgorithmsTab from "./Tabs/PathfindigAlgorithmsTab";
+import AlgorithmsTypeEnum from "../../../Enums/AlgorithmsTypeEnum";
 
 // Create a separate component for the tab content
 const TabContent = ({ active, children }) => {
     const classes = `tab-content ${active ? 'active' : ''}`;
-
     return <div className={classes}>{children}</div>;
   };
 
-export default function AlgorithmTypeTabs() {
+export default function AlgorithmTypeTabs(props) {
   const [activeTab, setActiveTab] = useState('1');
+  const [filteredAlgorithms, setFilteredAlgorithms] = useState([]);
+
+  useEffect(() => {
+    // Filter algorithms based on the active tab
+    if (activeTab === '1') {
+      // Filter pathfinding algorithms
+      const pathfindingAlgorithms = props.algorithmsList ?? props.algorithmsList.filter(algorithm => algorithm.algorithmsType === AlgorithmsTypeEnum.PATHFINDING_ALGORITHMS);
+      setFilteredAlgorithms(pathfindingAlgorithms);
+    } else if (activeTab === '2') {
+      // Filter sorting algorithms
+      const sortingAlgorithms = props.algorithmsList ?? props.algorithmsList.filter(algorithm => algorithm.type === AlgorithmsTypeEnum.SORTING_ALGORITHMS);
+      setFilteredAlgorithms(sortingAlgorithms);
+    } else if (activeTab === '3') {
+      // Filter binary search tree algorithms
+      const bstAlgorithms =props.algorithmsList ?? props.algorithmsList.filter(algorithm => algorithm.type === AlgorithmsTypeEnum.BINARY_SEARCH_TREE_ALGORITHMS);
+      setFilteredAlgorithms(bstAlgorithms);
+    } else if (activeTab === '4') {
+      // Filter prime number search algorithms
+      const primeAlgorithms =props.algorithmsList ?? props.algorithmsList.filter(algorithm => algorithm.type === AlgorithmsTypeEnum.PRIME_NUMBER_SEARCH_ALGORITHMS);
+      setFilteredAlgorithms(primeAlgorithms);
+    }
+  }, [activeTab, props.algorithmsList]);
 
   const handleTabChange = (key) => {
     setActiveTab(key);
@@ -25,7 +47,7 @@ export default function AlgorithmTypeTabs() {
           style={{ outline: 'none' }}
           key="1"
         >
-          <TabContent active={activeTab === '1'}><PathfindigAlgorithmsTab /></TabContent>
+          <TabContent active={activeTab === '1'}><PathfindigAlgorithmsTab PathfindingAlgorithms = {filteredAlgorithms}/></TabContent>
         </Tabs.TabPane>
         <Tabs.TabPane
           tab={<span>Sorting Algorithms</span>}
