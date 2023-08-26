@@ -1,6 +1,6 @@
 ﻿namespace VisualizerDatabase
 {
-    public class Class1
+    public class VisContext
     {
 
     }
