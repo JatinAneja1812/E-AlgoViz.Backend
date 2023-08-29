@@ -101,14 +101,14 @@
   animation-delay: 0s;
   animation-duration: 11s;
 }
-.circles li:nth-child(10){
+.circles li:nth-child(11){
   left: 65%;
   width: 120px;
   height: 120px;
   animation-delay: 0s;
   animation-duration: 17s;
 }
-.circles li:nth-child(10){
+.circles li:nth-child(12){
   left: 95%;
   width: 100px;
   height: 100px;

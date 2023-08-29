@@ -3,6 +3,7 @@ import { Tabs } from "antd";
 import { AlgorithmTypeTabsWrapper } from "./AlgorithmsTabs.styles";
 import PathfindigAlgorithmsTab from "./Tabs/PathfindigAlgorithmsTab";
 import AlgorithmsTypeEnum from "../../../Enums/AlgorithmsTypeEnum";
+import SortingAlgorithmsTab from "./Tabs/SortingAlgorithmsTab";
 
 // Create a separate component for the tab content
 const TabContent = ({ active, children }) => {
@@ -18,19 +19,19 @@ export default function AlgorithmTypeTabs(props) {
     // Filter algorithms based on the active tab
     if (activeTab === '1') {
       // Filter pathfinding algorithms
-      const pathfindingAlgorithms = props.algorithmsList ?? props.algorithmsList.filter(algorithm => algorithm.algorithmsType === AlgorithmsTypeEnum.PATHFINDING_ALGORITHMS);
+      const pathfindingAlgorithms = props.algorithmsList == null ? [] : props.algorithmsList.filter(algorithm => algorithm.algorithmsType === AlgorithmsTypeEnum.PATHFINDING_ALGORITHMS);
       setFilteredAlgorithms(pathfindingAlgorithms);
     } else if (activeTab === '2') {
       // Filter sorting algorithms
-      const sortingAlgorithms = props.algorithmsList ?? props.algorithmsList.filter(algorithm => algorithm.type === AlgorithmsTypeEnum.SORTING_ALGORITHMS);
+      const sortingAlgorithms = props.algorithmsList == null ? [] : props.algorithmsList.filter(algorithm => algorithm.algorithmsType === AlgorithmsTypeEnum.SORTING_ALGORITHMS);
       setFilteredAlgorithms(sortingAlgorithms);
     } else if (activeTab === '3') {
       // Filter binary search tree algorithms
-      const bstAlgorithms =props.algorithmsList ?? props.algorithmsList.filter(algorithm => algorithm.type === AlgorithmsTypeEnum.BINARY_SEARCH_TREE_ALGORITHMS);
+      const bstAlgorithms =props.algorithmsList == null ? [] : props.algorithmsList.filter(algorithm => algorithm.algorithmsType === AlgorithmsTypeEnum.BINARY_SEARCH_TREE_ALGORITHMS);
       setFilteredAlgorithms(bstAlgorithms);
     } else if (activeTab === '4') {
       // Filter prime number search algorithms
-      const primeAlgorithms =props.algorithmsList ?? props.algorithmsList.filter(algorithm => algorithm.type === AlgorithmsTypeEnum.PRIME_NUMBER_SEARCH_ALGORITHMS);
+      const primeAlgorithms =props.algorithmsList == null ? [] : props.algorithmsList.filter(algorithm => algorithm.algorithmsType === AlgorithmsTypeEnum.PRIME_NUMBER_SEARCH_ALGORITHMS);
       setFilteredAlgorithms(primeAlgorithms);
     }
   }, [activeTab, props.algorithmsList]);
@@ -54,7 +55,7 @@ export default function AlgorithmTypeTabs(props) {
           style={{ outline: 'none' }}
           key="2"
         >
-          <TabContent active={activeTab === '2'}>Tab 2 content</TabContent>
+          <TabContent active={activeTab === '2'}><SortingAlgorithmsTab SortingAlgorithms = {filteredAlgorithms} /></TabContent>
         </Tabs.TabPane>
         <Tabs.TabPane
           tab={<span>Binary Search Tree Algorithms</span>}

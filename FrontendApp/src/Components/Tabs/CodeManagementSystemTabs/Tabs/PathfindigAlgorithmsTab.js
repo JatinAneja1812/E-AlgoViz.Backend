@@ -1,54 +1,171 @@
 import React, { useEffect, useState } from "react";
-import { PathfindingAlgorithmTabWrapper } from "../AlgorithmsTabs.styles";
+import { Tabs } from "antd";
+import { AlgorithmTabWrapper } from "../AlgorithmsTabs.styles";
+import { GetAllAlgorithmsData } from "../../../../Utility/LibraryFunctions/GetAllAlgorithmsData";
+import Nodata from "../../../../imgs/NoData.svg";
 
-
+const TabContent = ({ active, children }) => {
+  const classes = `PFAtab-content ${active ? "active" : ""}`;
+  return <pre className={classes} style={{ whiteSpace: "pre-wrap", overflowX: "auto" }} >{children}</pre>;
+};
 
 export default function PathfindigAlgorithmsTab(props) {
+  const [data, setData] = useState([]);
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState(null);
+  const [activeTab, setActiveTab] = useState("1");
+  const [activeTab2, setActiveTab2] = useState("1");
 
-    console.log(props.PathfindingAlgorithms)
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const result = await GetAllAlgorithmsData(props.PathfindingAlgorithms);
+        setData(result);
+      } catch (error) {
+        // Handle any errors that occur during the API call
+        console.error(error);
+      }
+    }
+    // Call the async function to fetch data
+    fetchData();
+  }, [props.PathfindingAlgorithms]);
+
+  const handleAlgorithmClick = (algorithm) => {
+    setSelectedAlgorithm(algorithm);
+  };
+
+  const handleTabChange = (key) => {
+    setActiveTab(key);
+  };
+
+  const handleSecondTabChange = (key) => {
+    setActiveTab2(key);
+  };
 
   return (
-    <PathfindingAlgorithmTabWrapper>
-      <div class="button-container">
-        <button class="Tab_button1" data-target="info1">
-          Button 1
-        </button>
-        <button class="Tab_button1" data-target="info2">
-          Button 2
-        </button>
-        <button class="Tab_button1" data-target="info3">
-          Button 3
-        </button>
-        <button class="Tab_button1" data-target="info4">
-          Button 4
-        </button>
-        <button class="Tab_button1" data-target="info5">
-          Button 5
-        </button>
-        <button class="Tab_button1" data-target="info6">
-          Button 6
-        </button>
+    <AlgorithmTabWrapper>
+      <div className="button-container">
+        <ul className="bubble">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        {data.map((algorithm) => (
+          <button
+            className="Tab_button"
+            key={algorithm.key}
+            onClick={() => handleAlgorithmClick(algorithm)}
+          >
+            {algorithm.title}
+          </button>
+        ))}
       </div>
-      <div class="info-container">
-        <div id="info1" class="info">
-          Content for Info 1
-        </div>
-        <div id="info2" class="info">
-          Content for Info 2
-        </div>
-        <div id="info3" class="info">
-          Content for Info 3
-        </div>
-        <div id="info4" class="info">
-          Content for Info 4
-        </div>
-        <div id="info5" class="info">
-          Content for Info 5
-        </div>
-        <div id="info6" class="info">
-          Content for Info 6
-        </div>
+
+      <div className="info-container">
+        {selectedAlgorithm ? (
+          <>
+            <h2>{selectedAlgorithm.title}</h2>
+            <h4>{selectedAlgorithm.description}</h4>
+            {selectedAlgorithm.title !== "Swarm" ||
+            selectedAlgorithm.title !== "Convergent Swarm" ? (
+              <Tabs defaultActiveKey="1" onChange={handleTabChange}>
+                <Tabs.TabPane
+                  tab={<span>Algorithm Explanation</span>}
+                  style={{ outline: "none" }}
+                  key="1"
+                >
+                  <TabContent active={activeTab === "1"}>
+                    {selectedAlgorithm.codeExplanation}
+                  </TabContent>
+                </Tabs.TabPane>
+                <Tabs.TabPane
+                  tab={<span>Pseudo Code</span>}
+                  style={{ outline: "none" }}
+                  key="2"
+                >
+                  <TabContent active={activeTab === "2"}>
+                    {selectedAlgorithm.pseudoCode}
+                  </TabContent>
+                </Tabs.TabPane>
+                <Tabs.TabPane
+                  tab={<span>Python</span>}
+                  style={{ outline: "none" }}
+                  key="3"
+                >
+                  <TabContent active={activeTab === "3"}>
+                    {selectedAlgorithm.pythonCode}
+                  </TabContent>
+                </Tabs.TabPane>
+                <Tabs.TabPane
+                  tab={<span>JavaScript</span>}
+                  style={{ outline: "none" }}
+                  key="4"
+                >
+                  <TabContent active={activeTab === "4"}>
+                    {selectedAlgorithm.jsCode}
+                  </TabContent>
+                </Tabs.TabPane>
+                <Tabs.TabPane
+                  tab={<span>Java</span>}
+                  style={{ outline: "none" }}
+                  key="5"
+                >
+                  <TabContent active={activeTab === "5"}>
+                    {selectedAlgorithm.javaCode}
+                  </TabContent>
+                </Tabs.TabPane>
+                <Tabs.TabPane
+                  tab={<span>C#</span>}
+                  style={{ outline: "none" }}
+                  key="6"
+                >
+                  <TabContent active={activeTab === "6"}>
+                    {selectedAlgorithm.cSharpCode}
+                  </TabContent>
+                </Tabs.TabPane>
+              </Tabs>
+            ) : (
+              <Tabs defaultActiveKey="1" onChange={handleSecondTabChange}>
+                 <Tabs.TabPane
+                  tab={<span>Algorithm Explanation</span>}
+                  style={{ outline: "none" }}
+                  key="1"
+                >
+                  <TabContent active={activeTab2 === "1"}>
+                    {selectedAlgorithm.codeExplanation}
+                  </TabContent>
+                </Tabs.TabPane>
+                <Tabs.TabPane
+                  tab={<span>Pseudo Code</span>}
+                  style={{ outline: "none" }}
+                  key="2"
+                >
+                  <TabContent active={activeTab2 === "2"}>
+                    {selectedAlgorithm.pseudoCode}
+                  </TabContent>
+                </Tabs.TabPane>
+              </Tabs>
+            )}
+          </>
+        ) : (
+          <div className="no-data">
+            <img src={Nodata} alt="No Data" />
+            <p>No data available</p>
+            <p
+              style={{
+                top: "-24px",
+                left: "14px",
+              }}
+            >
+              Select an Algorithm to View{" "}
+            </p>
+          </div>
+        )}
       </div>
-    </PathfindingAlgorithmTabWrapper>
+    </AlgorithmTabWrapper>
   );
 }
