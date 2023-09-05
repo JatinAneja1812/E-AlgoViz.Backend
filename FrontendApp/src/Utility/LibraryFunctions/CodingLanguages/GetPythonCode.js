@@ -412,6 +412,645 @@ export default function GetPythonCode(title) {
           print("({}, {})".format(point[0], point[1]))
       `;
       break;
+    case "Quick Sort":
+      code = `
+    def partition(array, start, end):
+        pivot_value = array[start]
+        left = start + 1
+        right = end
+    
+        while True:
+            # Find an element on the right side smaller than pivot_value
+            while left <= right and array[right] >= pivot_value:
+                right -= 1
+    
+            # Find an element on the left side greater than pivot_value
+            while left <= right and array[left] <= pivot_value:
+                left += 1
+    
+            if left <= right:
+                # Swap the elements at left and right
+                array[left], array[right] = array[right], array[left]
+            else:
+                break
+    
+        # Swap pivot_value with the element at right
+        array[start], array[right] = array[right], array[start]
+    
+        return right
+
+    def quick_sort(array, start, end):
+        if start >= end:
+            return
+    
+        pivot_index = partition(array, start, end)
+        
+        # Recursively sort the subarrays on the left and right of the pivot
+        quick_sort(array, start, pivot_index - 1)
+        quick_sort(array, pivot_index + 1, end)`;
+      break;
+    case "Merge Sort":
+      code = `
+      def mergeSort(arr):
+        # Check if the array has more than one element
+        if len(arr) > 1:
+            # Calculate the middle of the array
+            mid = len(arr) // 2
+
+            # Divide the array into two halves
+            L = arr[:mid]
+            R = arr[mid:]
+
+            # Recursively sort the left and right halves
+            mergeSort(L)
+            mergeSort(R)
+
+            i = j = k = 0
+
+            # Merge the two sorted halves back into the original array
+            while i < len(L) and j < len(R):
+                if L[i] < R[j]:
+                    arr[k] = L[i]
+                    i += 1
+                else:
+                    arr[k] = R[j]
+                    j += 1
+                k += 1
+
+            # Copy any remaining elements from the left subarray
+            while i < len(L):
+                arr[k] = L[i]
+                i += 1
+                k += 1
+
+            # Copy any remaining elements from the right subarray
+            while j < len(R):
+                arr[k] = R[j]
+                j += 1
+                k += 1`;
+      break;
+    case "Heap Sort":
+      code = `
+    def heapify(arr, n, i):
+        # Initialize the largest element as the root
+        largest = i
+        left = 2 * i + 1
+        right = 2 * i + 2
+    
+        # Check if the left child exists and is greater than the current largest
+        if left < n and arr[left] > arr[largest]:
+            largest = left
+    
+        # Check if the right child exists and is greater than the current largest
+        if right < n and arr[right] > arr[largest]:
+            largest = right
+    
+        # If the largest is not the current node, swap them and recursively heapify the affected subtree
+        if largest != i:
+            arr[i], arr[largest] = arr[largest], arr[i]
+            heapify(arr, n, largest)
+    
+    def heapSort(arr):
+        n = len(arr)
+    
+        # Build a max-heap from the input array
+        for i in range(n // 2, -1, -1):
+            heapify(arr, n, i)
+    
+        # Extract elements from the max-heap one by one
+        for i in range(n - 1, 0, -1):
+            arr[i], arr[0] = arr[0], arr[i]  # Swap the root (maximum element) with the last element
+            heapify(arr, i, 0)  # Call heapify on the reduced heap (excluding the sorted elements)
+      `;
+      break;
+    case "Shell Sort":
+      code = `
+      def shellSort(arr):
+        n = len(arr)
+        gap = n // 2
+
+        while gap > 0:
+            for i in range(gap, n):
+                temp = arr[i]
+                j = i
+                while j >= gap and arr[j - gap] > temp:
+                    # Shift elements that are greater than 'temp' by 'gap' positions to the right
+                    arr[j] = arr[j - gap]
+                    j -= gap
+                arr[j] = temp
+            gap //= 2 `;
+      break;
+    case "Bubble Sort":
+      code = `
+      def bubbleSort(arr):
+      n = len(arr)
+      
+      # Iterate through all elements in the array
+      for i in range(n - 1):
+          # Last i elements are already sorted, so we reduce the inner loop range
+          for j in range(0, n - i - 1):
+              # Swap if the element found is greater than the next element
+              if arr[j] > arr[j + 1]:
+                  arr[j], arr[j + 1] = arr[j + 1], arr[j]
+          `;
+      break;
+    case "Selection Sort":
+      code = `
+      def selection_sort(A):
+        # Iterate over each element in the array
+        for i in range(len(A)):
+            # Assume the current index has the minimum value
+            min_idx = i
+
+            # Find the index of the minimum element in the remaining unsorted part of the array
+            for j in range(i + 1, len(A)):
+                if A[min_idx] > A[j]:
+                    min_idx = j
+
+            # Swap the found minimum element with the element at position i
+            A[i], A[min_idx] = A[min_idx], A[i]
+        `;
+      break;
+    case "Insertion Sort":
+      code = `
+      def insertionSort(arr):
+        # Iterate through the array starting from the second element (index 1)
+        for i in range(1, len(arr)):
+            key = arr[i]
+            j = i - 1
+            
+            # Move elements of arr[0..i-1] that are greater than 'key' one position ahead of their current position
+            while j >= 0 and key < arr[j]:
+                arr[j + 1] = arr[j]
+                j -= 1
+            
+            # Place 'key' in its correct position
+            arr[j + 1] = key
+        `;
+      break;
+    case "Gnome Sort":
+      code = `
+      def gnomeSort(arr, n):
+        index = 0
+
+        while index < n:
+            if index == 0:
+                index = index + 1
+            
+            # Compare adjacent elements and move them back if necessary
+            if arr[index] >= arr[index - 1]:
+                index = index + 1
+            else:
+                # Swap the elements
+                arr[index], arr[index - 1] = arr[index - 1], arr[index]
+                index = index - 1
+          `;
+      break;
+    case "Shaker Sort":
+      code = `
+      def cocktailSort(a):
+        n = len(a)
+        swapped = True
+        start = 0
+        end = n - 1
+
+        while swapped:
+            swapped = False
+
+            # Pass through the array from left to right
+            for i in range(start, end):
+                if a[i] > a[i + 1]:
+                    a[i], a[i + 1] = a[i + 1], a[i]
+                    swapped = True
+
+            if not swapped:
+                break
+
+            swapped = False
+            end = end - 1
+
+            # Pass through the array from right to left
+            for i in range(end - 1, start - 1, -1):
+                if a[i] > a[i + 1]:
+                    a[i], a[i + 1] = a[i + 1], a[i]
+                    swapped = True
+
+            start = start + 1
+        `;
+      break;
+    case "Odd-Even Sort":
+      code = `
+      def odd_even_sort(L):
+        sorted = False
+        while not sorted:
+            sorted = True
+
+            # Compare and swap elements at odd indices
+            for i in range(1, len(L) - 1, 2):
+                if L[i] > L[i + 1]:
+                    L[i], L[i + 1] = L[i + 1], L[i]
+                    sorted = False
+
+            # Compare and swap elements at even indices
+            for i in range(0, len(L) - 1, 2):
+                if L[i] > L[i + 1]:
+                    L[i], L[i + 1] = L[i + 1], L[i]
+                sorted = False
+        `;
+      break;
+    case "Pancake Sort":
+      code = `
+        # Function to flip the elements of the array from index 0 to k
+        def flip(arr, k):
+            left = 0
+            while left < k:
+                arr[left], arr[k] = arr[k], arr[left]  # Swap elements
+                k -= 1
+                left += 1
+
+        # Function to find the index of the maximum element in the first k elements of the array
+        def max_index(arr, k):
+            index = 0
+            for i in range(k):
+                if arr[i] > arr[index]:
+                    index = i
+            return index
+
+        # Main Pancake Sorting function
+        def pancake_sort(arr):
+            n = len(arr)
+            while n > 1:
+                maxdex = max_index(arr, n)
+                if maxdex != n - 1:
+                    flip(arr, maxdex)   # Flip the maximum element to the beginning
+                    flip(arr, n - 1)   # Flip the maximum element to its correct position
+                n -= 1
+        `;
+      break;
+    case "Radix Sort":
+      code = `
+      # Function to perform counting sort based on a specific digit (exp1)
+        def countingSort(arr, exp1):
+            n = len(arr)
+            output = [0] * (n)
+            count = [0] * (10)
+
+            # Count the occurrences of each digit at the specified place (exp1)
+            for i in range(0, n):
+                index = (arr[i] / exp1)
+                count[int(index % 10)] += 1
+
+            # Modify the count array to store the actual position of each digit
+            for i in range(1, 10):
+                count[i] += count[i - 1]
+
+            # Build the output array by placing elements in their sorted order
+            i = n - 1
+            while i >= 0:
+                index = (arr[i] / exp1)
+                output[count[int(index % 10)] - 1] = arr[i]
+                count[int(index % 10)] -= 1
+                i -= 1
+
+            # Copy the sorted elements back to the original array
+            for i in range(0, len(arr)):
+                arr[i] = output[i]
+
+        # Main Radix Sort function
+        def radixSort(arr):
+            max1 = max(arr)
+            exp = 1
+            while max1 / exp > 0:
+                countingSort(arr, exp)
+                exp *= 10
+          `;
+      break;
+    case "Cycle Sort":
+      code = `
+      def cycle_sort(arr):
+        n = len(arr)
+
+        # Loop through the array
+        for cycle_start in range(n - 1):
+            item = arr[cycle_start]
+            pos = cycle_start
+
+            # Find the correct position for the current item
+            for i in range(cycle_start + 1, n):
+                if arr[i] < item:
+                    pos += 1
+
+            # If the item is already in the correct position, continue to the next cycle
+            if pos == cycle_start:
+                continue
+
+            # Swap the item to its correct position
+            while item == arr[pos]:
+                pos += 1
+            arr[pos], item = item, arr[pos]
+
+            # Continue cycling until we return to the starting point of this cycle
+            while pos != cycle_start:
+                pos = cycle_start
+                for i in range(cycle_start + 1, n):
+                    if arr[i] < item:
+                        pos += 1
+                while item == arr[pos]:
+                    pos += 1
+                arr[pos], item = item, arr[pos]
+        `;
+      break;
+    case "Bitonic Sort":
+      code = `
+      def bitonic_sort(arr):
+        n = len(arr)
+        for k in range(2, n + 1):
+            j = k // 2
+            while j > 0:
+                for i in range(0, n):
+                    l = i ^ j  # Calculate the index of the element in the other half of the subarray
+
+                    # Compare and swap elements based on Bitonic order
+                    if l > i:
+                        if (((i & k) == 0 and arr[i] > arr[l]) or (((i & k) != 0) and arr[i] < arr[l])):
+                            temp = arr[i]
+                            arr[i] = arr[l]
+                            arr[l] = temp
+                j //= 2
+        `;
+      break;
+    case "Tim Sort":
+      code = `
+      def tim_sort(arr):
+        MIN_MERGE = 32
+
+        # Function to find the minimum run length
+        def calc_min_run(n):
+            r = 0
+            while n >= MIN_MERGE:
+                r |= n & 1
+                n >>= 1
+            return n + r
+
+        # Function to reverse an array slice
+        def reverse_slice(arr, start, end):
+            end -= 1
+            while start < end:
+                arr[start], arr[end] = arr[end], arr[start]
+                start += 1
+                end -= 1
+
+        # Insertion sort for small runs
+        def insertion_sort(arr, left, right):
+            for i in range(left + 1, right + 1):
+                key = arr[i]
+                j = i - 1
+                while j >= left and arr[j] > key:
+                    arr[j + 1] = arr[j]
+                    j -= 1
+                arr[j + 1] = key
+
+        # Merge two runs
+        def merge(arr, l, m, r):
+            len1 = m - l + 1
+            len2 = r - m
+            left = [0] * len1
+            right = [0] * len2
+
+            for i in range(len1):
+                left[i] = arr[l + i]
+            for i in range(len2):
+                right[i] = arr[m + 1 + i]
+
+            i = 0
+            j = 0
+            k = l
+
+            while i < len1 and j < len2:
+                if left[i] <= right[j]:
+                    arr[k] = left[i]
+                    i += 1
+                else:
+                    arr[k] = right[j]
+                    j += 1
+                k += 1
+
+            while i < len1:
+                arr[k] = left[i]
+                i += 1
+                k += 1
+
+            while j < len2:
+                arr[k] = right[j]
+                j += 1
+                k += 1
+
+        # Main Tim Sort function
+        def tim_sort_main(arr):
+            n = len(arr)
+            min_run = calc_min_run(n)
+
+            for i in range(0, n, min_run):
+                insertion_sort(arr, i, min(i + min_run - 1, n - 1))
+
+            size = min_run
+            while size < n:
+                for left in range(0, n, 2 * size):
+                    mid = min(left + size - 1, n - 1)
+                    right = min(left + 2 * size - 1, n - 1)
+                    if mid < right:
+                        merge(arr, left, mid, right)
+                size *= 2
+
+        tim_sort_main(arr)
+        `;
+      break;
+    case "Cube Sort":
+      code = `
+      def cube_sort(arr):
+        n = len(arr)
+        cube_size = int(n ** (1/3)) + 1  # Cube size is the cube root of the array size rounded up
+
+        # Function to sort a cube using any sorting algorithm (e.g., insertion sort)
+        def sort_cube(cube):
+            return sorted(cube)
+
+        for i in range(0, n, cube_size):
+            cube = arr[i:i + cube_size]  # Extract a cube
+            cube = sort_cube(cube)  # Sort the cube
+            arr[i:i + cube_size] = cube  # Put the sorted cube back into the array
+          `;
+      break;
+    case "Bogo Sort":
+      code = `
+        import random
+        # Function to perform BogoSort
+        def bogo_sort(a):
+            while not is_sorted(a):
+                shuffle(a)
+
+        # Function to check if an array is sorted
+        def is_sorted(a):
+            n = len(a)
+            for i in range(0, n - 1):
+                if a[i] > a[i + 1]:
+                    return False
+            return True
+
+        # Function to shuffle the elements in an array randomly
+        def shuffle(a):
+            n = len(a)
+            for i in range(0, n):
+                r = random.randint(0, n - 1)
+                a[i], a[r] = a[r], a[i]
+
+        `;
+      break;
+    case "Binary Search Tree Preorder Traversal":
+      code = `
+        # Class definition for a node in a Binary Tree
+        class Node:
+            def __init__(self, key):
+                self.left = None
+                self.right = None
+                self.val = key
+        
+        # Function to perform a preorder tree traversal
+        def PrintPreorder(root):
+            if root:
+        
+                # Visit and print the data of the current node
+                print(root.val, end=" ")
+        
+                # Recur on the left child
+                PrintPreorder(root.left)
+        
+                # Recur on the right child
+                PrintPreorder(root.right)
+        
+        # Driver code
+        if __name__ == "__main__":
+            # Create a binary tree with sample nodes
+            root = Node(1)
+            root.left = Node(2)
+            root.right = Node(3)
+            root.left.left = Node(4)
+            root.left.right = Node(5)
+        
+            # Print the preorder traversal of the binary tree
+            print("Preorder traversal of binary tree:")
+            PrintPreorder(root)
+      
+        `;
+      break;
+    case "Binary Search Tree Postorder Traversal":
+      code = `
+        # Class definition for a node in a Binary Tree
+        class Node:
+            def __init__(self, key):
+                self.left = None
+                self.right = None
+                self.val = key
+        
+        # Function to perform a postorder tree traversal
+        def PrintPostorder(root):
+            if root:
+        
+                # Recur on the left child
+                PrintPostorder(root.left)
+        
+                # Recur on the right child
+                PrintPostorder(root.right)
+        
+                # Process the current node (print its value)
+                print(root.val, end=" ")
+        
+        # Driver code
+        if __name__ == "__main__":
+            # Create a binary tree with sample nodes
+            root = Node(1)
+            root.left = Node(2)
+            root.right = Node(3)
+            root.left.left = Node(4)
+            root.left.right = Node(5)
+        
+            # Print the postorder traversal of the binary tree
+            print("Postorder traversal of binary tree:")
+            PrintPostorder(root)
+        `;
+      break;
+    case "Binary Search Tree Inorder Traversal":
+      code = `
+        # Class definition for a node in a Binary Tree
+        class Node:
+            def __init__(self, key):
+                self.left = None
+                self.right = None
+                self.val = key
+        
+        # Function to perform an inorder tree traversal
+        def PrintInorder(root):
+            if root:
+        
+                # Recur on the left child
+                PrintInorder(root.left)
+        
+                # Process the current node (print its value)
+                print(root.val, end=" ")
+        
+                # Recur on the right child
+                PrintInorder(root.right)
+        
+        # Driver code
+        if __name__ == "__main__":
+            # Create a binary tree with sample nodes
+            root = Node(1)
+            root.left = Node(2)
+            root.right = Node(3)
+            root.left.left = Node(4)
+            root.left.right = Node(5)
+        
+            # Print the inorder traversal of the binary tree
+            print("Inorder traversal of binary tree is:")
+            PrintInorder(root)
+      `;
+      break;
+    case "Sieve of Eratosthenes":
+      code = `
+        def main():
+            upper_limit = int(input("Enter the upper limit to find prime numbers up to: "))
+        
+            is_prime = [True] * (upper_limit + 1)
+            initialize_sieve(is_prime)
+            perform_sieve(is_prime)
+        
+            print(f"Prime numbers up to {upper_limit}:")
+            print_primes(is_prime)
+        
+        def initialize_sieve(is_prime):
+            is_prime[0] = is_prime[1] = False  # 0 and 1 are not prime
+        
+        def perform_sieve(is_prime):
+            current = 2
+            while current * current <= len(is_prime):
+                if is_prime[current]:
+                    multiple = current * current
+                    while multiple < len(is_prime):
+                        is_prime[multiple] = False
+                        multiple += current
+                current += 1
+        
+        def print_primes(is_prime):
+            for i in range(len(is_prime)):
+                if is_prime[i]:
+                    print(i, end=' ')
+            print()
+        
+        if __name__ == "__main__":
+            main()
+      
+      `;
+      break;
     default:
       code = "Algorithm not supported";
   }

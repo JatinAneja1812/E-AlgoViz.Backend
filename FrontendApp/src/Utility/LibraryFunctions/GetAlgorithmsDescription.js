@@ -2,6 +2,10 @@ import { PathfindingAlgoDescriptionExtraEnum } from "../../Enums/PathfindingAlgo
 import { SortingAlgoDescriptionEnum } from "../../Enums/SortingAlgoDescriptionEnum";
 
 export default function GetAlgorithmsDescription(title) {
+  let BSTDescription =
+    "A Binary Search Tree (BST) is a data structure in computer science used for efficient data storage and retrieval. It organizes elements in a tree-like structure, where each node has at most two child nodes, and values in the left subtree are smaller than the values in the right subtree, making it ideal for fast searching and sorting operations";
+  let PrimeNumberDescription =
+    "Prime numbers are natural numbers greater than 1 that have no positive divisors other than 1 and themselves. They play a fundamental role in number theory and cryptography, with applications in encryption algorithms and ensuring secure communications. Prime numbers are the building blocks of all positive integers, as any integer can be uniquely expressed as a product of prime factors.";
   let description = "";
 
   switch (title) {
@@ -87,8 +91,20 @@ export default function GetAlgorithmsDescription(title) {
     case "Bogo Sort":
       description = SortingAlgoDescriptionEnum.BOGO_SORT.toString();
       break;
+    case "Binary Search Tree Preorder Traversal":
+      description = BSTDescription;
+      break;
+    case "Binary Search Tree Inorder Traversal":
+      description = BSTDescription;
+      break;
+    case "Binary Search Tree Postorder Traversal":
+      description = BSTDescription;
+      break;
+    case "Sieve of Eratosthenes":
+      description = PrimeNumberDescription;
+      break;
     default:
-      description = "Algorithm not supported";
+      description = "  \n\n ";
   }
 
   return description;

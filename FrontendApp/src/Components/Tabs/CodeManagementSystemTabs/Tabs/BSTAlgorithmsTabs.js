@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { AlgorithmTabWrapper } from "../AlgorithmsTabs.styles";
+import { Tabs } from "antd";
 import { GetAllAlgorithmsData } from "../../../../Utility/LibraryFunctions/GetAllAlgorithmsData";
 import Nodata from "../../../../imgs/NoData.svg";
-import { Tabs } from "antd";
+import { AlgorithmTabWrapper } from "../AlgorithmsTabs.styles";
 import TabContent from "./Component/TabsContent";
 
-export default function SortingAlgorithmsTab(props) {
+export default function BSTAlgorithmsTabs(props) {
   const [data, setData] = useState([]);
-  const [activeTab, setActiveTab] = useState("1");
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(null);
+  const [activeTab, setActiveTab] = useState("1");
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const result = await GetAllAlgorithmsData(props.SortingAlgorithms);
+        const result = await GetAllAlgorithmsData(props.BSTAlgorithms);
         setData(result);
       } catch (error) {
         // Handle any errors that occur during the API call
@@ -22,14 +22,14 @@ export default function SortingAlgorithmsTab(props) {
     }
     // Call the async function to fetch data
     fetchData();
-  }, [props.SortingAlgorithms]);
-
-  const handleTabChange = (key) => {
-    setActiveTab(key);
-  };
+  }, [props.BSTAlgorithms]);
 
   const handleAlgorithmClick = (algorithm) => {
     setSelectedAlgorithm(algorithm);
+  };
+
+  const handleTabChange = (key) => {
+    setActiveTab(key);
   };
 
   return (
@@ -61,6 +61,7 @@ export default function SortingAlgorithmsTab(props) {
           <>
             <h2>{selectedAlgorithm.title}</h2>
             <h4>{selectedAlgorithm.description}</h4>
+
             <Tabs defaultActiveKey="1" onChange={handleTabChange}>
               <Tabs.TabPane
                 tab={<span>Algorithm Explanation</span>}
@@ -84,6 +85,10 @@ export default function SortingAlgorithmsTab(props) {
                 tab={<span>Python</span>}
                 style={{ outline: "none" }}
                 key="3"
+                disabled={
+                  selectedAlgorithm.title === "Swarm" ||
+                  selectedAlgorithm.title === "Convergent Swarm"
+                }
               >
                 <TabContent active={activeTab === "3"}>
                   {selectedAlgorithm.pythonCode}
@@ -93,6 +98,10 @@ export default function SortingAlgorithmsTab(props) {
                 tab={<span>JavaScript</span>}
                 style={{ outline: "none" }}
                 key="4"
+                disabled={
+                  selectedAlgorithm.title === "Swarm" ||
+                  selectedAlgorithm.title === "Convergent Swarm"
+                }
               >
                 <TabContent active={activeTab === "4"}>
                   {selectedAlgorithm.jsCode}
@@ -102,6 +111,10 @@ export default function SortingAlgorithmsTab(props) {
                 tab={<span>Java</span>}
                 style={{ outline: "none" }}
                 key="5"
+                disabled={
+                  selectedAlgorithm.title === "Swarm" ||
+                  selectedAlgorithm.title === "Convergent Swarm"
+                }
               >
                 <TabContent active={activeTab === "5"}>
                   {selectedAlgorithm.javaCode}
@@ -111,6 +124,10 @@ export default function SortingAlgorithmsTab(props) {
                 tab={<span>C#</span>}
                 style={{ outline: "none" }}
                 key="6"
+                disabled={
+                  selectedAlgorithm.title === "Swarm" ||
+                  selectedAlgorithm.title === "Convergent Swarm"
+                }
               >
                 <TabContent active={activeTab === "6"}>
                   {selectedAlgorithm.cSharpCode}

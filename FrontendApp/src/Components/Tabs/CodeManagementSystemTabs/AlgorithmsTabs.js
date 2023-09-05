@@ -4,6 +4,8 @@ import { AlgorithmTypeTabsWrapper } from "./AlgorithmsTabs.styles";
 import PathfindigAlgorithmsTab from "./Tabs/PathfindigAlgorithmsTab";
 import AlgorithmsTypeEnum from "../../../Enums/AlgorithmsTypeEnum";
 import SortingAlgorithmsTab from "./Tabs/SortingAlgorithmsTab";
+import BSTAlgorithmsTabs from "./Tabs/BSTAlgorithmsTabs";
+import SieveAlgorithmTab from "./Tabs/SieveAlgorithmTab";
 
 // Create a separate component for the tab content
 const TabContent = ({ active, children }) => {
@@ -27,11 +29,13 @@ export default function AlgorithmTypeTabs(props) {
       setFilteredAlgorithms(sortingAlgorithms);
     } else if (activeTab === '3') {
       // Filter binary search tree algorithms
-      const bstAlgorithms =props.algorithmsList == null ? [] : props.algorithmsList.filter(algorithm => algorithm.algorithmsType === AlgorithmsTypeEnum.BINARY_SEARCH_TREE_ALGORITHMS);
+      const bstAlgorithms = props.algorithmsList == null ? [] : props.algorithmsList.filter(algorithm => algorithm.algorithmsType === AlgorithmsTypeEnum.BINARY_SEARCH_TREE_ALGORITHMS);
       setFilteredAlgorithms(bstAlgorithms);
     } else if (activeTab === '4') {
       // Filter prime number search algorithms
-      const primeAlgorithms =props.algorithmsList == null ? [] : props.algorithmsList.filter(algorithm => algorithm.algorithmsType === AlgorithmsTypeEnum.PRIME_NUMBER_SEARCH_ALGORITHMS);
+
+      const primeAlgorithms = props.algorithmsList == null ? [] : props.algorithmsList.filter(algorithm => algorithm.algorithmsType === AlgorithmsTypeEnum.PRIME_NUMBER_SEARCH_ALGORITHMS);
+      console.log(primeAlgorithms)
       setFilteredAlgorithms(primeAlgorithms);
     }
   }, [activeTab, props.algorithmsList]);
@@ -62,14 +66,14 @@ export default function AlgorithmTypeTabs(props) {
           style={{ outline: 'none' }}
           key="3"
         >
-          <TabContent active={activeTab === '3'}>Tab 3 content</TabContent>
+          <TabContent active={activeTab === '3'}><BSTAlgorithmsTabs BSTAlgorithms = {filteredAlgorithms}/></TabContent>
         </Tabs.TabPane>
         <Tabs.TabPane
           tab={<span>Prime Numbers Search Algorithms</span>}
           style={{ outline: 'none' }}
           key="4"
         >
-          <TabContent active={activeTab === '4'}>Tab 4 content</TabContent>
+          <TabContent active={activeTab === '4'}><SieveAlgorithmTab sieveAlgorithm = {filteredAlgorithms} /></TabContent>
         </Tabs.TabPane>
       </Tabs>
     </AlgorithmTypeTabsWrapper>

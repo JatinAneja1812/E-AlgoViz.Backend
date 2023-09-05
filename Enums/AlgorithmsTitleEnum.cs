@@ -33,12 +33,12 @@
         BOGO_SORT = 24,
 
         //BST
-        BST_INORDER = 26,
-        BST_PREORDER = 27,
-        BST_POSTORDER = 28,
+        BST_INORDER = 25,
+        BST_PREORDER = 26,
+        BST_POSTORDER = 27,
 
         //PRIME NUMBER
-        SIEV = 29
+        SIEV = 28
 
     }
 }

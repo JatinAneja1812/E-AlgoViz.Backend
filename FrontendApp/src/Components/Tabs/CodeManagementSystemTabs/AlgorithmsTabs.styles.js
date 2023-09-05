@@ -85,7 +85,7 @@ const AlgorithmTabWrapper = styled.div`
   display: flex;
   justify-content: space-between; /* Space evenly between the two divs */
 
-  .PFAtab-content {
+  .Innertab-content {
     opacity: 0;
     transform: translate(-20px, -20px); /* Start from top-left corner */
     transform-origin: top left;
@@ -114,7 +114,7 @@ const AlgorithmTabWrapper = styled.div`
   }
 
   /* Style the active tab content */
-  .PFAtab-content.active {
+  .Innertab-content.active {
     opacity: 1;
     height: 48vh;
     position: relative;
@@ -123,16 +123,16 @@ const AlgorithmTabWrapper = styled.div`
   }
 
   /* Scrollbar styles */
-  .PFAtab-content::-webkit-scrollbar {
+  .Innertab-content::-webkit-scrollbar {
     width: 8px; /* Set the width of the scrollbar */
   }
   
-  .PFAtab-content::-webkit-scrollbar-thumb {
+  .Innertab-content::-webkit-scrollbar-thumb {
     background-color: #888; /* Scrollbar thumb color */
     border-radius: 4px;
   }
   
-  .PFAtab-content::-webkit-scrollbar-track {
+  .Innertab-content::-webkit-scrollbar-track {
     background-color: rgba(192, 225, 250, 0.3);
   }
 

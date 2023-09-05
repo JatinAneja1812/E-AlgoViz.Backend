@@ -24,10 +24,11 @@ const AlgorithmsTitleEnum = {
   TIM_SORT: "Tim Sort",
   CUBE_SORT: "Cube Sort",
   BOGO_SORT: "Bogo Sort",
-  BST_INORDER: "Binary Search Tree Inorder Traversal",
   BST_PREORDER: "Binary Search Tree Preorder Traversal",
   BST_POSTORDER: "Binary Search Tree Postorder Traversal",
+  BST_INORDER: "Binary Search Tree Inorder Traversal",
   SIEV: "Sieve of Eratosthenes",
+ 
 };
 
 export default AlgorithmsTitleEnum;

@@ -3,17 +3,12 @@ import { Tabs } from "antd";
 import { AlgorithmTabWrapper } from "../AlgorithmsTabs.styles";
 import { GetAllAlgorithmsData } from "../../../../Utility/LibraryFunctions/GetAllAlgorithmsData";
 import Nodata from "../../../../imgs/NoData.svg";
-
-const TabContent = ({ active, children }) => {
-  const classes = `PFAtab-content ${active ? "active" : ""}`;
-  return <pre className={classes} style={{ whiteSpace: "pre-wrap", overflowX: "auto" }} >{children}</pre>;
-};
+import TabContent from "./Component/TabsContent";
 
 export default function PathfindigAlgorithmsTab(props) {
   const [data, setData] = useState([]);
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState(null);
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState(null); 
   const [activeTab, setActiveTab] = useState("1");
-  const [activeTab2, setActiveTab2] = useState("1");
 
   useEffect(() => {
     async function fetchData() {
@@ -37,10 +32,7 @@ export default function PathfindigAlgorithmsTab(props) {
     setActiveTab(key);
   };
 
-  const handleSecondTabChange = (key) => {
-    setActiveTab2(key);
-  };
-
+  
   return (
     <AlgorithmTabWrapper>
       <div className="button-container">
@@ -70,8 +62,7 @@ export default function PathfindigAlgorithmsTab(props) {
           <>
             <h2>{selectedAlgorithm.title}</h2>
             <h4>{selectedAlgorithm.description}</h4>
-            {selectedAlgorithm.title !== "Swarm" ||
-            selectedAlgorithm.title !== "Convergent Swarm" ? (
+       
               <Tabs defaultActiveKey="1" onChange={handleTabChange}>
                 <Tabs.TabPane
                   tab={<span>Algorithm Explanation</span>}
@@ -95,6 +86,7 @@ export default function PathfindigAlgorithmsTab(props) {
                   tab={<span>Python</span>}
                   style={{ outline: "none" }}
                   key="3"
+                  disabled={selectedAlgorithm.title === "Swarm" || selectedAlgorithm.title === "Convergent Swarm"}
                 >
                   <TabContent active={activeTab === "3"}>
                     {selectedAlgorithm.pythonCode}
@@ -104,6 +96,7 @@ export default function PathfindigAlgorithmsTab(props) {
                   tab={<span>JavaScript</span>}
                   style={{ outline: "none" }}
                   key="4"
+                  disabled={selectedAlgorithm.title === "Swarm" || selectedAlgorithm.title === "Convergent Swarm"}
                 >
                   <TabContent active={activeTab === "4"}>
                     {selectedAlgorithm.jsCode}
@@ -113,6 +106,7 @@ export default function PathfindigAlgorithmsTab(props) {
                   tab={<span>Java</span>}
                   style={{ outline: "none" }}
                   key="5"
+                  disabled={selectedAlgorithm.title === "Swarm" || selectedAlgorithm.title === "Convergent Swarm"}
                 >
                   <TabContent active={activeTab === "5"}>
                     {selectedAlgorithm.javaCode}
@@ -122,34 +116,14 @@ export default function PathfindigAlgorithmsTab(props) {
                   tab={<span>C#</span>}
                   style={{ outline: "none" }}
                   key="6"
+                  disabled={selectedAlgorithm.title === "Swarm" || selectedAlgorithm.title === "Convergent Swarm"}
                 >
                   <TabContent active={activeTab === "6"}>
                     {selectedAlgorithm.cSharpCode}
                   </TabContent>
                 </Tabs.TabPane>
               </Tabs>
-            ) : (
-              <Tabs defaultActiveKey="1" onChange={handleSecondTabChange}>
-                 <Tabs.TabPane
-                  tab={<span>Algorithm Explanation</span>}
-                  style={{ outline: "none" }}
-                  key="1"
-                >
-                  <TabContent active={activeTab2 === "1"}>
-                    {selectedAlgorithm.codeExplanation}
-                  </TabContent>
-                </Tabs.TabPane>
-                <Tabs.TabPane
-                  tab={<span>Pseudo Code</span>}
-                  style={{ outline: "none" }}
-                  key="2"
-                >
-                  <TabContent active={activeTab2 === "2"}>
-                    {selectedAlgorithm.pseudoCode}
-                  </TabContent>
-                </Tabs.TabPane>
-              </Tabs>
-            )}
+           
           </>
         ) : (
           <div className="no-data">

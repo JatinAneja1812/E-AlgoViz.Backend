@@ -9,6 +9,7 @@ import GetAlgorithmsDescription from "./GetAlgorithmsDescription";
 
 async function GetAllAlgorithmsData(List) {
  
+  console.log(List)
   const newList = List.map((item) => ({
     key: item.algorithmsID,
     title: Object.values(AlgorithmsTitleEnum)[item.algorithmsTitle],
@@ -20,7 +21,7 @@ async function GetAllAlgorithmsData(List) {
     codeExplanation: GetExplanation(Object.values(AlgorithmsTitleEnum)[item.algorithmsTitle]),
     pseudoCode: GetPseudoCode(Object.values(AlgorithmsTitleEnum)[item.algorithmsTitle])
   }));
-
+  console.log(newList)
   return newList;
 }
 
