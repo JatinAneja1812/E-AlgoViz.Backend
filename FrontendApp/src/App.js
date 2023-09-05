@@ -29,8 +29,7 @@ export default function App() {
 
   let current = isLogginActive ? "REGISTER" : "LOGIN";
   let currentActive = isLogginActive ? "LOGIN" : "REGISTER";
-
-
+  
   return (
       <>
         <div className="App">

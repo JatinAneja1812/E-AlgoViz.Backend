@@ -6,13 +6,12 @@ namespace BackendProcess.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FrontendController : ControllerBase
+    public class AlgorithmsController : ControllerBase
     {
         private readonly IAlgorithmsInfo _algorithmsInfoService;
-        public FrontendController(IAlgorithmsInfo AlgorithmsInfoService)
+        public AlgorithmsController(IAlgorithmsInfo AlgorithmsInfoService)
         {
             _algorithmsInfoService = AlgorithmsInfoService;
-
         }
 
         [HttpGet]
@@ -22,8 +21,6 @@ namespace BackendProcess.Controllers
             var res = _algorithmsInfoService.GetAllAlgorithmsData();
 
             return Ok(res);
-
         }
-
     }
 }

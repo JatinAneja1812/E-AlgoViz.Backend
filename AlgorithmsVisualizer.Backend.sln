@@ -25,19 +25,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AlgorithmsVisualizer.DTOs",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AlgorithmsVisualizer.Repositories", "AlgorithmsVisualizer.Repositories", "{F87B8840-9C79-4D0D-87A2-1C13A666885D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModels", "DataModels\DataModels.csproj", "{264C0CF1-F5D3-4488-A98D-3A9EC9C9D823}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataModels", "DataModels\DataModels.csproj", "{264C0CF1-F5D3-4488-A98D-3A9EC9C9D823}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AlgorithmsVisualizer.Enums", "AlgorithmsVisualizer.Enums", "{8BAF1A89-CBDD-40FE-89A8-9D26A87E9A62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enums", "Enums\Enums.csproj", "{43971381-A0C0-42A5-A17C-DD4365E60732}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enums", "Enums\Enums.csproj", "{43971381-A0C0-42A5-A17C-DD4365E60732}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmsVisualizer.Services.Classes", "AlgorithmsVisualizer.Services.Classes\AlgorithmsVisualizer.Services.Classes.csproj", "{173690BE-B190-417D-8DB3-9066F0F57B4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgorithmsVisualizer.Services.Classes", "AlgorithmsVisualizer.Services.Classes\AlgorithmsVisualizer.Services.Classes.csproj", "{173690BE-B190-417D-8DB3-9066F0F57B4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmsVisualizer.Services.Interfaces", "AlgorithmsVisualizer.Services.Interfaces\AlgorithmsVisualizer.Services.Interfaces.csproj", "{5D3581D8-126F-459A-82DC-907469F5516C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgorithmsVisualizer.Services.Interfaces", "AlgorithmsVisualizer.Services.Interfaces\AlgorithmsVisualizer.Services.Interfaces.csproj", "{5D3581D8-126F-459A-82DC-907469F5516C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmsVisualizer.Repository.Classes", "AlgorithmsVisualizer.Repository.Classes\AlgorithmsVisualizer.Repository.Classes.csproj", "{564A357A-35B9-4509-B0CB-8D28579D3406}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgorithmsVisualizer.Repository.Classes", "AlgorithmsVisualizer.Repository.Classes\AlgorithmsVisualizer.Repository.Classes.csproj", "{564A357A-35B9-4509-B0CB-8D28579D3406}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmsVisualizer.Repository.Interfaces", "AlgorithmsVisualizer.Repository.Interfaces\AlgorithmsVisualizer.Repository.Interfaces.csproj", "{4BBAF393-1108-4AC1-AE5F-ACF3792FAD61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgorithmsVisualizer.Repository.Interfaces", "AlgorithmsVisualizer.Repository.Interfaces\AlgorithmsVisualizer.Repository.Interfaces.csproj", "{4BBAF393-1108-4AC1-AE5F-ACF3792FAD61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOs", "DTOs\DTOs.csproj", "{5A7089ED-5BDD-4192-8B90-92DB0AB8E8FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{4BBAF393-1108-4AC1-AE5F-ACF3792FAD61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BBAF393-1108-4AC1-AE5F-ACF3792FAD61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BBAF393-1108-4AC1-AE5F-ACF3792FAD61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A7089ED-5BDD-4192-8B90-92DB0AB8E8FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A7089ED-5BDD-4192-8B90-92DB0AB8E8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A7089ED-5BDD-4192-8B90-92DB0AB8E8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A7089ED-5BDD-4192-8B90-92DB0AB8E8FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +102,7 @@ Global
 		{5D3581D8-126F-459A-82DC-907469F5516C} = {1AECBB3C-655A-4B2F-9456-D7D553BCE872}
 		{564A357A-35B9-4509-B0CB-8D28579D3406} = {F87B8840-9C79-4D0D-87A2-1C13A666885D}
 		{4BBAF393-1108-4AC1-AE5F-ACF3792FAD61} = {F87B8840-9C79-4D0D-87A2-1C13A666885D}
+		{5A7089ED-5BDD-4192-8B90-92DB0AB8E8FF} = {E3192733-9F23-47CD-9594-52549C51462D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D575D3EB-A801-4EBB-BA03-8869A57A85DF}

@@ -15,6 +15,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
 	<PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
 	<PackageReference Include="System.Runtime.Handles" Version="4.3.0" />
@@ -27,6 +28,7 @@
     <ProjectReference Include="..\AlgorithmsVisualizer.Repository.Interfaces\AlgorithmsVisualizer.Repository.Interfaces.csproj" />
     <ProjectReference Include="..\AlgorithmsVisualizer.Services.Classes\AlgorithmsVisualizer.Services.Classes.csproj" />
     <ProjectReference Include="..\AlgorithmsVisualizer.Services.Interfaces\AlgorithmsVisualizer.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\DTOs\DTOs.csproj" />
     <ProjectReference Include="..\VisualizerDatabase\VisualizerDatabase.csproj" />
   </ItemGroup>
 

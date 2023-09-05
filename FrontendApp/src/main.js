@@ -141,11 +141,10 @@ ipcMain.on("maximise-window", (_) => {
 // APIS 
 
 ipcMain.on("GetAlgorithmsList", async (event) => {
-
   if (BrowserWindow.getAllWindows().length === 1) {
     try {
       fetch(
-        "http://localhost:5000/api/frontend/AlgorithmsInfo",
+        "http://localhost:5000/api/Algorithms/AlgorithmsInfo",
         {
           method: "GET",
           headers: {
@@ -167,3 +166,36 @@ ipcMain.on("GetAlgorithmsList", async (event) => {
 });
 
 
+//Pathfinding Algorithms APIs
+
+ipcMain.on("visualizeDijkstra", async (event, grid, startNode, endNode) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const dijkstraVisualizerDTO = {
+        grid: grid,
+        startNode: startNode,
+        endNode: endNode
+      };
+
+      fetch(
+        "http://localhost:5000/api/PathfindingAlgos/Dijkstra",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(dijkstraVisualizerDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("dijkstraResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});

@@ -1,7 +1,9 @@
 ﻿using AlgorithmsVisualizer.Repository.Classes;
 using AlgorithmsVisualizer.Repository.Interfaces;
 using AlgorithmsVisualizer.Services.Classes;
+using AlgorithmsVisualizer.Services.Classes.PathfindingAlgorithms.Interfaces;
 using AlgorithmsVisualizer.Services.Interfaces;
+using AlgorithmsVisualizer.Services.Interfaces.PathfindingAlgorithms.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -11,7 +13,6 @@ namespace BackendProcess
 {
     public class Startup
     {
-
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options =>
@@ -27,6 +28,7 @@ namespace BackendProcess
                 );
             });
 
+            services.AddTransient<IDijkstraAlgoService, DijkstraAlgoService>();
             services.AddTransient<IAlgorithmsInfo, AlgorithmsInfo>();
             services.AddTransient<IAlgorithmsInfoRepo, AlgorithmsInfoRepo>();
 
