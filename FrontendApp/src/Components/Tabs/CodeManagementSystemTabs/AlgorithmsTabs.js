@@ -35,7 +35,6 @@ export default function AlgorithmTypeTabs(props) {
       // Filter prime number search algorithms
 
       const primeAlgorithms = props.algorithmsList == null ? [] : props.algorithmsList.filter(algorithm => algorithm.algorithmsType === AlgorithmsTypeEnum.PRIME_NUMBER_SEARCH_ALGORITHMS);
-      console.log(primeAlgorithms)
       setFilteredAlgorithms(primeAlgorithms);
     }
   }, [activeTab, props.algorithmsList]);
