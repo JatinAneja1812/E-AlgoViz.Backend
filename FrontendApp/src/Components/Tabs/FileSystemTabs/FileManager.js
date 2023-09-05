@@ -6,8 +6,8 @@ import {
   UploadWrapper,
   DownloadWrapper,
 } from "./FileManager.styles";
-import ErrorNotification from "../Snackbar/ErrorSnackbar";
-import { storage } from "../../Authentication/Firebase/Firebase";
+import ErrorNotification from "../../Snackbar/ErrorSnackbar";
+import { storage } from "../../../Authentication/Firebase/Firebase";
 import {
   ref,
   uploadString,
@@ -16,7 +16,7 @@ import {
   getDownloadURL,
   deleteObject
 } from "firebase/storage";
-import FilesTable from "../Tables/FilesTable";
+import FilesTable from "../../Tables/FilesTable";
 
 const { Dragger } = Upload;
 

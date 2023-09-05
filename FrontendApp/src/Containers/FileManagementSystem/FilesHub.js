@@ -1,13 +1,12 @@
 import React from "react";
-import FilesHubWrapper from "./FilesHub.styles";
-import FileManager from "../../Components/Tabs/FileManager";
+import FileManager from "../../Components/Tabs/FileSystemTabs/FileManager";
 import FilesHubNavBar from "../../Components/Menu/FileshubNavMenu";
 
 export default function FilesHub() {
   return (
-    <FilesHubWrapper>
+    <div>
       <FilesHubNavBar />
       <FileManager />
-    </FilesHubWrapper>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "SentinelCollector.BackendProcess": {
+    "AlgorithmsVisualizer.BackendProcess": {
       "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

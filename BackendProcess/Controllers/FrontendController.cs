@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AlgorithmsVisualizer.Services.Classes;
+using DataModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BackendProcess.Controllers
 {
@@ -6,17 +8,20 @@ namespace BackendProcess.Controllers
     [ApiController]
     public class FrontendController : ControllerBase
     {
-        public FrontendController()
+        private readonly IAlgorithmsInfo _algorithmsInfoService;
+        public FrontendController(IAlgorithmsInfo AlgorithmsInfoService)
         {
+            _algorithmsInfoService = AlgorithmsInfoService;
 
         }
 
         [HttpGet]
-        [Route("hello")]
-        public string GetText()
+        [Route("AlgorithmsInfo")]
+        public ActionResult<List<Algorithm>> GetAllAlogirthmsData()
         {
-           
-            return "Hello Jatin: Connection Worked";
+            var res = _algorithmsInfoService.GetAllAlgorithmsData();
+
+            return Ok(res);
 
         }
 

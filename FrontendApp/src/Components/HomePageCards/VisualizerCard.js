@@ -6,6 +6,7 @@ import uploadFiles from "../../imgs/uploadFiles.gif";
 import InAppMessageing from "../../imgs/InAppMessaging.gif";
 import bstVis from "../../imgs/bst.gif";
 import CircularStatic from "../../Utility/Hooks/LoadingWithLabel";
+import codeImage from "../../imgs/code.gif";
 
 const slides = [
   {
@@ -39,6 +40,12 @@ const slides = [
     subtitle: "Share and Access Educational Resources",
     description: DescriptionEnum.FILE_STORAGE.toString(),
     image: uploadFiles,
+  },
+  {
+    title: "Explore Algorithms",
+    subtitle: "Visualize Algorithm & their Explainations",
+    description: DescriptionEnum.CODE_MANAGER.toString(),
+    image: codeImage,
   },
   {
     title: "E-AlgoVis ChatRooms",
@@ -172,11 +179,11 @@ function Slide({ slide, offset }) {
           }
         }, 5000);
         break;
-      case "Knowledge Hub: Exam Papers and Notes":
+      case "Binary Search Tree Algorithm":
         setIsLoading(true);
         const timer4 = setTimeout(async () => {
           try {
-            const path = "/filesUploadandDownload";
+            const path = "/bstVisualizer";
             const timeout = setTimeout(() => {
               navigate(path);
               setIsLoading(false);
@@ -190,11 +197,11 @@ function Slide({ slide, offset }) {
           }
         }, 5000);
         break;
-      case "Binary Search Tree Algorithm":
+      case "Knowledge Hub: Exam Papers and Notes":
         setIsLoading(true);
         const timer5 = setTimeout(async () => {
           try {
-            const path = "/bstVisualizer";
+            const path = "/filesUploadandDownload";
             const timeout = setTimeout(() => {
               navigate(path);
               setIsLoading(false);
@@ -208,9 +215,27 @@ function Slide({ slide, offset }) {
           }
         }, 5000);
         break;
-      case "E-AlgoVis ChatRooms":
+      case "Explore Algorithms":
         setIsLoading(true);
         const timer6 = setTimeout(async () => {
+          try {
+            const path = "/codeManager";
+            const timeout = setTimeout(() => {
+              navigate(path);
+              setIsLoading(false);
+            }, 3000);
+  
+            return () => clearTimeout(timeout) && setIsLoading(false);
+          } catch (error) {
+            navigate("/homepage");
+            setIsLoading(false);
+            return () => clearTimeout(timer6) && setIsLoading(false);
+          }
+        }, 5000);
+        break;
+      case "E-AlgoVis ChatRooms":
+        setIsLoading(true);
+        const timer7 = setTimeout(async () => {
           try {
             const path = "/chatRoomApp";
             const timeout = setTimeout(() => {
@@ -222,7 +247,7 @@ function Slide({ slide, offset }) {
           } catch (error) {
             navigate("/homepage");
             setIsLoading(false);
-            return () => clearTimeout(timer6) && setIsLoading(false);
+            return () => clearTimeout(timer7) && setIsLoading(false);
           }
         }, 5000);
         break;
