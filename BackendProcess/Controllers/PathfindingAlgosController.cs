@@ -15,16 +15,21 @@ namespace BackendProcess.Controllers
         private readonly IAStarAlgoService _aStarAlgoService;
         private readonly IDepthFirstSearchAlgoService _depthFirstSearchAlgoService;
         private readonly IGreedyBFSAlgoService _greedyBFSAlgoService;
+        private readonly IBreadthFirstSearchAlgoService _breadthFirstSearchAlgoService;
+        private readonly ISwarmAlgoService _swarmAlgoService;
         private readonly JsonSerializerSettings settings;
         public PathfindingAlgosController(IDijkstraAlgoService DijkstraAlgoService, IAStarAlgoService AStarAlgoService, 
-            IDepthFirstSearchAlgoService depthFirstSearchAlgoService, IGreedyBFSAlgoService greedyBFSAlgoService)
+            IDepthFirstSearchAlgoService depthFirstSearchAlgoService, IGreedyBFSAlgoService greedyBFSAlgoService, 
+            IBreadthFirstSearchAlgoService breadthFirstSearchAlgoService, ISwarmAlgoService swarmAlgoService)
         {
             _dijkstraAlgoService = DijkstraAlgoService;
             _aStarAlgoService = AStarAlgoService;
             _depthFirstSearchAlgoService = depthFirstSearchAlgoService;
+            _greedyBFSAlgoService = greedyBFSAlgoService;
+            _breadthFirstSearchAlgoService = breadthFirstSearchAlgoService;
+            _swarmAlgoService = swarmAlgoService;
 
             settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
-            _greedyBFSAlgoService = greedyBFSAlgoService;
         }
 
         [HttpPost]
@@ -65,6 +70,28 @@ namespace BackendProcess.Controllers
         public ActionResult VisualizeGreedyBFS([FromBody] PathfindingAlgoVisualizerDTO greedyBFSVisualizerDTO)
         {
             var result = _greedyBFSAlgoService.FindShortestPath(greedyBFSVisualizerDTO.Grid, greedyBFSVisualizerDTO.StartNode, greedyBFSVisualizerDTO.EndNode);
+
+            string json = JsonConvert.SerializeObject(result, settings);
+
+            return Ok(json);
+        }
+
+        [HttpPost]
+        [Route("BFS")]
+        public ActionResult VisualizeBreadthFirstSearch([FromBody] PathfindingAlgoVisualizerDTO bfsVisualizerDTO)
+        {
+            var result = _breadthFirstSearchAlgoService.FindShortestPath(bfsVisualizerDTO.Grid, bfsVisualizerDTO.StartNode, bfsVisualizerDTO.EndNode);
+
+            string json = JsonConvert.SerializeObject(result, settings);
+
+            return Ok(json);
+        }
+
+        [HttpPost]
+        [Route("Swarm")]
+        public ActionResult VisualizeSwarmSearch([FromBody] PathfindingAlgoVisualizerDTO swarmVisualizerDTO)
+        {
+            var result = _swarmAlgoService.FindShortestPath(swarmVisualizerDTO.Grid, swarmVisualizerDTO.StartNode, swarmVisualizerDTO.EndNode);
 
             string json = JsonConvert.SerializeObject(result, settings);
 

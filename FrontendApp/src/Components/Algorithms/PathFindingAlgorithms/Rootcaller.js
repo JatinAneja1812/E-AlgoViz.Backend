@@ -1,16 +1,10 @@
-import { dijkstra, getNodesInShortestPathOrder } from "./dijkstra";
-
-import { solve_bfs, getNodesInShortestPathOrderBFS } from "./BFS2";
-
-import { solve_mbfs, getNodesInShortestPathOrderMBFS } from "./BFSmultiple"; // for bidirectional BFS
-
+import { dijkstra, getNodesInShortestPathOrder } from "./DijkstraSearch";
 import { astar, getNodesInShortestPathOrderASTAR } from "./Astar";
-import {
-  GreedyBFS,
-  getNodesInShortestPathOrderBestFS,
-} from "./BestFirstSearch";
-
+import { GreedyBFS, getNodesInShortestPathOrderBestFS} from "./GreedyBestFirstSearch";
 import { depthFirstSearch, getNodesInShortestPathOrderDFS} from "./DepthFirstSearch";
+import { bfs, getNodesInShortestPathOrderBFS } from "./BreadthFirstSearch";
+import { bidirectionalBFS, getNodesInShortestPathOrderMBFS } from "./BFSBidirectional"; // for bidirectional BFS
+
 import { swarmAlgorithm, getNodesInShortestPathOrderSwarm } from "./SwarmAlgorithm";
 import { convergentSwarmAlgorithm, getNodesInShortestPathOrderConvergeSwarm } from "./ConvergentSwarm";
 
@@ -42,10 +36,16 @@ async function get_paths(
       }
       break;
     }
-
     case "Breadth-First Search": {
-      visitedNodesInOrder = solve_bfs(grid, start_node, end_node);
-      nodesInShortestPathOrder = getNodesInShortestPathOrderBFS(end_node);
+      try {
+        visitedNodesInOrder = await bfs(grid, start_node, end_node);
+        finishNode =  visitedNodesInOrder.find(node => node.row === end_node.row && node.col === end_node.col);
+        nodesInShortestPathOrder = getNodesInShortestPathOrderBFS(finishNode);
+        finishNode = null;
+      } catch (error) {
+        // Handle any errors that might occur during the dijkstra function
+        console.error(error);
+      }
       break;
     }
     case "Greedy B-F Serach": {
@@ -61,7 +61,7 @@ async function get_paths(
       break;
     }
     case "BFS-Bidirectional": {
-      visitedNodesInOrder = solve_mbfs(grid, start_node, end_node);
+      visitedNodesInOrder = bidirectionalBFS(grid, start_node, end_node);
       nodesInShortestPathOrder = getNodesInShortestPathOrderMBFS();
       break;
     }
@@ -94,8 +94,16 @@ async function get_paths(
       break;
     }
     case "Swarm Algorithm": {
-      visitedNodesInOrder = swarmAlgorithm(grid, start_node, end_node);
-      nodesInShortestPathOrder = getNodesInShortestPathOrderSwarm(end_node);
+      try {
+        visitedNodesInOrder = await swarmAlgorithm(grid, start_node, end_node);
+        finishNode =  visitedNodesInOrder.find(node => node.row === end_node.row && node.col === end_node.col);
+        nodesInShortestPathOrder = getNodesInShortestPathOrderSwarm(finishNode);
+        finishNode = null;
+      } catch (error) {
+        // Handle any errors that might occur during the dijkstra function
+        console.error(error);
+      }
+
       break;
     }
     case "Convergent Swarm": {

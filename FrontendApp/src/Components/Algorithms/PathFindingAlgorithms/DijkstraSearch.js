@@ -1,5 +1,3 @@
-//guaranteed for giving the shortest distance/path
-
 const { ipcRenderer } = window.require("electron");
 
 export function dijkstra(grid, start_node, end_node) {

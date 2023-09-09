@@ -4,7 +4,7 @@ var visitedNodesInOrder = [];
 var nodesInShortestPathOrder = [];
 var end_from_start, end_from_last;
 
-function mbfs(grid, st, en) {
+function processAlgorithm(grid, st, en) {
   st.isVisited = en.isVisited = true;
   st.previousNode = en.previousNode = null;
   st.distance = en.distance = 0;
@@ -50,15 +50,14 @@ function getUnvisitedNeighbors(node, grid) {
   if (col > 0) neighbors.push(grid[row][col - 1]);
   if (row < grid.length - 1) neighbors.push(grid[row + 1][col]);
   if (col < grid[0].length - 1) neighbors.push(grid[row][col + 1]);
-  //We are only concerned about the unvisited neighbors
   return neighbors;
 }
 
-export function solve_mbfs(grid, start_node, end_node) {
+export function bidirectionalBFS(grid, start_node, end_node) {
   end_from_last = end_from_start = null;
   visitedNodesInOrder = [];
   nodesInShortestPathOrder = [];
-  mbfs(grid, start_node, end_node);
+  processAlgorithm(grid, start_node, end_node);
   let currentNode = end_from_last;
   while (currentNode !== null) {
     nodesInShortestPathOrder.unshift(currentNode);
@@ -73,8 +72,6 @@ export function solve_mbfs(grid, start_node, end_node) {
 }
 
 // Backtracks from the finishNode to find the shortest path.
- 
 export function getNodesInShortestPathOrderMBFS() {
   return nodesInShortestPathOrder;
-  //array consisting the nodes leads to the shortest path
 }

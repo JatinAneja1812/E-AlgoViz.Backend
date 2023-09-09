@@ -295,3 +295,67 @@ ipcMain.on("visualizeGreedyBFS", async (event, grid, startNode, endNode) => {
     }
   }
 });
+
+ipcMain.on("visualizeBreadthFirstSearch", async (event, grid, startNode, endNode) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const bfsVisualizerDTO = {
+        grid: grid,
+        startNode: startNode,
+        endNode: endNode
+      };
+
+      fetch(
+        "http://localhost:5000/api/PathfindingAlgos/BFS",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(bfsVisualizerDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("BreadthFirstSearchResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
+ipcMain.on("visualizeSwarmSearch", async (event, grid, startNode, endNode) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const swarmVisualizerDTO = {
+        grid: grid,
+        startNode: startNode,
+        endNode: endNode
+      };
+
+      fetch(
+        "http://localhost:5000/api/PathfindingAlgos/Swarm",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(swarmVisualizerDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("swarmSearchResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
