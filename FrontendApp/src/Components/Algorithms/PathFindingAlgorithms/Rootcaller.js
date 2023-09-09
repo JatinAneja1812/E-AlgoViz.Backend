@@ -4,7 +4,6 @@ import { GreedyBFS, getNodesInShortestPathOrderBestFS} from "./GreedyBestFirstSe
 import { depthFirstSearch, getNodesInShortestPathOrderDFS} from "./DepthFirstSearch";
 import { bfs, getNodesInShortestPathOrderBFS } from "./BreadthFirstSearch";
 import { bidirectionalBFS, getNodesInShortestPathOrderMBFS } from "./BFSBidirectional"; // for bidirectional BFS
-
 import { swarmAlgorithm, getNodesInShortestPathOrderSwarm } from "./SwarmAlgorithm";
 import { convergentSwarmAlgorithm, getNodesInShortestPathOrderConvergeSwarm } from "./ConvergentSwarm";
 
@@ -107,10 +106,21 @@ async function get_paths(
       break;
     }
     case "Convergent Swarm": {
-      visitedNodesInOrder = convergentSwarmAlgorithm(grid, start_node, end_node);
-      nodesInShortestPathOrder = getNodesInShortestPathOrderConvergeSwarm(end_node);
+      try {
+        visitedNodesInOrder = await convergentSwarmAlgorithm(grid, start_node, end_node);
+        finishNode =  visitedNodesInOrder.find(node => node.row === end_node.row && node.col === end_node.col);
+        nodesInShortestPathOrder = getNodesInShortestPathOrderConvergeSwarm(finishNode);
+        finishNode = null;
+      } catch (error) {
+        // Handle any errors that might occur during the dijkstra function
+        console.error(error);
+      }
+
+      // visitedNodesInOrder = convergentSwarmAlgorithm(grid, start_node, end_node);
+      // nodesInShortestPathOrder = getNodesInShortestPathOrderConvergeSwarm(end_node);
       break;
     }
+
     default:
       break;
   }

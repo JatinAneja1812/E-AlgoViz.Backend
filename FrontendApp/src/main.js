@@ -359,3 +359,35 @@ ipcMain.on("visualizeSwarmSearch", async (event, grid, startNode, endNode) => {
     }
   }
 });
+
+ipcMain.on("visualizeConvergentSwarmSearch", async (event, grid, startNode, endNode) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const convergentSwarmVisualizerDTO = {
+        grid: grid,
+        startNode: startNode,
+        endNode: endNode
+      };
+
+      fetch(
+        "http://localhost:5000/api/PathfindingAlgos/ConvergentSwarm",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(convergentSwarmVisualizerDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("convergentSwarmSearchResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});

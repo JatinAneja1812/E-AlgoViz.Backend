@@ -29,14 +29,15 @@ namespace BackendProcess
             });
 
             services.AddTransient<IAlgorithmsInfo, AlgorithmsInfo>();
+            services.AddTransient<IAlgorithmsInfoRepo, AlgorithmsInfoRepo>();
 
             services.AddTransient<IDijkstraAlgoService, DijkstraAlgoService>();
             services.AddTransient<IAStarAlgoService, AStarAlgoService>();
-            services.AddTransient<IAlgorithmsInfoRepo, AlgorithmsInfoRepo>();
             services.AddTransient<IDepthFirstSearchAlgoService, DepthFirstSearchAlgoService>();
             services.AddTransient<IGreedyBFSAlgoService, GreedyBFSAlgoService>();
             services.AddTransient<IBreadthFirstSearchAlgoService, BreadthFirstSearchAlgoService>();
             services.AddTransient<ISwarmAlgoService, SwarmAlgoService>();
+            services.AddTransient<IConvergentSwarmAlgoService, ConvergentSwarmAlgoService>();
             //services.AddAutoMapper(typeof(UserConfigurationProfile));
 
             services.AddDbContext<VisContext>();

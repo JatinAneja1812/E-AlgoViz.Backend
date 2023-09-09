@@ -17,10 +17,11 @@ namespace BackendProcess.Controllers
         private readonly IGreedyBFSAlgoService _greedyBFSAlgoService;
         private readonly IBreadthFirstSearchAlgoService _breadthFirstSearchAlgoService;
         private readonly ISwarmAlgoService _swarmAlgoService;
+        private readonly IConvergentSwarmAlgoService _convergentSwarmAlgoService;
         private readonly JsonSerializerSettings settings;
         public PathfindingAlgosController(IDijkstraAlgoService DijkstraAlgoService, IAStarAlgoService AStarAlgoService, 
             IDepthFirstSearchAlgoService depthFirstSearchAlgoService, IGreedyBFSAlgoService greedyBFSAlgoService, 
-            IBreadthFirstSearchAlgoService breadthFirstSearchAlgoService, ISwarmAlgoService swarmAlgoService)
+            IBreadthFirstSearchAlgoService breadthFirstSearchAlgoService, ISwarmAlgoService swarmAlgoService, IConvergentSwarmAlgoService convergentSwarmAlgoService)
         {
             _dijkstraAlgoService = DijkstraAlgoService;
             _aStarAlgoService = AStarAlgoService;
@@ -28,6 +29,7 @@ namespace BackendProcess.Controllers
             _greedyBFSAlgoService = greedyBFSAlgoService;
             _breadthFirstSearchAlgoService = breadthFirstSearchAlgoService;
             _swarmAlgoService = swarmAlgoService;
+            _convergentSwarmAlgoService = convergentSwarmAlgoService;
 
             settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
         }
@@ -92,6 +94,17 @@ namespace BackendProcess.Controllers
         public ActionResult VisualizeSwarmSearch([FromBody] PathfindingAlgoVisualizerDTO swarmVisualizerDTO)
         {
             var result = _swarmAlgoService.FindShortestPath(swarmVisualizerDTO.Grid, swarmVisualizerDTO.StartNode, swarmVisualizerDTO.EndNode);
+
+            string json = JsonConvert.SerializeObject(result, settings);
+
+            return Ok(json);
+        }
+
+        [HttpPost]
+        [Route("ConvergentSwarm")]
+        public ActionResult VisualizeConvergentSwarmSearch([FromBody] PathfindingAlgoVisualizerDTO convergentSwarmVisualizerDTO)
+        {
+            var result = _convergentSwarmAlgoService.FindShortestPath(convergentSwarmVisualizerDTO.Grid, convergentSwarmVisualizerDTO.StartNode, convergentSwarmVisualizerDTO.EndNode);
 
             string json = JsonConvert.SerializeObject(result, settings);
 
