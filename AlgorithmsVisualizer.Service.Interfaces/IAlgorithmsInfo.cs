@@ -1,6 +1,6 @@
 ﻿using DataModels;
 
-namespace AlgorithmsVisualizer.Services.Classes
+namespace AlgorithmsVisualizer.Service.Interfaces
 {
     public interface IAlgorithmsInfo
     {

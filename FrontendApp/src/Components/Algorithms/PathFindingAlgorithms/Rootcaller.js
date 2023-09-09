@@ -4,13 +4,13 @@ import { solve_bfs, getNodesInShortestPathOrderBFS } from "./BFS2";
 
 import { solve_mbfs, getNodesInShortestPathOrderMBFS } from "./BFSmultiple"; // for bidirectional BFS
 
-import { solve_astar, getNodesInShortestPathOrderASTAR } from "./Astar";
+import { astar, getNodesInShortestPathOrderASTAR } from "./Astar";
 import {
   GreedyBFS,
   getNodesInShortestPathOrderBestFS,
 } from "./BestFirstSearch";
 
-import {depthFirstSearch, getNodesInShortestPathOrderDFS} from "./DepthFirstSearch";
+import { depthFirstSearch, getNodesInShortestPathOrderDFS} from "./DepthFirstSearch";
 import { swarmAlgorithm, getNodesInShortestPathOrderSwarm } from "./SwarmAlgorithm";
 import { convergentSwarmAlgorithm, getNodesInShortestPathOrderConvergeSwarm } from "./ConvergentSwarm";
 
@@ -27,15 +27,15 @@ async function get_paths(
   var end_node = grid[end_row][end_col];
   var visitedNodesInOrder = [];
   var nodesInShortestPathOrder = [];
-
+  var finishNode;
   //call for switching the path finding algo
   switch (algo_type) {
     case "Dijkstra": {
       try {
         visitedNodesInOrder = await dijkstra(grid, start_node, end_node);
-        var endNode =  visitedNodesInOrder.find(node => node.row === end_node.row && node.col === end_node.col);
-        nodesInShortestPathOrder = getNodesInShortestPathOrder(endNode);
-        // Continue with the code that depends on visitedNodesInOrder and nodesInShortestPathOrder
+        finishNode =  visitedNodesInOrder.find(node => node.row === end_node.row && node.col === end_node.col);
+        nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+        finishNode = null;
       } catch (error) {
         // Handle any errors that might occur during the dijkstra function
         console.error(error);
@@ -49,8 +49,15 @@ async function get_paths(
       break;
     }
     case "Greedy B-F Serach": {
-      visitedNodesInOrder = GreedyBFS(grid, start_node, end_node);
-      nodesInShortestPathOrder = getNodesInShortestPathOrderBestFS(end_node);
+      try {
+        visitedNodesInOrder = await GreedyBFS(grid, start_node, end_node);
+        finishNode =  visitedNodesInOrder.find(node => node.row === end_node.row && node.col === end_node.col);
+        nodesInShortestPathOrder = getNodesInShortestPathOrderBestFS(finishNode);
+        finishNode = null;
+      } catch (error) {
+        // Handle any errors that might occur during the dijkstra function
+        console.error(error);
+      }
       break;
     }
     case "BFS-Bidirectional": {
@@ -59,13 +66,31 @@ async function get_paths(
       break;
     }
     case "A* Search": {
-      visitedNodesInOrder = solve_astar(grid, start_node, end_node);
-      nodesInShortestPathOrder = getNodesInShortestPathOrderASTAR(end_node);
+      try {
+        visitedNodesInOrder = await astar(grid, start_node, end_node);
+        finishNode =  visitedNodesInOrder.find(node => node.row === end_node.row && node.col === end_node.col);
+        nodesInShortestPathOrder = getNodesInShortestPathOrderASTAR(finishNode);
+        finishNode = null;
+      } catch (error) {
+        // Handle any errors that might occur during the dijkstra function
+        console.error(error);
+      }
+
       break;
     }
     case "Depth-First Search": {
-      visitedNodesInOrder = depthFirstSearch(grid, start_node, end_node);
-      nodesInShortestPathOrder = getNodesInShortestPathOrderDFS(end_node);
+      try {
+        visitedNodesInOrder = await depthFirstSearch(grid, start_node, end_node);
+        finishNode =  visitedNodesInOrder.find(node => node.row === end_node.row && node.col === end_node.col);
+        nodesInShortestPathOrder = getNodesInShortestPathOrderDFS(finishNode);
+        finishNode = null;
+      } catch (error) {
+        // Handle any errors that might occur during the dijkstra function
+        console.error(error);
+      }
+
+      // visitedNodesInOrder = depthFirstSearch(grid, start_node, end_node);
+      // nodesInShortestPathOrder = getNodesInShortestPathOrderDFS(end_node);
       break;
     }
     case "Swarm Algorithm": {

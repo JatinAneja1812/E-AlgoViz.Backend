@@ -26,8 +26,8 @@
   <ItemGroup>
     <ProjectReference Include="..\AlgorithmsVisualizer.Repository.Classes\AlgorithmsVisualizer.Repository.Classes.csproj" />
     <ProjectReference Include="..\AlgorithmsVisualizer.Repository.Interfaces\AlgorithmsVisualizer.Repository.Interfaces.csproj" />
-    <ProjectReference Include="..\AlgorithmsVisualizer.Services.Classes\AlgorithmsVisualizer.Services.Classes.csproj" />
-    <ProjectReference Include="..\AlgorithmsVisualizer.Services.Interfaces\AlgorithmsVisualizer.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\AlgorithmsVisualizer.Service.Classes\AlgorithmsVisualizer.Service.Classes.csproj" />
+    <ProjectReference Include="..\AlgorithmsVisualizer.Service.Interfaces\AlgorithmsVisualizer.Service.Interfaces.csproj" />
     <ProjectReference Include="..\DTOs\DTOs.csproj" />
     <ProjectReference Include="..\VisualizerDatabase\VisualizerDatabase.csproj" />
   </ItemGroup>

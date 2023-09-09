@@ -1,6 +1,6 @@
 ﻿using DataModels;
 
-namespace AlgorithmsVisualizer.Services.Classes.PathfindingAlgorithms.Interfaces
+namespace AlgorithmsVisualizer.Service.Interfaces
 {
     public interface IDijkstraAlgoService
     {

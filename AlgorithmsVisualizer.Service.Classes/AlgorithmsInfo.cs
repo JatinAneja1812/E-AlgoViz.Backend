@@ -1,8 +1,8 @@
 ﻿using AlgorithmsVisualizer.Repository.Interfaces;
-using AlgorithmsVisualizer.Services.Classes;
+using AlgorithmsVisualizer.Service.Interfaces;
 using DataModels;
 
-namespace AlgorithmsVisualizer.Services.Interfaces
+namespace AlgorithmsVisualizer.Service.Classes
 {
     public class AlgorithmsInfo : IAlgorithmsInfo
     {

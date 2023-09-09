@@ -11,8 +11,8 @@
         "dependencies": {
           "AlgorithmsVisualizer.Repository.Classes": "1.0.0",
           "AlgorithmsVisualizer.Repository.Interfaces": "1.0.0",
-          "AlgorithmsVisualizer.Services.Classes": "1.0.0",
-          "AlgorithmsVisualizer.Services.Interfaces": "1.0.0",
+          "AlgorithmsVisualizer.Service.Classes": "1.0.0",
+          "AlgorithmsVisualizer.Service.Interfaces": "1.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
           "DTOs": "1.0.0",
           "Microsoft.AspNetCore.Owin": "6.0.16",
@@ -1869,22 +1869,22 @@
           "AlgorithmsVisualizer.Repository.Interfaces.dll": {}
         }
       },
-      "AlgorithmsVisualizer.Services.Classes/1.0.0": {
-        "dependencies": {
-          "DataModels": "1.0.0"
-        },
-        "runtime": {
-          "AlgorithmsVisualizer.Services.Classes.dll": {}
-        }
-      },
-      "AlgorithmsVisualizer.Services.Interfaces/1.0.0": {
+      "AlgorithmsVisualizer.Service.Classes/1.0.0": {
         "dependencies": {
           "AlgorithmsVisualizer.Repository.Interfaces": "1.0.0",
-          "AlgorithmsVisualizer.Services.Classes": "1.0.0",
-          "Microsoft.Extensions.DependencyInjection": "7.0.0"
+          "AlgorithmsVisualizer.Service.Interfaces": "1.0.0"
         },
         "runtime": {
-          "AlgorithmsVisualizer.Services.Interfaces.dll": {}
+          "AlgorithmsVisualizer.Service.Classes.dll": {}
+        }
+      },
+      "AlgorithmsVisualizer.Service.Interfaces/1.0.0": {
+        "dependencies": {
+          "DataModels": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "7.0.10"
+        },
+        "runtime": {
+          "AlgorithmsVisualizer.Service.Interfaces.dll": {}
         }
       },
       "DataModels/1.0.0": {
@@ -2430,12 +2430,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "AlgorithmsVisualizer.Services.Classes/1.0.0": {
+    "AlgorithmsVisualizer.Service.Classes/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "AlgorithmsVisualizer.Services.Interfaces/1.0.0": {
+    "AlgorithmsVisualizer.Service.Interfaces/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

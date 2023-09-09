@@ -1,9 +1,9 @@
 ﻿using AlgorithmsVisualizer.Repository.Classes;
 using AlgorithmsVisualizer.Repository.Interfaces;
-using AlgorithmsVisualizer.Services.Classes;
-using AlgorithmsVisualizer.Services.Classes.PathfindingAlgorithms.Interfaces;
-using AlgorithmsVisualizer.Services.Interfaces;
-using AlgorithmsVisualizer.Services.Interfaces.PathfindingAlgorithms.Services;
+using AlgorithmsVisualizer.Service.Classes;
+using AlgorithmsVisualizer.Service.Classes.PathfindingAlgorithms;
+using AlgorithmsVisualizer.Service.Interfaces;
+using AlgorithmsVisualizer.Service.Interfaces.PathfindingAlgorithms;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -29,8 +29,11 @@ namespace BackendProcess
             });
 
             services.AddTransient<IDijkstraAlgoService, DijkstraAlgoService>();
+            services.AddTransient<IAStarAlgoService, AStarAlgoService>();
             services.AddTransient<IAlgorithmsInfo, AlgorithmsInfo>();
             services.AddTransient<IAlgorithmsInfoRepo, AlgorithmsInfoRepo>();
+            services.AddTransient<IDepthFirstSearchAlgoService, DepthFirstSearchAlgoService>();
+            services.AddTransient<IGreedyBFSAlgoService, GreedyBFSAlgoService>();
 
             //services.AddAutoMapper(typeof(UserConfigurationProfile));
 

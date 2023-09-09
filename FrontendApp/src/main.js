@@ -192,7 +192,103 @@ ipcMain.on("visualizeDijkstra", async (event, grid, startNode, endNode) => {
           return res.text();
         })
         .then((result) => {
-          event.sender.send("dijkstraResult", result);
+           event.sender.send("dijkstraResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
+ipcMain.on("visualizeAStar", async (event, grid, startNode, endNode) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const aStarVisualizerDTO = {
+        grid: grid,
+        startNode: startNode,
+        endNode: endNode
+      };
+
+      fetch(
+        "http://localhost:5000/api/PathfindingAlgos/AStar",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(aStarVisualizerDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("aStarResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
+ipcMain.on("visualizeDFS", async (event, grid, startNode, endNode) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const dfsVisualizerDTO = {
+        grid: grid,
+        startNode: startNode,
+        endNode: endNode
+      };
+
+      fetch(
+        "http://localhost:5000/api/PathfindingAlgos/DFS",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(dfsVisualizerDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("DFSResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
+ipcMain.on("visualizeGreedyBFS", async (event, grid, startNode, endNode) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const greedyBFSVisualizerDTO = {
+        grid: grid,
+        startNode: startNode,
+        endNode: endNode
+      };
+
+      fetch(
+        "http://localhost:5000/api/PathfindingAlgos/GreedyBFS",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(greedyBFSVisualizerDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("GreedyBFSResult", result);
         });
     } catch (err) {
       console.log(err);

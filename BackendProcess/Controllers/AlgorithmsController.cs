@@ -1,4 +1,5 @@
-﻿using AlgorithmsVisualizer.Services.Classes;
+﻿
+using AlgorithmsVisualizer.Service.Interfaces;
 using DataModels;
 using Microsoft.AspNetCore.Mvc;
 

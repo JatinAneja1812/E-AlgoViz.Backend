@@ -1,11 +1,11 @@
-﻿using AlgorithmsVisualizer.Services.Classes.PathfindingAlgorithms.Interfaces;
+﻿using AlgorithmsVisualizer.Service.Interfaces.PathfindingAlgorithms;
 using DataModels;
 
-namespace AlgorithmsVisualizer.Services.Interfaces.PathfindingAlgorithms.Services
+namespace AlgorithmsVisualizer.Service.Classes.PathfindingAlgorithms
 {
-    public class DijkstraAlgoService : IDijkstraAlgoService
+    public class AStarAlgoService : IAStarAlgoService
     {
-        public DijkstraAlgoService() { }
+        public AStarAlgoService() { }
 
         public List<Node> FindShortestPath(List<List<Node>> grid, Node startNode, Node endNode)
         {
@@ -30,21 +30,21 @@ namespace AlgorithmsVisualizer.Services.Interfaces.PathfindingAlgorithms.Service
 
                 if (currentNode.Row == endNode.Row && currentNode.Col == endNode.Col)
                 {
-                    UpdateNeighbors(grid, currentNode); // Update neighbors for endNode
+                    UpdateNeighbors(grid, currentNode, endNode); // Update neighbors for endNode
                     visitedNodesInOrder.Add(currentNode);
                     break;
                 }
 
-                UpdateNeighbors(grid, currentNode);
+                UpdateNeighbors(grid, currentNode, endNode);
 
                 visitedNodesInOrder.Add(currentNode); // Add the currentNode
-                currentNode = GetClosestUnvisitedNode(grid); // Update currentNode
+                currentNode = GetClosestUnvisitedNode(grid, endNode); // Update currentNode
             }
 
             return visitedNodesInOrder;
         }
 
-        static Node GetClosestUnvisitedNode(List<List<Node>> grid)
+        static Node GetClosestUnvisitedNode(List<List<Node>> grid, Node endNode)
         {
             double minDistance = double.MaxValue;
             Node closestNode = null;
@@ -53,9 +53,9 @@ namespace AlgorithmsVisualizer.Services.Interfaces.PathfindingAlgorithms.Service
             {
                 foreach (var node in row)
                 {
-                    if (!node.IsVisited && node.Distance < minDistance)
+                    if (!node.IsVisited && node.Distance + CalculateHeuristic(node, endNode) < minDistance)
                     {
-                        minDistance = node.Distance;
+                        minDistance = node.Distance + CalculateHeuristic(node, endNode);
                         closestNode = node;
                     }
                 }
@@ -64,7 +64,7 @@ namespace AlgorithmsVisualizer.Services.Interfaces.PathfindingAlgorithms.Service
             return closestNode;
         }
 
-        static void UpdateNeighbors(List<List<Node>> grid, Node node)
+        static void UpdateNeighbors(List<List<Node>> grid, Node node, Node endNode)
         {
             int numRows = grid.Count;
             int numCols = grid[0].Count;
@@ -83,30 +83,32 @@ namespace AlgorithmsVisualizer.Services.Interfaces.PathfindingAlgorithms.Service
 
                     if (!neighbor.IsVisited && !neighbor.IsWall)
                     {
-                        int tentativeDistance;
+                        int tentativeDistance = node.Distance + 1; // Assuming each step has a cost of 1
 
                         if (neighbor.IsWeight)
                         {
-                            if (neighbor.Distance > node.Distance + CalculateWeight(node, neighbor))
-                            {
-                                // Only update the distance and previous node if it's a shorter path
-                                neighbor.Distance = (int)(node.Distance + CalculateWeight(node, neighbor));
-                                neighbor.PreviousNode = node;
-                            }
+                            tentativeDistance = (int)(node.Distance + CalculateWeight(node, neighbor));
                         }
-                        else
-                        {
-                            tentativeDistance = node.Distance + 1; // Assuming each step has a cost of 1
 
-                            if (tentativeDistance < neighbor.Distance)
-                            {
-                                neighbor.Distance = tentativeDistance;
-                                neighbor.PreviousNode = node; // Update the closest node
-                            }
+                        if (tentativeDistance < neighbor.Distance)
+                        {
+                            neighbor.Distance = tentativeDistance;
+                            neighbor.PreviousNode = node; // Update the closest node
                         }
                     }
                 }
             }
+        }
+
+        static double CalculateHeuristic(Node nodeA, Node nodeB)
+        {
+            int deltaX = nodeB.Col - nodeA.Col;
+            int deltaY = nodeB.Row - nodeA.Row;
+
+            // Calculate Euclidean distance
+            double distance = Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
+
+            return distance;
         }
 
         static double CalculateWeight(Node nodeA, Node nodeB)
