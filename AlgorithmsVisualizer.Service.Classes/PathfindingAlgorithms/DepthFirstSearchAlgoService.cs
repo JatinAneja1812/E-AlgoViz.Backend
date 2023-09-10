@@ -3,9 +3,8 @@ using DataModels;
 
 namespace AlgorithmsVisualizer.Service.Classes.PathfindingAlgorithms
 {
-    public class DepthFirstSearchAlgoService : IDepthFirstSearchAlgoService
+    public class DepthFirstSearchAlgoService : IPathfindingAlgorithm
     {
-        public DepthFirstSearchAlgoService() { }
         public List<Node> FindShortestPath(List<List<Node>> grid, Node startNode, Node endNode)
         {
             List<Node> visitedNodesInOrder = new List<Node>();

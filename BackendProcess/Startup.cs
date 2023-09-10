@@ -3,7 +3,7 @@ using AlgorithmsVisualizer.Repository.Interfaces;
 using AlgorithmsVisualizer.Service.Classes;
 using AlgorithmsVisualizer.Service.Classes.PathfindingAlgorithms;
 using AlgorithmsVisualizer.Service.Interfaces;
-using AlgorithmsVisualizer.Service.Interfaces.PathfindingAlgorithms;
+using AlgorithmsVisualizer.Service.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -31,14 +31,17 @@ namespace BackendProcess
             services.AddTransient<IAlgorithmsInfo, AlgorithmsInfo>();
             services.AddTransient<IAlgorithmsInfoRepo, AlgorithmsInfoRepo>();
 
-            services.AddTransient<IDijkstraAlgoService, DijkstraAlgoService>();
-            services.AddTransient<IAStarAlgoService, AStarAlgoService>();
-            services.AddTransient<IDepthFirstSearchAlgoService, DepthFirstSearchAlgoService>();
-            services.AddTransient<IGreedyBFSAlgoService, GreedyBFSAlgoService>();
-            services.AddTransient<IBreadthFirstSearchAlgoService, BreadthFirstSearchAlgoService>();
-            services.AddTransient<ISwarmAlgoService, SwarmAlgoService>();
-            services.AddTransient<IConvergentSwarmAlgoService, ConvergentSwarmAlgoService>();
-            //services.AddAutoMapper(typeof(UserConfigurationProfile));
+            services.AddTransient<DijkstraAlgoService>();
+            services.AddTransient<AStarAlgoService>();
+            services.AddTransient<DepthFirstSearchAlgoService>();
+            services.AddTransient<GreedyBFSAlgoService>();
+            services.AddTransient<BreadthFirstSearchAlgoService>();
+            services.AddTransient<SwarmAlgoService>();
+            services.AddTransient<ConvergentSwarmAlgoService>();
+
+            services.AddSingleton<IPathfindingAlgorithmFactory, PathfindingAlgorithmFactory>();
+
+            //services.AddAutoMapper(typeof());
 
             services.AddDbContext<VisContext>();
 

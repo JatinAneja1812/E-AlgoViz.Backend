@@ -1,6 +1,7 @@
-﻿using AlgorithmsVisualizer.Service.Interfaces;
-using AlgorithmsVisualizer.Service.Interfaces.PathfindingAlgorithms;
+﻿using AlgorithmsVisualizer.Service.Interfaces.PathfindingAlgorithms;
+using AlgorithmsVisualizer.Service.Utilities;
 using DTOs;
+using Enums;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -11,25 +12,11 @@ namespace BackendProcess.Controllers
     [ApiController]
     public class PathfindingAlgosController : ControllerBase
     {
-        private readonly IDijkstraAlgoService _dijkstraAlgoService;
-        private readonly IAStarAlgoService _aStarAlgoService;
-        private readonly IDepthFirstSearchAlgoService _depthFirstSearchAlgoService;
-        private readonly IGreedyBFSAlgoService _greedyBFSAlgoService;
-        private readonly IBreadthFirstSearchAlgoService _breadthFirstSearchAlgoService;
-        private readonly ISwarmAlgoService _swarmAlgoService;
-        private readonly IConvergentSwarmAlgoService _convergentSwarmAlgoService;
+        private readonly IPathfindingAlgorithmFactory _algorithmFactory;
         private readonly JsonSerializerSettings settings;
-        public PathfindingAlgosController(IDijkstraAlgoService DijkstraAlgoService, IAStarAlgoService AStarAlgoService, 
-            IDepthFirstSearchAlgoService depthFirstSearchAlgoService, IGreedyBFSAlgoService greedyBFSAlgoService, 
-            IBreadthFirstSearchAlgoService breadthFirstSearchAlgoService, ISwarmAlgoService swarmAlgoService, IConvergentSwarmAlgoService convergentSwarmAlgoService)
+        public PathfindingAlgosController(IPathfindingAlgorithmFactory algorithmFactory)
         {
-            _dijkstraAlgoService = DijkstraAlgoService;
-            _aStarAlgoService = AStarAlgoService;
-            _depthFirstSearchAlgoService = depthFirstSearchAlgoService;
-            _greedyBFSAlgoService = greedyBFSAlgoService;
-            _breadthFirstSearchAlgoService = breadthFirstSearchAlgoService;
-            _swarmAlgoService = swarmAlgoService;
-            _convergentSwarmAlgoService = convergentSwarmAlgoService;
+            _algorithmFactory = algorithmFactory;
 
             settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
         }
@@ -38,8 +25,11 @@ namespace BackendProcess.Controllers
         [Route("Dijkstra")]
         public ActionResult VisualizeDijkstra([FromBody] PathfindingAlgoVisualizerDTO dijkstraVisualizerDTO)
         {
-            var result = _dijkstraAlgoService.FindShortestPath(dijkstraVisualizerDTO.Grid, dijkstraVisualizerDTO.StartNode, dijkstraVisualizerDTO.EndNode);
-   
+            // Retrieving algorithm service
+            IPathfindingAlgorithm dijkstraService = _algorithmFactory.FindAlgorithm(PathfindingAlgorithmsEnum.DIJKSTRA);
+
+            var result = dijkstraService.FindShortestPath(dijkstraVisualizerDTO.Grid, dijkstraVisualizerDTO.StartNode, dijkstraVisualizerDTO.EndNode);
+
             string json = JsonConvert.SerializeObject(result, settings);
 
             return Ok(json);
@@ -49,8 +39,11 @@ namespace BackendProcess.Controllers
         [Route("AStar")]
         public ActionResult VisualizeAStar([FromBody] PathfindingAlgoVisualizerDTO aStarVisualizerDTO)
         {
-            var result = _aStarAlgoService.FindShortestPath(aStarVisualizerDTO.Grid, aStarVisualizerDTO.StartNode, aStarVisualizerDTO.EndNode);
-          
+            // Retrieving algorithm service
+            IPathfindingAlgorithm astarService = _algorithmFactory.FindAlgorithm(PathfindingAlgorithmsEnum.ASTAR);
+
+            var result = astarService.FindShortestPath(aStarVisualizerDTO.Grid, aStarVisualizerDTO.StartNode, aStarVisualizerDTO.EndNode);
+
             string json = JsonConvert.SerializeObject(result, settings);
 
             return Ok(json);
@@ -60,8 +53,11 @@ namespace BackendProcess.Controllers
         [Route("DFS")]
         public ActionResult VisualizeDFS([FromBody] PathfindingAlgoVisualizerDTO dfsVisualizerDTO)
         {
-            var result = _depthFirstSearchAlgoService.FindShortestPath(dfsVisualizerDTO.Grid, dfsVisualizerDTO.StartNode, dfsVisualizerDTO.EndNode);
-           
+            // Retrieving algorithm service
+            IPathfindingAlgorithm dfsService = _algorithmFactory.FindAlgorithm(PathfindingAlgorithmsEnum.DEPTH_FIRST_SEARCH);
+
+            var result = dfsService.FindShortestPath(dfsVisualizerDTO.Grid, dfsVisualizerDTO.StartNode, dfsVisualizerDTO.EndNode);
+
             string json = JsonConvert.SerializeObject(result, settings);
 
             return Ok(json);
@@ -71,7 +67,10 @@ namespace BackendProcess.Controllers
         [Route("GreedyBFS")]
         public ActionResult VisualizeGreedyBFS([FromBody] PathfindingAlgoVisualizerDTO greedyBFSVisualizerDTO)
         {
-            var result = _greedyBFSAlgoService.FindShortestPath(greedyBFSVisualizerDTO.Grid, greedyBFSVisualizerDTO.StartNode, greedyBFSVisualizerDTO.EndNode);
+            // Retrieving algorithm service
+            IPathfindingAlgorithm greedyBFSService = _algorithmFactory.FindAlgorithm(PathfindingAlgorithmsEnum.GREEDY_BEST_FIRST_SEARCH);
+
+            var result = greedyBFSService.FindShortestPath(greedyBFSVisualizerDTO.Grid, greedyBFSVisualizerDTO.StartNode, greedyBFSVisualizerDTO.EndNode);
 
             string json = JsonConvert.SerializeObject(result, settings);
 
@@ -82,7 +81,10 @@ namespace BackendProcess.Controllers
         [Route("BFS")]
         public ActionResult VisualizeBreadthFirstSearch([FromBody] PathfindingAlgoVisualizerDTO bfsVisualizerDTO)
         {
-            var result = _breadthFirstSearchAlgoService.FindShortestPath(bfsVisualizerDTO.Grid, bfsVisualizerDTO.StartNode, bfsVisualizerDTO.EndNode);
+            // Retrieving algorithm service
+            IPathfindingAlgorithm bfsService = _algorithmFactory.FindAlgorithm(PathfindingAlgorithmsEnum.BREADTH_FIRST_SEARCH);
+
+            var result = bfsService.FindShortestPath(bfsVisualizerDTO.Grid, bfsVisualizerDTO.StartNode, bfsVisualizerDTO.EndNode);
 
             string json = JsonConvert.SerializeObject(result, settings);
 
@@ -93,7 +95,10 @@ namespace BackendProcess.Controllers
         [Route("Swarm")]
         public ActionResult VisualizeSwarmSearch([FromBody] PathfindingAlgoVisualizerDTO swarmVisualizerDTO)
         {
-            var result = _swarmAlgoService.FindShortestPath(swarmVisualizerDTO.Grid, swarmVisualizerDTO.StartNode, swarmVisualizerDTO.EndNode);
+            // Retrieving algorithm service
+            IPathfindingAlgorithm swarmService = _algorithmFactory.FindAlgorithm(PathfindingAlgorithmsEnum.SWARM);
+
+            var result = swarmService.FindShortestPath(swarmVisualizerDTO.Grid, swarmVisualizerDTO.StartNode, swarmVisualizerDTO.EndNode);
 
             string json = JsonConvert.SerializeObject(result, settings);
 
@@ -104,7 +109,10 @@ namespace BackendProcess.Controllers
         [Route("ConvergentSwarm")]
         public ActionResult VisualizeConvergentSwarmSearch([FromBody] PathfindingAlgoVisualizerDTO convergentSwarmVisualizerDTO)
         {
-            var result = _convergentSwarmAlgoService.FindShortestPath(convergentSwarmVisualizerDTO.Grid, convergentSwarmVisualizerDTO.StartNode, convergentSwarmVisualizerDTO.EndNode);
+            // Retrieving algorithm service
+            IPathfindingAlgorithm convergentSwarmService = _algorithmFactory.FindAlgorithm(PathfindingAlgorithmsEnum.CONVERGENT_SWARM);
+
+            var result = convergentSwarmService.FindShortestPath(convergentSwarmVisualizerDTO.Grid, convergentSwarmVisualizerDTO.StartNode, convergentSwarmVisualizerDTO.EndNode);
 
             string json = JsonConvert.SerializeObject(result, settings);
 

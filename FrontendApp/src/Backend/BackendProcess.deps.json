@@ -13,6 +13,7 @@
           "AlgorithmsVisualizer.Repository.Interfaces": "1.0.0",
           "AlgorithmsVisualizer.Service.Classes": "1.0.0",
           "AlgorithmsVisualizer.Service.Interfaces": "1.0.0",
+          "AlgorithmsVisualizer.Service.Utilities": "1.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
           "DTOs": "1.0.0",
           "Microsoft.AspNetCore.Owin": "6.0.16",
@@ -1887,6 +1888,15 @@
           "AlgorithmsVisualizer.Service.Interfaces.dll": {}
         }
       },
+      "AlgorithmsVisualizer.Service.Utilities/1.0.0": {
+        "dependencies": {
+          "AlgorithmsVisualizer.Service.Classes": "1.0.0",
+          "AlgorithmsVisualizer.Service.Interfaces": "1.0.0"
+        },
+        "runtime": {
+          "AlgorithmsVisualizer.Service.Utilities.dll": {}
+        }
+      },
       "DataModels/1.0.0": {
         "dependencies": {
           "Enums": "1.0.0"
@@ -2436,6 +2446,11 @@
       "sha512": ""
     },
     "AlgorithmsVisualizer.Service.Interfaces/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AlgorithmsVisualizer.Service.Utilities/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

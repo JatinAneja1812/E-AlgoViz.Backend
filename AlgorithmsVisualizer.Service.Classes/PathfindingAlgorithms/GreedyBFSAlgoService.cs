@@ -3,7 +3,7 @@ using DataModels;
 
 namespace AlgorithmsVisualizer.Service.Classes.PathfindingAlgorithms
 {
-    public class GreedyBFSAlgoService : IGreedyBFSAlgoService
+    public class GreedyBFSAlgoService : IPathfindingAlgorithm
     {
         public List<Node> FindShortestPath(List<List<Node>> grid, Node startNode, Node endNode)
         {

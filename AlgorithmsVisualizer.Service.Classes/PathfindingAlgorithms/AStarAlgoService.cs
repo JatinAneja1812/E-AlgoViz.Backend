@@ -3,10 +3,8 @@ using DataModels;
 
 namespace AlgorithmsVisualizer.Service.Classes.PathfindingAlgorithms
 {
-    public class AStarAlgoService : IAStarAlgoService
+    public class AStarAlgoService : IPathfindingAlgorithm
     {
-        public AStarAlgoService() { }
-
         public List<Node> FindShortestPath(List<List<Node>> grid, Node startNode, Node endNode)
         {
             foreach (var row in grid)

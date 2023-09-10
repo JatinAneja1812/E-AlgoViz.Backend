@@ -1,12 +1,10 @@
-﻿using AlgorithmsVisualizer.Service.Interfaces;
+﻿using AlgorithmsVisualizer.Service.Interfaces.PathfindingAlgorithms;
 using DataModels;
 
-namespace AlgorithmsVisualizer.Service.Classes
+namespace AlgorithmsVisualizer.Service.Classes.PathfindingAlgorithms
 {
-    public class DijkstraAlgoService : IDijkstraAlgoService
+    public class DijkstraAlgoService : IPathfindingAlgorithm
     {
-        public DijkstraAlgoService() { }
-
         public List<Node> FindShortestPath(List<List<Node>> grid, Node startNode, Node endNode)
         {
             foreach (var row in grid)
