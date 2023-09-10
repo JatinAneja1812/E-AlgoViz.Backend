@@ -18,7 +18,7 @@ namespace BackendProcess
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder =>
+                    builder =>        
                     {
                         builder
                         .AllowAnyOrigin()

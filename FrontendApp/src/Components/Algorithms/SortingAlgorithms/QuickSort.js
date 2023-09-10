@@ -13,10 +13,16 @@ const partition = (dupBlocks, start, end, order) => {
             order.push ([pivotSpot, i, dupBlocks.slice(), null, pivotSpot]);
         }
     }
+    console.log(order)
+    console.log(pivotSpot)
     return pivotSpot;
 }
 
 const quickSortWorker = (dupBlocks, start, end, order) => {
+    console.log(dupBlocks)
+    console.log(start)
+    console.log(end)
+    console.log(order)
     // base case to stop recursive call 
     if (start >= end) {
         if (start === end) { //case of single block
