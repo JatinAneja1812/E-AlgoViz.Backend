@@ -1,5 +1,4 @@
-﻿
-using AlgorithmsVisualizer.Service.Classes.PathfindingAlgorithms;
+﻿using AlgorithmsVisualizer.Service.Classes.PathfindingAlgorithms;
 using AlgorithmsVisualizer.Service.Interfaces.PathfindingAlgorithms;
 using Enums;
 using Microsoft.Extensions.DependencyInjection;

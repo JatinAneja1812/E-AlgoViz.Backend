@@ -391,3 +391,33 @@ ipcMain.on("visualizeConvergentSwarmSearch", async (event, grid, startNode, endN
     }
   }
 });
+
+ipcMain.on("visualizeQuickSort", async (event, array) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const quickSortDTO = {
+        array: array
+      };
+
+      fetch(
+        "http://localhost:5000/api/SortingAlgos/QuickSort",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(quickSortDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("quickSortResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});

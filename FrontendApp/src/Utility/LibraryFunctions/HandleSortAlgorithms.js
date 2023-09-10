@@ -16,42 +16,42 @@ import bitonicSort from "../../Components/Algorithms/SortingAlgorithms/BitonicSo
 import bogoSort from "../../Components/Algorithms/SortingAlgorithms/BogoSort";
 import cycleSort from "../../Components/Algorithms/SortingAlgorithms/CycleSort";
 
-export default function handleSortingAlgorithm(algorithmType, array) {
+export default async function handleSortingAlgorithm(algorithmType, array) {
   switch (algorithmType) {
     case "Quick Sort":
-      return quickSort(array);
+      return await quickSort(array);
     case "Merge Sort":
-      return mergeSort(array);
+      return await mergeSort(array);
     case "Heap Sort":
-      return heapSort(array);
+      return await heapSort(array);
     case "Bubble Sort":
-      return bubbleSort(array);
+      return  await bubbleSort(array);
     case "Selection Sort":
-      return selectionSort(array);
+      return await selectionSort(array);
     case "Insertion Sort":
-      return insertionSort(array);
+      return await insertionSort(array);
     case "Gnome Sort":
-      return gnomeSort(array);
+      return await gnomeSort(array);
     case "Shaker Sort":
-      return cocktailShakerSort(array);
+      return await cocktailShakerSort(array);
     case "Odd Even Sort":
-      return oddEvenSort(array);
+      return await oddEvenSort(array);
     case "Pancake Sort":
-      return pancakeSort(array);
+      return await pancakeSort(array);
     case "Shell Sort":
-      return shellSort(array);
+      return await shellSort(array);
     case "Tim Sort":
-        return timSort(array);
+        return await timSort(array);
     case "Cube Sort":
-        return cubeSort(array);
+        return await cubeSort(array);
     case "Radix Sort":
-      return radixSort(array);
+      return await radixSort(array);
     case "Bitonic Sort":
-        return bitonicSort(array);
+        return await bitonicSort(array);
     case "Bogo Sort":
-        return bogoSort(array);
+        return await bogoSort(array);
     case "Cycle Sort":
-        return cycleSort(array);
+        return await cycleSort(array);
     default:
       return "";
   }

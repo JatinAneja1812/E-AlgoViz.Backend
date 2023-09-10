@@ -2,6 +2,7 @@
 using AlgorithmsVisualizer.Repository.Interfaces;
 using AlgorithmsVisualizer.Service.Classes;
 using AlgorithmsVisualizer.Service.Classes.PathfindingAlgorithms;
+using AlgorithmsVisualizer.Service.Classes.SortingAlgorithms;
 using AlgorithmsVisualizer.Service.Interfaces;
 using AlgorithmsVisualizer.Service.Utilities;
 using Microsoft.AspNetCore.Builder;
@@ -40,6 +41,10 @@ namespace BackendProcess
             services.AddTransient<ConvergentSwarmAlgoService>();
 
             services.AddSingleton<IPathfindingAlgorithmFactory, PathfindingAlgorithmFactory>();
+
+            services.AddTransient<QuickSortAlgoService>();
+
+            services.AddSingleton<ISortingAlgorithmFactory, SortingAlgorithmFactory>();
 
             //services.AddAutoMapper(typeof());
 
