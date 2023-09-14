@@ -5,7 +5,7 @@ namespace AlgorithmsVisualizer.Service.Classes.SortingAlgorithms
 {
     public class QuickSortAlgoService : SwapArrayElements, ISortingAlgorithm
     {
-        private List<object> order = new List<object>();
+        private readonly List<object> order = new List<object>();
 
         public List<object> SortList(List<int> arr)
         {

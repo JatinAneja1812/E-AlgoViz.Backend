@@ -27,8 +27,6 @@ export default function quickSort(blocks) {
 //             order.push ([pivotSpot, i, dupBlocks.slice(), null, pivotSpot]);
 //         }
 //     }
-//     console.log(order)
-//     console.log(pivotSpot)
 //     return pivotSpot;
 // }
 

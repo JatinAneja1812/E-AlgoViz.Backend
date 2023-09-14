@@ -43,6 +43,12 @@ namespace BackendProcess
             services.AddSingleton<IPathfindingAlgorithmFactory, PathfindingAlgorithmFactory>();
 
             services.AddTransient<QuickSortAlgoService>();
+            services.AddTransient<MergeSortAlgoService>();
+            services.AddTransient<HeapSortAlgoService>();
+            services.AddTransient<ShellSortAlgoService>();
+            services.AddTransient<BubbleSortAlgoService>();
+            services.AddTransient<SelectionSortAlgoService>();
+            services.AddTransient<InsertionSortAlgoService>();
 
             services.AddSingleton<ISortingAlgorithmFactory, SortingAlgorithmFactory>();
 

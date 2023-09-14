@@ -20,19 +20,33 @@ namespace AlgorithmsVisualizer.Service.Utilities
             {
                 case SortingAlgorithmsEnum.QUICK_SORT:
                     return serviceProvider.GetRequiredService<QuickSortAlgoService>();
-
-                //case SortingAlgorithmsEnum.ASTAR:
-                //    return serviceProvider.GetRequiredService<AStarAlgoService>();
-                //case SortingAlgorithmsEnum.GREEDY_BEST_FIRST_SEARCH:
-                //    return serviceProvider.GetRequiredService<GreedyBFSAlgoService>();
-                //case SortingAlgorithmsEnum.DEPTH_FIRST_SEARCH:
-                //    return serviceProvider.GetRequiredService<DepthFirstSearchAlgoService>();
-                //case SortingAlgorithmsEnum.BREADTH_FIRST_SEARCH:
-                //    return serviceProvider.GetRequiredService<BreadthFirstSearchAlgoService>();
-                //case SortingAlgorithmsEnum.SWARM:
-                //    return serviceProvider.GetRequiredService<SwarmAlgoService>();
+                case SortingAlgorithmsEnum.MERGE_SORT:
+                    return serviceProvider.GetRequiredService<MergeSortAlgoService>();
+                case SortingAlgorithmsEnum.HEAP_SORT:
+                    return serviceProvider.GetRequiredService<HeapSortAlgoService>();
+                case SortingAlgorithmsEnum.SHELL_SORT:
+                    return serviceProvider.GetRequiredService<ShellSortAlgoService>();
+                case SortingAlgorithmsEnum.BUBBLE_SORT:
+                    return serviceProvider.GetRequiredService<BubbleSortAlgoService>();
+                case SortingAlgorithmsEnum.SELECTION_SORT:
+                    return serviceProvider.GetRequiredService<SelectionSortAlgoService>();
+                case SortingAlgorithmsEnum.INSERTION_SORT:
+                    return serviceProvider.GetRequiredService<InsertionSortAlgoService>();
                 //case SortingAlgorithmsEnum.CONVERGENT_SWARM:
                 //    return serviceProvider.GetRequiredService<ConvergentSwarmAlgoService>();
+                //case SortingAlgorithmsEnum.CONVERGENT_SWARM:
+                //    return serviceProvider.GetRequiredService<ConvergentSwarmAlgoService>();
+                //case SortingAlgorithmsEnum.CONVERGENT_SWARM:
+                //    return serviceProvider.GetRequiredService<ConvergentSwarmAlgoService>();
+                //case SortingAlgorithmsEnum.CONVERGENT_SWARM:
+                //    return serviceProvider.GetRequiredService<ConvergentSwarmAlgoService>();
+                //case SortingAlgorithmsEnum.CONVERGENT_SWARM:
+                //    return serviceProvider.GetRequiredService<ConvergentSwarmAlgoService>();
+                //case SortingAlgorithmsEnum.CONVERGENT_SWARM:
+                //    return serviceProvider.GetRequiredService<ConvergentSwarmAlgoService>();
+                //case SortingAlgorithmsEnum.CONVERGENT_SWARM:
+                //    return serviceProvider.GetRequiredService<ConvergentSwarmAlgoService>();
+
                 default:
                     throw new ArgumentException("Invalid algorithm name.");
             }

@@ -421,3 +421,184 @@ ipcMain.on("visualizeQuickSort", async (event, array) => {
     }
   }
 });
+
+ipcMain.on("visualizeMergeSort", async (event, array) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const mergeSortDTO = {
+        array: array
+      };
+
+      fetch(
+        "http://localhost:5000/api/SortingAlgos/MergeSort",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(mergeSortDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("mergeSortResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
+ipcMain.on("visualizeHeapSort", async (event, array) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const heapSortDTO = {
+        array: array
+      };
+
+      fetch(
+        "http://localhost:5000/api/SortingAlgos/HeapSort",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(heapSortDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("heapSortResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
+ipcMain.on("visualizeShellSort", async (event, array) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const shellSortDTO = {
+        array: array
+      };
+
+      fetch(
+        "http://localhost:5000/api/SortingAlgos/ShellSort",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(shellSortDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("shellSortResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
+ipcMain.on("visualizeBubbleSort", async (event, array) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const bubbleSortDTO = {
+        array: array
+      };
+
+      fetch(
+        "http://localhost:5000/api/SortingAlgos/BubbleSort",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(bubbleSortDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("bubbleSortResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
+ipcMain.on("visualizeSelectionSort", async (event, array) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const selectionSortDTO = {
+        array: array
+      };
+
+      fetch(
+        "http://localhost:5000/api/SortingAlgos/SelectionSort",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(selectionSortDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("selectionSortResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
+
+ipcMain.on("visualizeInsertionSort", async (event, array) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const insertionSortDTO = {
+        array: array
+      };
+
+      fetch(
+        "http://localhost:5000/api/SortingAlgos/InsertionSort",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(insertionSortDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("insertionSortResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
