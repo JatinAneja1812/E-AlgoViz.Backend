@@ -1,11 +1,11 @@
-//guaranteed for giving the shortest distance/path
+import PathfindingAlgorithmsEnum from "../../../Enums/VisualizerAlgosEnums/PathfindingAlgorithmsEnum";
 
 const { ipcRenderer } = window.require("electron");
 
 export function astar(grid, start_node, end_node) {
   return new Promise((resolve, reject) => {
-    ipcRenderer.send("visualizeAStar", grid, start_node, end_node);
-    ipcRenderer.on("aStarResult", (event, result) => {
+    ipcRenderer.send("visualizeShortestPath", grid, start_node, end_node, PathfindingAlgorithmsEnum.ASTAR);
+    ipcRenderer.on("pathfindingAlgoResult", (event, result) => {
       const parsedResult = JSON.parse(result);
       resolve(parsedResult); // Resolve the promise with the result
     });
@@ -23,6 +23,5 @@ export function getNodesInShortestPathOrderASTAR(finishNode) {
   }
   
   return nodesInShortestPathOrder;
-  //array consisting the nodes for shortest path
 }
 

@@ -49,6 +49,16 @@ namespace BackendProcess
             services.AddTransient<BubbleSortAlgoService>();
             services.AddTransient<SelectionSortAlgoService>();
             services.AddTransient<InsertionSortAlgoService>();
+            services.AddTransient<GnomeSortAlgoService>();
+            services.AddTransient<ShakerSortAlgoService>();
+            services.AddTransient<OddEvenSortAlgoService>();
+            services.AddTransient<PancakeSortAlgoService>();
+            services.AddTransient<RadixSortAlgoService>();
+            services.AddTransient<CycleSortAlgoService>();
+            services.AddTransient<BitonicSortAlgoService>();
+            services.AddTransient<TimSortAlgoService>();
+            services.AddTransient<BogoSortAlgoService>();
+            services.AddTransient<CubeSortAlgoService>();
 
             services.AddSingleton<ISortingAlgorithmFactory, SortingAlgorithmFactory>();
 

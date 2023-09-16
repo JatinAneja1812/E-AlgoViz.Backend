@@ -1,9 +1,11 @@
+import PathfindingAlgorithmsEnum from "../../../Enums/VisualizerAlgosEnums/PathfindingAlgorithmsEnum";
+
 const { ipcRenderer } = window.require("electron");
 
 export function swarmAlgorithm(grid, start_node, end_node) {
   return new Promise((resolve, reject) => {
-    ipcRenderer.send("visualizeSwarmSearch", grid, start_node, end_node);
-    ipcRenderer.on("swarmSearchResult", (event, result) => {
+    ipcRenderer.send("visualizeShortestPath", grid, start_node, end_node, PathfindingAlgorithmsEnum.SWARM);
+    ipcRenderer.on("pathfindingAlgoResult", (event, result) => {
       const parsedResult = JSON.parse(result);
       resolve(parsedResult); // Resolve the promise with the result
     });

@@ -27,7 +27,6 @@ child(connString, function(err, data) {
   }
 });
 
-
 function createWindow() {
   if (BrowserWindow.getAllWindows().length !== 0) {
     return;
@@ -165,20 +164,53 @@ ipcMain.on("GetAlgorithmsList", async (event) => {
   }
 });
 
+//Sorting Algorithms API
 
-//Pathfinding Algorithms APIs
+ipcMain.on("visualizeSort", async (event, array, algorithmType) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const sortDTO = {
+        array: array,
+        sortingAlgorithmType: algorithmType
+      };
 
-ipcMain.on("visualizeDijkstra", async (event, grid, startNode, endNode) => {
+      fetch(
+        "http://localhost:5000/api/SortingAlgos/Sort",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(sortDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("sortResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
+//Pathfinding Algorithms API
+
+ipcMain.on("visualizeShortestPath", async (event, grid, startNode, endNode, algorithmType ) => {
   if (BrowserWindow.getAllWindows().length === 1) {
     try {
       const dijkstraVisualizerDTO = {
         grid: grid,
         startNode: startNode,
-        endNode: endNode
+        endNode: endNode,
+        pathfindingAlgorithmType: algorithmType
       };
 
       fetch(
-        "http://localhost:5000/api/PathfindingAlgos/Dijkstra",
+        "http://localhost:5000/api/PathfindingAlgos/ShortestPath",
         {
           method: "POST",
           headers: {
@@ -192,410 +224,7 @@ ipcMain.on("visualizeDijkstra", async (event, grid, startNode, endNode) => {
           return res.text();
         })
         .then((result) => {
-           event.sender.send("dijkstraResult", result);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-});
-
-ipcMain.on("visualizeAStar", async (event, grid, startNode, endNode) => {
-  if (BrowserWindow.getAllWindows().length === 1) {
-    try {
-      const aStarVisualizerDTO = {
-        grid: grid,
-        startNode: startNode,
-        endNode: endNode
-      };
-
-      fetch(
-        "http://localhost:5000/api/PathfindingAlgos/AStar",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(aStarVisualizerDTO)
-        }
-      )
-        .then((res) => {
-          return res.text();
-        })
-        .then((result) => {
-          event.sender.send("aStarResult", result);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-});
-
-ipcMain.on("visualizeDFS", async (event, grid, startNode, endNode) => {
-  if (BrowserWindow.getAllWindows().length === 1) {
-    try {
-      const dfsVisualizerDTO = {
-        grid: grid,
-        startNode: startNode,
-        endNode: endNode
-      };
-
-      fetch(
-        "http://localhost:5000/api/PathfindingAlgos/DFS",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(dfsVisualizerDTO)
-        }
-      )
-        .then((res) => {
-          return res.text();
-        })
-        .then((result) => {
-          event.sender.send("DFSResult", result);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-});
-
-ipcMain.on("visualizeGreedyBFS", async (event, grid, startNode, endNode) => {
-  if (BrowserWindow.getAllWindows().length === 1) {
-    try {
-      const greedyBFSVisualizerDTO = {
-        grid: grid,
-        startNode: startNode,
-        endNode: endNode
-      };
-
-      fetch(
-        "http://localhost:5000/api/PathfindingAlgos/GreedyBFS",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(greedyBFSVisualizerDTO)
-        }
-      )
-        .then((res) => {
-          return res.text();
-        })
-        .then((result) => {
-          event.sender.send("GreedyBFSResult", result);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-});
-
-ipcMain.on("visualizeBreadthFirstSearch", async (event, grid, startNode, endNode) => {
-  if (BrowserWindow.getAllWindows().length === 1) {
-    try {
-      const bfsVisualizerDTO = {
-        grid: grid,
-        startNode: startNode,
-        endNode: endNode
-      };
-
-      fetch(
-        "http://localhost:5000/api/PathfindingAlgos/BFS",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(bfsVisualizerDTO)
-        }
-      )
-        .then((res) => {
-          return res.text();
-        })
-        .then((result) => {
-          event.sender.send("BreadthFirstSearchResult", result);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-});
-
-ipcMain.on("visualizeSwarmSearch", async (event, grid, startNode, endNode) => {
-  if (BrowserWindow.getAllWindows().length === 1) {
-    try {
-      const swarmVisualizerDTO = {
-        grid: grid,
-        startNode: startNode,
-        endNode: endNode
-      };
-
-      fetch(
-        "http://localhost:5000/api/PathfindingAlgos/Swarm",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(swarmVisualizerDTO)
-        }
-      )
-        .then((res) => {
-          return res.text();
-        })
-        .then((result) => {
-          event.sender.send("swarmSearchResult", result);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-});
-
-ipcMain.on("visualizeConvergentSwarmSearch", async (event, grid, startNode, endNode) => {
-  if (BrowserWindow.getAllWindows().length === 1) {
-    try {
-      const convergentSwarmVisualizerDTO = {
-        grid: grid,
-        startNode: startNode,
-        endNode: endNode
-      };
-
-      fetch(
-        "http://localhost:5000/api/PathfindingAlgos/ConvergentSwarm",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(convergentSwarmVisualizerDTO)
-        }
-      )
-        .then((res) => {
-          return res.text();
-        })
-        .then((result) => {
-          event.sender.send("convergentSwarmSearchResult", result);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-});
-
-ipcMain.on("visualizeQuickSort", async (event, array) => {
-  if (BrowserWindow.getAllWindows().length === 1) {
-    try {
-      const quickSortDTO = {
-        array: array
-      };
-
-      fetch(
-        "http://localhost:5000/api/SortingAlgos/QuickSort",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(quickSortDTO)
-        }
-      )
-        .then((res) => {
-          return res.text();
-        })
-        .then((result) => {
-          event.sender.send("quickSortResult", result);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-});
-
-ipcMain.on("visualizeMergeSort", async (event, array) => {
-  if (BrowserWindow.getAllWindows().length === 1) {
-    try {
-      const mergeSortDTO = {
-        array: array
-      };
-
-      fetch(
-        "http://localhost:5000/api/SortingAlgos/MergeSort",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(mergeSortDTO)
-        }
-      )
-        .then((res) => {
-          return res.text();
-        })
-        .then((result) => {
-          event.sender.send("mergeSortResult", result);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-});
-
-ipcMain.on("visualizeHeapSort", async (event, array) => {
-  if (BrowserWindow.getAllWindows().length === 1) {
-    try {
-      const heapSortDTO = {
-        array: array
-      };
-
-      fetch(
-        "http://localhost:5000/api/SortingAlgos/HeapSort",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(heapSortDTO)
-        }
-      )
-        .then((res) => {
-          return res.text();
-        })
-        .then((result) => {
-          event.sender.send("heapSortResult", result);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-});
-
-ipcMain.on("visualizeShellSort", async (event, array) => {
-  if (BrowserWindow.getAllWindows().length === 1) {
-    try {
-      const shellSortDTO = {
-        array: array
-      };
-
-      fetch(
-        "http://localhost:5000/api/SortingAlgos/ShellSort",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(shellSortDTO)
-        }
-      )
-        .then((res) => {
-          return res.text();
-        })
-        .then((result) => {
-          event.sender.send("shellSortResult", result);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-});
-
-ipcMain.on("visualizeBubbleSort", async (event, array) => {
-  if (BrowserWindow.getAllWindows().length === 1) {
-    try {
-      const bubbleSortDTO = {
-        array: array
-      };
-
-      fetch(
-        "http://localhost:5000/api/SortingAlgos/BubbleSort",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(bubbleSortDTO)
-        }
-      )
-        .then((res) => {
-          return res.text();
-        })
-        .then((result) => {
-          event.sender.send("bubbleSortResult", result);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-});
-
-ipcMain.on("visualizeSelectionSort", async (event, array) => {
-  if (BrowserWindow.getAllWindows().length === 1) {
-    try {
-      const selectionSortDTO = {
-        array: array
-      };
-
-      fetch(
-        "http://localhost:5000/api/SortingAlgos/SelectionSort",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(selectionSortDTO)
-        }
-      )
-        .then((res) => {
-          return res.text();
-        })
-        .then((result) => {
-          event.sender.send("selectionSortResult", result);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-});
-
-
-ipcMain.on("visualizeInsertionSort", async (event, array) => {
-  if (BrowserWindow.getAllWindows().length === 1) {
-    try {
-      const insertionSortDTO = {
-        array: array
-      };
-
-      fetch(
-        "http://localhost:5000/api/SortingAlgos/InsertionSort",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(insertionSortDTO)
-        }
-      )
-        .then((res) => {
-          return res.text();
-        })
-        .then((result) => {
-          event.sender.send("insertionSortResult", result);
+           event.sender.send("pathfindingAlgoResult", result);
         });
     } catch (err) {
       console.log(err);
