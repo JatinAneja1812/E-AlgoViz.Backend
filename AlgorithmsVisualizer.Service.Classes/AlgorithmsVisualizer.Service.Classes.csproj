@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AlgorithmsVisualizer.Repository.Interfaces\AlgorithmsVisualizer.Repository.Interfaces.csproj" />
+    <ProjectReference Include="..\AlgorithmsVisualizer.Service.Interfaces\AlgorithmsVisualizer.Service.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,7 +1,10 @@
 ﻿using AlgorithmsVisualizer.Repository.Classes;
 using AlgorithmsVisualizer.Repository.Interfaces;
-using AlgorithmsVisualizer.Services.Classes;
-using AlgorithmsVisualizer.Services.Interfaces;
+using AlgorithmsVisualizer.Service.Classes;
+using AlgorithmsVisualizer.Service.Classes.PathfindingAlgorithms;
+using AlgorithmsVisualizer.Service.Classes.SortingAlgorithms;
+using AlgorithmsVisualizer.Service.Interfaces;
+using AlgorithmsVisualizer.Service.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -11,13 +14,12 @@ namespace BackendProcess
 {
     public class Startup
     {
-
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder =>
+                    builder =>        
                     {
                         builder
                         .AllowAnyOrigin()
@@ -30,7 +32,37 @@ namespace BackendProcess
             services.AddTransient<IAlgorithmsInfo, AlgorithmsInfo>();
             services.AddTransient<IAlgorithmsInfoRepo, AlgorithmsInfoRepo>();
 
-            //services.AddAutoMapper(typeof(UserConfigurationProfile));
+            services.AddTransient<DijkstraAlgoService>();
+            services.AddTransient<AStarAlgoService>();
+            services.AddTransient<DepthFirstSearchAlgoService>();
+            services.AddTransient<GreedyBFSAlgoService>();
+            services.AddTransient<BreadthFirstSearchAlgoService>();
+            services.AddTransient<SwarmAlgoService>();
+            services.AddTransient<ConvergentSwarmAlgoService>();
+
+            services.AddSingleton<IPathfindingAlgorithmFactory, PathfindingAlgorithmFactory>();
+
+            services.AddTransient<QuickSortAlgoService>();
+            services.AddTransient<MergeSortAlgoService>();
+            services.AddTransient<HeapSortAlgoService>();
+            services.AddTransient<ShellSortAlgoService>();
+            services.AddTransient<BubbleSortAlgoService>();
+            services.AddTransient<SelectionSortAlgoService>();
+            services.AddTransient<InsertionSortAlgoService>();
+            services.AddTransient<GnomeSortAlgoService>();
+            services.AddTransient<ShakerSortAlgoService>();
+            services.AddTransient<OddEvenSortAlgoService>();
+            services.AddTransient<PancakeSortAlgoService>();
+            services.AddTransient<RadixSortAlgoService>();
+            services.AddTransient<CycleSortAlgoService>();
+            services.AddTransient<BitonicSortAlgoService>();
+            services.AddTransient<TimSortAlgoService>();
+            services.AddTransient<BogoSortAlgoService>();
+            services.AddTransient<CubeSortAlgoService>();
+
+            services.AddSingleton<ISortingAlgorithmFactory, SortingAlgorithmFactory>();
+
+            //services.AddAutoMapper(typeof());
 
             services.AddDbContext<VisContext>();
 

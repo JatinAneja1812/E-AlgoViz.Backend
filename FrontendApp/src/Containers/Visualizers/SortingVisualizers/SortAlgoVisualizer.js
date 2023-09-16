@@ -133,14 +133,15 @@ export default function SortAlgoVisualizer() {
     processNextStep();
   };
 
-  const handleSort = () => {
+  const handleSort = async () => {
     setStatusMessage("Sorting...");
     if (isSorted) {
       return;
     }
     setIsSortingPaused(false);
     setIterations(0); // Initialize iterations to 0
-    sortArray(handleSortingAlgorithm(algorithm, blocks));
+    let sortResult = await handleSortingAlgorithm(algorithm, blocks)
+    sortArray(sortResult);
     setSorting(true);
     setIsSorted(true);
   };

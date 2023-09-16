@@ -123,8 +123,6 @@ export default function Register(props) {
 
   return (
     <>
-
-
       {errorOpen && (
           <ErrorNotification
             message={error}

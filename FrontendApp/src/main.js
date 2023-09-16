@@ -27,7 +27,6 @@ child(connString, function(err, data) {
   }
 });
 
-
 function createWindow() {
   if (BrowserWindow.getAllWindows().length !== 0) {
     return;
@@ -141,11 +140,10 @@ ipcMain.on("maximise-window", (_) => {
 // APIS 
 
 ipcMain.on("GetAlgorithmsList", async (event) => {
-
   if (BrowserWindow.getAllWindows().length === 1) {
     try {
       fetch(
-        "http://localhost:5000/api/frontend/AlgorithmsInfo",
+        "http://localhost:5000/api/Algorithms/AlgorithmsInfo",
         {
           method: "GET",
           headers: {
@@ -166,4 +164,70 @@ ipcMain.on("GetAlgorithmsList", async (event) => {
   }
 });
 
+//Sorting Algorithms API
 
+ipcMain.on("visualizeSort", async (event, array, algorithmType) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const sortDTO = {
+        array: array,
+        sortingAlgorithmType: algorithmType
+      };
+
+      fetch(
+        "http://localhost:5000/api/SortingAlgos/Sort",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(sortDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("sortResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
+//Pathfinding Algorithms API
+
+ipcMain.on("visualizeShortestPath", async (event, grid, startNode, endNode, algorithmType ) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const dijkstraVisualizerDTO = {
+        grid: grid,
+        startNode: startNode,
+        endNode: endNode,
+        pathfindingAlgorithmType: algorithmType
+      };
+
+      fetch(
+        "http://localhost:5000/api/PathfindingAlgos/ShortestPath",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(dijkstraVisualizerDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+           event.sender.send("pathfindingAlgoResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
