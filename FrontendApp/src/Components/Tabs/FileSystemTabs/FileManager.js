@@ -48,8 +48,8 @@ export default function FileManager() {
     multiple: true,
     beforeUpload: (file) => {
       if (file.type === "application/pdf" || file.type === "text/plain" || 
-      file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||  file.type === "image/jpeg" ||
-      file.type === "image/png"    ) {
+      file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||  file.type === "image/jpeg" || // Add JPEG support
+      file.type === "image/png") {
         let fileList = uploadTest.current;
         fileList.push(file);
 
@@ -139,7 +139,6 @@ export default function FileManager() {
       setUploadArray([]);
       setButtonDisabled(false);
       getFileDetailsFromStorage();
-      console.error("Error uploading files:", error);
       throw error;
     }
   };
