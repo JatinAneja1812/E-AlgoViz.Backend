@@ -1,4 +1,4 @@
-import { SearchOutlined, FilePdfOutlined,FileTextOutlined,FileWordOutlined } from "@ant-design/icons";
+import { SearchOutlined, FilePdfOutlined, FileTextOutlined, FileWordOutlined, FileImageOutlined } from "@ant-design/icons";
 import SearchInputDropdown from "../../Dropdowns/SearchInputDropDown";
 import {
   CompareDates,
@@ -25,6 +25,8 @@ const FilesTableColumn = {
               <FilePdfOutlined style={{ marginRight: 14, color: "#1677ff", fontSize: "21px" }} />
             ) : object.fileType === "text/plain" ? (
               <FileTextOutlined style={{ marginRight: 14, color: "#1677ff", fontSize: "21px" }} />
+            ) : object.fileType === "image/jpeg" ||  object.fileType === "image/png" ? (
+              <FileImageOutlined style={{ marginRight: 14, color: "#1677ff", fontSize: "21px" }} />
             ) : (
               <FileWordOutlined style={{ marginRight: 14, color: "#1677ff", fontSize: "21px" }} />
             )}

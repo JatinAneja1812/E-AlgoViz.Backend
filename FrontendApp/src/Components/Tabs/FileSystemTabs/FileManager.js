@@ -48,7 +48,8 @@ export default function FileManager() {
     multiple: true,
     beforeUpload: (file) => {
       if (file.type === "application/pdf" || file.type === "text/plain" || 
-      file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+      file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||  file.type === "image/jpeg" ||
+      file.type === "image/png"    ) {
         let fileList = uploadTest.current;
         fileList.push(file);
 
@@ -254,7 +255,7 @@ export default function FileManager() {
           disabled={isUploading}
           type={"file"}
           name="file"
-          accept={".pdf, .txt, .docx"}
+          accept={".pdf, .txt, .docx, .png, .jpeg"}
           style={{
             height: "195vh",
             width: "115vh",
