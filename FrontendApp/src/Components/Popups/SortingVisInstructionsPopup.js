@@ -15,16 +15,15 @@ function nextPreviousClick(counter) {
   if (counter === 1) {
     document.getElementById(
       "textGroup"
-    ).innerHTML = `<h3>What is a Sorting Algorithms?</h3>
+    ).innerHTML = `<h3>Welcome to the Sorting Visualizer!</h3>
                     <h4> 
-                        A sorting algorithm is a method used to organize a set of elements into a particular order, like ascending or descending. 
-                        Its main goal is to efficiently arrange data for easier search, retrieval, and analysis in applications like databases and search algorithms.
-                        Sorting is a fundamental operation in computer science, enhancing the performance of various algorithms and applications. 
-                        Different sorting algorithms vary in their implementation, efficiency, and suitability for different data types and input sizes.
+                      Explore and understand diverse sorting algorithms with our Sorting Visualizer—a robust tool for efficiently organizing data. 
+                      Sorting algorithms are methods for arranging elements in a specific order, such as ascending or descending, to enhance data accessibility for tasks like searching, retrieval, and analysis.
+                      Sorting is a foundational operation in computer science, elevating the performance of various algorithms and applications. 
+                      These algorithms differ in implementation, efficiency, and adaptability to varying data types and input sizes. 
                     </h4>
-                    <p> 
-                        Sorting Algorithm Visualizer is an interactive web application provides a hands-on experience to explore and comprehend various sorting algorithms. 
-                        The Sorting Algorithm Visualizer allows you to witness the magic of sorting as you interactively observe how different algorithms rearrange data elements into ascending order.
+                    <p>
+                      Dive into the world of sorting and its significance in computer science.
                     </p>
                     <img id="sortMainTutorialImage" alt="sortingBarImg" src="${SortingBars}"/><div id="tutorialCounter">${counter}/6</div>`;
   } else if (counter === 2) {
@@ -32,8 +31,8 @@ function nextPreviousClick(counter) {
       "textGroup"
     ).innerHTML = `<h3>Picking an Algorithm</h3><h4>Select Your Preferred Sorting Algorithm</h4>
                     <p>
-                        Take control of your sorting experience by choosing from a range of powerful sorting algorithms in the "Select Algorithms" drop-down menu. 
-                        Observe the efficiency and elegance of each algorithm as it sorts your data into the desired order. Uncover the best sorting solution for your specific datasets, and gain valuable insights into the world of sorting algorithms with this professional and intuitive tool. 
+                      Take control of your sorting experience by choosing from a range of powerful sorting algorithms in the "Select Algorithms" drop-down menu. 
+                      Observe the efficiency and elegance of each algorithm as it sorts your data into the desired order. Uncover the best sorting solution for your specific datasets, and gain valuable insights into the world of sorting algorithms with this professional and intuitive tool. 
                     </p>
                     <img id="SortAlgoImg1" alt="sortingAlgoImg1" src="${SortingAlgoImg1}"> <img id="SortAlgoImg2" alt="sortingAlgoImg2" src="${SortingAlgoImg2}"><div id="tutorialCounter">${counter}/6</div>`;
   } else if (counter === 3) {
@@ -46,7 +45,7 @@ function nextPreviousClick(counter) {
     document.getElementById(
       "textGroup"
     ).innerHTML = `<h3>Dynamic Sorting Visualizer: Control Speed and Data Size</h3>
-                    <h4>"Personalize Your Sorting Experience.</h4>
+                    <h4>Personalize Your Sorting Experience.</h4>
                     <p>Take charge of your sorting exploration with our Customizable Sorting Visualizer. Adjust the visualization speed and data size effortlessly using intuitive slider tools. 
                     Fine-tune the pace to analyze sorting algorithms in detail or accelerate for a quick overview. Whether you're a coding enthusiast, a student, or a professional, this tool allows you to tailor the sorting experience to your needs, fostering a deeper understanding of these essential computational processes.</p>
                     <img id="sortVisToolsImg" src="${SetSizeAndSpeed}"><div id="tutorialCounter">${counter}/6</div>`;
@@ -94,16 +93,15 @@ export default function SortingVisInstructionPopup(props) {
     >
       <div id="tutorial" className="popup" style={{ background: "#ffffff" }}>
         <div id="textGroup">
-          <h3>What is a Sorting Algorithm?</h3>
+          <h3>Welcome to the Sorting Visualizer!</h3>
           <h4>
-            A sorting algorithm is a method used to organize a set of elements into a particular order, like ascending or descending. 
-            Its main goal is to efficiently arrange data for easier search, retrieval, and analysis in applications like databases and search algorithms.
-            Sorting is a fundamental operation in computer science, enhancing the performance of various algorithms and applications. 
-            Different sorting algorithms vary in their implementation, efficiency, and suitability for different data types and input sizes.
+            Explore and understand diverse sorting algorithms with our Sorting Visualizer—a robust tool for efficiently organizing data. 
+            Sorting algorithms are methods for arranging elements in a specific order, such as ascending or descending, to enhance data accessibility for tasks like searching, retrieval, and analysis.
+            Sorting is a foundational operation in computer science, elevating the performance of various algorithms and applications. 
+            These algorithms differ in implementation, efficiency, and adaptability to varying data types and input sizes. 
           </h4>
           <p>
-            Sorting Algorithm Visualizer is an interactive web application provides a hands-on experience to explore and comprehend various sorting algorithms. 
-            The Sorting Algorithm Visualizer allows you to witness the magic of sorting as you interactively observe how different algorithms rearrange data elements into ascending order.
+             Dive into the world of sorting and its significance in computer science.
           </p>
           <div id="tutorialCounter">1/6</div>
           <img id="sortMainTutorialImage" alt="sortingBarImg" src={SortingBars} />

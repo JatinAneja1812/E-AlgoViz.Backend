@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import ReturnButton from "../Buttons/ReturnButton";
 import RefreshButton from "../Buttons/PrimeNumberVisualizer/RefreshButton";
 import VisualizerAlgoButton from "../Buttons/PrimeNumberVisualizer/VisualizeAlgoButton";
+import PrimeNumberVisInstructionButton from "../Buttons/PrimeNumberVisualizer/PrimeNumberVisInstructionButton";
 
 export default function PrimeNumberVisualizerNavMenu(props) {
   let navigate = useNavigate();
@@ -65,6 +66,7 @@ export default function PrimeNumberVisualizerNavMenu(props) {
               marginRight: "2.5vh",
             }}
           >
+            <PrimeNumberVisInstructionButton />
             <ReturnButton />
           </div>
         </Toolbar>

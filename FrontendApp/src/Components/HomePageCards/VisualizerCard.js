@@ -32,8 +32,7 @@ const slides = [
     title: "Prime Numbers Algorithm",
     subtitle: "Visualizer",
     description: DescriptionEnum.PRIME_NUMBER_ALGO_TEXT.toString(),
-    image:
-      "https://scx2.b-cdn.net/gfx/news/2018/whyprimenumb.gif",
+    image: "https://scx2.b-cdn.net/gfx/news/2018/whyprimenumb.gif",
   },
   {
     title: "Knowledge Hub: Exam Papers and Notes",
@@ -102,13 +101,13 @@ const initialState = {
 };
 
 const slidesReducer = (state, event) => {
-  if (event.type === "NEXT") {
+  if (event.type === "PREV") {
     return {
       ...state,
       slideIndex: (state.slideIndex + 1) % slides.length,
     };
   }
-  if (event.type === "PREV") {
+  if (event.type === "NEXT") {
     return {
       ...state,
       slideIndex: (state.slideIndex - 1 + slides.length) % slides.length,
@@ -119,10 +118,10 @@ const slidesReducer = (state, event) => {
 function Slide({ slide, offset }) {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  
+
   const active = offset === 0 ? true : null;
   const ref = useTilt(active);
-  
+
   const VisualizerClick = (Title) => {
     switch (Title) {
       case "Pathfinding Algorithm":
@@ -134,7 +133,7 @@ function Slide({ slide, offset }) {
               navigate(path);
               setIsLoading(false);
             }, 3000);
-  
+
             return () => clearTimeout(timeout) && setIsLoading(false);
           } catch (error) {
             navigate("/homepage");
@@ -152,7 +151,7 @@ function Slide({ slide, offset }) {
               navigate(path);
               setIsLoading(false);
             }, 3000);
-  
+
             return () => clearTimeout(timeout) && setIsLoading(false);
           } catch (error) {
             navigate("/homepage");
@@ -188,7 +187,7 @@ function Slide({ slide, offset }) {
               navigate(path);
               setIsLoading(false);
             }, 3000);
-  
+
             return () => clearTimeout(timeout) && setIsLoading(false);
           } catch (error) {
             navigate("/homepage");
@@ -206,7 +205,7 @@ function Slide({ slide, offset }) {
               navigate(path);
               setIsLoading(false);
             }, 3000);
-  
+
             return () => clearTimeout(timeout) && setIsLoading(false);
           } catch (error) {
             navigate("/homepage");
@@ -224,7 +223,7 @@ function Slide({ slide, offset }) {
               navigate(path);
               setIsLoading(false);
             }, 3000);
-  
+
             return () => clearTimeout(timeout) && setIsLoading(false);
           } catch (error) {
             navigate("/homepage");
@@ -242,7 +241,7 @@ function Slide({ slide, offset }) {
               navigate(path);
               setIsLoading(false);
             }, 3000);
-  
+
             return () => clearTimeout(timeout) && setIsLoading(false);
           } catch (error) {
             navigate("/homepage");
@@ -255,7 +254,7 @@ function Slide({ slide, offset }) {
         break;
     }
   };
-  
+
   return (
     <div
       ref={ref}
@@ -302,7 +301,7 @@ function Slide({ slide, offset }) {
             >
               {isLoading ? (
                 <div>
-                  <CircularStatic isLoading={isLoading}  />
+                  <CircularStatic isLoading={isLoading} />
                 </div>
               ) : (
                 <>
@@ -334,11 +333,12 @@ function Slide({ slide, offset }) {
 
 export default function VisualizerCard(props) {
   const [state, dispatch] = useReducer(slidesReducer, initialState);
-  const showPrevButton = state.slideIndex !== 0;
-  const showNextButton = state.slideIndex !== slides.length - 1;
+  const showPrevButton = state.slideIndex !== slides.length - 1;
+  const showNextButton = state.slideIndex !== 0;
 
   return (
     <>
+
       <VisualizerCardWrapper>
         <div className="textContainer">
           <p> {DescriptionEnum.ALGORITHM_TEXT.toString()} </p>
@@ -368,6 +368,23 @@ export default function VisualizerCard(props) {
           )}
         </div>
       </VisualizerCardWrapper>
+      <div className="area">
+        <ul className="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
     </>
   );
 }

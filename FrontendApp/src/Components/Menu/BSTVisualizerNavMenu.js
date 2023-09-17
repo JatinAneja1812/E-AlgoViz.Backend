@@ -11,6 +11,7 @@ import ResetTreeButton from '../Buttons/BSTVisualizerButtons/ResetTreeButton';
 import SearchNodeButton from '../Buttons/BSTVisualizerButtons/SearchButton';
 import BSTSpeedDropdown from '../Dropdowns/BSTVisualizerDropdowns/BSTSpeedDropdown';
 import BSTSearchTypeDropdown from '../Dropdowns/BSTVisualizerDropdowns/BSTSearchTypeDropdown';
+import BSTVisInstructionButton from '../Buttons/BSTVisualizerButtons/BSTVisInstructionButton';
 
 
 export default function BSTVisualizerNavMenu(props) {
@@ -68,6 +69,7 @@ export default function BSTVisualizerNavMenu(props) {
                   marginRight: "2.5vh",
                 }}
               >
+                <BSTVisInstructionButton />
                 <ReturnButton />
               </div>
             </Toolbar>
