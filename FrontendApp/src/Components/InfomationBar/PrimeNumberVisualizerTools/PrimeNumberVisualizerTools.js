@@ -80,7 +80,7 @@ export default function PrimeNumberVisualizerTools(props) {
         isDisabled={false}
       />
 
-      <Row display="flex" alignItems="center" style={{ marginTop: "26px"}}>
+      <Row display="flex" alignitems="center" style={{ marginTop: "26px"}}>
         <Col span={12}>
           <DiscreteSlider
             onChange={props.onChangeValues}

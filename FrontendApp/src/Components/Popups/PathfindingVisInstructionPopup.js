@@ -20,7 +20,9 @@ function nextPreviousClick(counter) {
     document.getElementById(
       "textGroup"
     ).innerHTML = `<h3>What is a Pathfinding Algorithm?</h3>
-                    <h4>At its core, a Pathfinding Algorithm seeks to find the shortest path between two points. This application visualizes various pathfinding algorithms in action, and more!</h4>
+                    <h4>Welcome to our Pathfinding Visualizer, a powerful tool for exploring and understanding various pathfinding algorithms. 
+                    Pathfinding is crucial in computer science and gaming, as it helps find the shortest path from one point to another in a complex maze or map. 
+                    This application visualizes various pathfinding algorithms in action, and more!</h4>
                     <p>All of the algorithms on this application are adapted for a 2D grid, where 90 degree turns have a "cost" of 1 and movements from a node to another have a "cost" of 1.</p>
                     <img id="mainTutorialImage" alt="pathImg" src="${path}"/><div id="tutorialCounter">${counter}/9</div>`;
   } else if (counter === 2) {
@@ -33,16 +35,18 @@ function nextPreviousClick(counter) {
     document.getElementById(
       "textGroup"
     ).innerHTML = `<h3>Algorithms Intomation</h3>
-                   <h4>Not all algorithms are created equal.</h4><ul><li>
-                   <b>Dijkstra's Algorithm</b> (weighted): the father of pathfinding algorithms; guarantees the shortest path</li><li>
-                   <b>A* Search</b> (weighted): arguably the best pathfinding algorithm; uses heuristics to guarantee the shortest path much faster than Dijkstra's Algorithm</li><li>
-                   <b>Greedy Best-first Search</b> (weighted): a faster, more heuristic-heavy version of A*; does not guarantee the shortest path</li><li>
-                   <b>Swarm Algorithm</b> (weighted): a mixture of Dijkstra's Algorithm and A*; does not guarantee the shortest-path</li><li>
-                   <b>Convergent Swarm Algorithm</b> (weighted): the faster, more heuristic-heavy version of Swarm; does not guarantee the shortest path</li><li>
-                   <b>Bidirectional Swarm Algorithm</b> (weighted): Swarm from both sides; does not guarantee the shortest path</li><li>
-                   <b>Breath-first Search</b> (unweighted): a great algorithm; guarantees the shortest path</li><li>
-                   <b>Birdirectional Breath-first Search</b> (unweighted): Another great algorithm, Breath-First Search from both sides; guarantees the shortest path</li><li>
-                   <b>Depth-first Search</b> (unweighted): a very bad algorithm for pathfinding; does not guarantee the shortest path</li></ul>
+                   <h4>Not all algorithms are created equal.</h4>
+                   <ul>
+                    <li><b>Dijkstra's Algorithm</b> (weighted): the father of pathfinding algorithms; guarantees the shortest path</li>
+                    <li><b>A* Search</b> (weighted): arguably the best pathfinding algorithm; uses heuristics to guarantee the shortest path much faster than Dijkstra's Algorithm</li>
+                    <li><b>Greedy Best-first Search</b> (weighted): a faster, more heuristic-heavy version of A*; does not guarantee the shortest path</li>
+                    <li><b>Swarm Algorithm</b> (weighted): a mixture of Dijkstra's Algorithm and A*; does not guarantee the shortest-path</li
+                    <li><b>Convergent Swarm Algorithm</b> (weighted): the faster, more heuristic-heavy version of Swarm; does not guarantee the shortest path</li>
+                    <li><b>Bidirectional Swarm Algorithm</b> (weighted): Swarm from both sides; does not guarantee the shortest path</li>
+                    <li><b>Breath-first Search</b> (unweighted): a great algorithm; guarantees the shortest path</li>
+                    <li><b>Birdirectional Breath-first Search</b> (unweighted): Another great algorithm, Breath-First Search from both sides; guarantees the shortest path</li>
+                    <li><b>Depth-first Search</b> (unweighted): a very bad algorithm for pathfinding; does not guarantee the shortest path</li>
+                   </ul>
                    <div id="tutorialCounter">${counter}/9</div>`;
   } else if (counter === 4) {
     document.getElementById(
@@ -114,11 +118,11 @@ export default function InstructionMainPopup(props) {
     >
       <div id="tutorial" className="popup" style={{ background: "#ffffff" }}>
         <div id="textGroup">
-          <h3>What is a Pathfinding Algorithm?</h3>
+          <h3> Welcome to the Pathfinding Visualizer!</h3>
           <h4>
-            At its core, a Pathfinding Algorithm seeks to find the shortest path
-            between two nodes. This application visualizes various pathfinding
-            algorithms in action, and more!
+            Welcome to our Pathfinding Visualizer, a powerful tool for exploring and understanding various pathfinding algorithms. 
+            Pathfinding is crucial in computer science and gaming, as it helps find the shortest path from one point to another in a complex maze or map. 
+            This application visualizes various pathfinding algorithms in action, and more!
           </h4>
           <p>
             All of the algorithms on this application are adapted for a 2D grid,

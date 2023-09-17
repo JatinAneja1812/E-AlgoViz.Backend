@@ -212,6 +212,119 @@
     position: relative;
 }
 
+#bstMainTutorialImage {
+    width: 57%;
+    height: 35vh;
+    top: 0vh;
+    position: relative;
+}
+
+#bstInsert{
+    padding-top: 5px;
+    height: 8vh;
+    width: 40%;
+    border: 1px solid #CCC;
+    position: relative;
+}
+
+#bstRandonInsert{
+    padding-top: 5px;
+    height: 8vh;
+    width: 24%;
+    border: 1px solid #CCC;
+    position: relative;
+}
+
+#image-container {
+    display: flex;
+    left: 11vh;
+    position: relative;
+    align-items: flex-start;
+  }
+
+  
+#visualizedSearch{
+    height: 35vh;
+    width: 44%;
+    border: 1px solid #CCC;
+}
+
+#bstSeachElement{
+    padding-top: 5px;
+    height: 7vh;
+    width: 34%;
+    top: 1vh;
+    left: 3vh;
+    position: relative;
+}
+
+#bstSeachOrder{
+    padding-top: 5px;
+    height: 23vh;
+    width: 17%;
+    top: 11vh;
+    left: -30vh;
+    position: relative;
+}
+
+#bstOrders{
+    height: 9vh;
+    width: 98%;
+    border: 1px solid #CCC
+}
+
+#bstResetBtn{
+    padding-top: 5px;
+    height: 7vh;
+    width: 22%;
+    top: -12vh;
+    left: -10vh;
+    position: relative;
+}
+
+#bstSpeedBtn{
+    padding-top: 5px;
+    height: 23vh;
+    width: 16%;
+    top: -1vh;
+    left: 6vh;
+    position: relative;
+}
+
+#PrimeNumberVisMainTutorialImage {
+    width: 45%;
+    height: 38vh;
+    top: 0vh;
+    position: relative;
+}
+
+#primeNumberInsert{
+    height: 8vh;
+    width: 100%;
+    top: 24px;
+    left: -9px;
+    border: 1px solid #CCC;
+    position: relative;
+}
+
+#primeNumberVisSpeed{
+    height: 7vh;
+    width: 55%;
+    border: 1px solid #CCC;
+    position: relative;
+    top: 22px;
+}
+
+#primeNumberVisReset{
+    height: 7vh;
+    border-radius: 9px;
+    width: 19%;
+    top: 5vh;
+    left: 3vh;
+    position: relative;
+}
+
+
 #textGroup>h3 {
     font-size: 250%;
     text-shadow: 1px 1px 1px rgb(80, 79, 79), 2px 2px 1px rgb(75, 112, 118);
