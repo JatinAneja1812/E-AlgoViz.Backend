@@ -250,7 +250,7 @@ function BSTVisualizer() {
                 }}
               >
                 <img src={Nodata} alt="no data " />
-                <div class="ant-empty-description">
+                <div className="ant-empty-description">
                   Please insert the element to begin!
                 </div>
               </div>
