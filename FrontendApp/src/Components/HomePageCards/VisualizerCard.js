@@ -59,7 +59,7 @@ function useTilt(active) {
 
   useEffect(() => {
     if (!ref.current || !active) {
-      return;
+      return () => { }
     }
 
     const state = {
@@ -72,7 +72,7 @@ function useTilt(active) {
 
     const handleMouseMove = (e) => {
       if (!el) {
-        return;
+        return () => { }
       }
       if (!state.rect) {
         state.rect = el.getBoundingClientRect();
