@@ -38,7 +38,7 @@ namespace VisualizerDatabase.VisualizerContext
             builder.Entity<Algorithm>().HasData(
                new Algorithm { AlgorithmsID = "PFA1", AlgorithmsTitle = AlgorithmsTitleEnum.ASTAR, AlgorithmsType = AlgorithmsTypeEnum.PATHFINDING_ALGORITHMS },
                new Algorithm { AlgorithmsID = "PFA2", AlgorithmsTitle = AlgorithmsTitleEnum.DIJKSTRA, AlgorithmsType = AlgorithmsTypeEnum.PATHFINDING_ALGORITHMS },
-               new Algorithm { AlgorithmsID = "PFA3", AlgorithmsTitle = AlgorithmsTitleEnum.GREEDY_BREATH_FIRST_SEARCH, AlgorithmsType = AlgorithmsTypeEnum.PATHFINDING_ALGORITHMS },
+               new Algorithm { AlgorithmsID = "PFA3", AlgorithmsTitle = AlgorithmsTitleEnum.GREEDY_BEST_FIRST_SEARCH, AlgorithmsType = AlgorithmsTypeEnum.PATHFINDING_ALGORITHMS },
                new Algorithm { AlgorithmsID = "PFA4", AlgorithmsTitle = AlgorithmsTitleEnum.BREATH_FIRST_SEARCH, AlgorithmsType = AlgorithmsTypeEnum.PATHFINDING_ALGORITHMS },
                new Algorithm { AlgorithmsID = "PFA5", AlgorithmsTitle = AlgorithmsTitleEnum.DEPTH_FIRST_SEARCH, AlgorithmsType = AlgorithmsTypeEnum.PATHFINDING_ALGORITHMS },
                new Algorithm { AlgorithmsID = "PFA6", AlgorithmsTitle = AlgorithmsTitleEnum.BREATH_FIRST_SEARCH_BIDIRECTIONAL, AlgorithmsType = AlgorithmsTypeEnum.PATHFINDING_ALGORITHMS },

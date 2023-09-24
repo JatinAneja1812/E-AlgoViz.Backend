@@ -16,9 +16,9 @@ export default function GetAlgorithmsDescription(title) {
     case "Dijkstra":
       description = PathfindingAlgoDescriptionExtraEnum.DIJKSTRA.toString();
       break;
-    case "Greedy Breath First Search":
+    case "Greedy Best First Search":
       description =
-        PathfindingAlgoDescriptionExtraEnum.GREEDY_BREADTH_FIRST_SEARCH.toString();
+        PathfindingAlgoDescriptionExtraEnum.GREEDY_BEST_FIRST_SEARCH.toString();
       break;
     case "Breath First Search":
       description =

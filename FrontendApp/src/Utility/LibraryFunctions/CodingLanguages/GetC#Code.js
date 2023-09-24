@@ -189,7 +189,7 @@ export default function GetCSharpCode(title) {
           }
       }`;
       break;
-    case "Greedy Breath First Search":
+    case "Greedy Best First Search":
       code = `
       using System;
       using System.Collections.Generic;
