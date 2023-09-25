@@ -14,7 +14,7 @@ export default function AlgorithmInfoBar(props) {
         setAlgoDescription(PathfindingAlgoDescriptionEnum.BREADTH_FIRST_SEARCH.toString());
         break;
       case "Greedy B-F Serach":
-        setAlgoDescription(PathfindingAlgoDescriptionEnum.GREEDY_BREADTH_FIRST_SEARCH.toString());
+        setAlgoDescription(PathfindingAlgoDescriptionEnum.GREEDY_BEST_FIRST_SEARCH.toString());
         break;
       case "BFS-Bidirectional":
         setAlgoDescription(PathfindingAlgoDescriptionEnum.BREADTH_FIRST_SEARCH_BIDIRECTIONAL.toString());

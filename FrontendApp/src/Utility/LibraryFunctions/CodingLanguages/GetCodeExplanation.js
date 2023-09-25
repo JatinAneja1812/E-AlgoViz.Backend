@@ -70,7 +70,7 @@ export default function GetExplanation(title) {
         To find the shortest path from the start node to any other node, backtrack from the goal node using the minimum tentative distances and the edges taken.
         `;
       break;
-    case "Greedy Breath First Search":
+    case "Greedy Best First Search":
       code = `
         Explanation:
         The Greedy Best-First Search algorithm is a pathfinding algorithm used to find the path from a start node to a goal node in a 

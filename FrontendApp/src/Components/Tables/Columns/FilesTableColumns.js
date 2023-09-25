@@ -52,23 +52,14 @@ const FilesTableColumn = {
     {
       title: "File Size",
       key: "size",
-      filterDropdown: SearchInputDropdown,
-      filterIcon: <SearchOutlined />,
       render: (object) => {
         return formatFileSize(parseInt(object.size, 10));
-      },
-      onFilter: (value, record) => {
-        return value.length === 0
-          ? true
-          : record.size == null
-          ? false
-          : record.size.toLowerCase().includes(value[0].toLowerCase());
       },
       sorter: {
         compare: (a, b) => {
           return a.size === undefined || b.size === undefined
             ? null
-            : a.size.localeCompare(b.size);
+            : parseInt(a.size, 10) - (parseInt(b.size, 10));
         },
       },
     },
@@ -125,23 +116,12 @@ const FilesTableColumn = {
     {
       title: "Date Uploaded",
       key: "dateModified",
-      filterDropdown: SearchInputDropdown,
       render: (object) => DateTimeCell(object.dateModified),
-      filterIcon: <SearchOutlined />,
-      onFilter: (value, record) => {
-        return value.length === 0
-          ? true
-          : record.dateModified == null
-          ? false
-          : record.dateModified.toLowerCase().includes(value[0].toLowerCase());
-      },
       sorter: {
-        sorter: {
-          compare: (a, b) => {
-            return a.dateModified === undefined || b.dateModified === undefined
-              ? null
-              : CompareDates(a.dateModified, b.dateModified);
-          },
+        compare: (a, b) => {
+          return a.dateModified === undefined || b.dateModified === undefined
+            ? null
+            : CompareDates(a.dateModified, b.dateModified);
         },
       },
     },

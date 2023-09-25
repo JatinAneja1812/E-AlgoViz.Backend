@@ -42,7 +42,7 @@ const slides = [
   },
   {
     title: "Explore Algorithms",
-    subtitle: "Visualize Algorithm & their Explainations",
+    subtitle: "Visualize Algorithm Code Examples & their Explainations",
     description: DescriptionEnum.CODE_MANAGER.toString(),
     image: codeImage,
   },

@@ -170,7 +170,7 @@ export default function GetJavaCode(title) {
             }
         }`;
       break;
-    case "Greedy Breath First Search":
+    case "Greedy Best First Search":
       code = `
       import java.util.*;
 

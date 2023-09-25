@@ -142,7 +142,7 @@ export default function GetJSCode(title) {
             console.log(node + ":", shortestPath[node]);
       }`;
       break;
-    case "Greedy Breath First Search":
+    case "Greedy Best First Search":
       code = ` 
         function isValid(x, y, grid) {
             const n = grid.length;

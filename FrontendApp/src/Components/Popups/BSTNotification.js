@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 export default function BSTNotification() {
@@ -19,20 +18,20 @@ export default function BSTNotification() {
 
   return (
     <div>
-      <IconButton aria-label="info"  >
+      <div aria-label="info">
         <InfoOutlinedIcon
           style={{
             color: "red",
             fontSize: "40px",
-            top: "23px",
-            right: "49px",
+            top: "30px",
+            right: "60px",
             position: "relative",
           }}
           className={`rotate-icon ${!openPopup ? '' : 'pause'}`}
           onMouseEnter={handlePopoverOpen}
           onMouseLeave={handlePopoverClose}
         />
-      </IconButton>
+      </div>
 
       <Popover
         id="mouse-over-popover"

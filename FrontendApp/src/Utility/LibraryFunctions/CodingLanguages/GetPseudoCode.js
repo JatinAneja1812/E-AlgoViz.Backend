@@ -88,7 +88,7 @@ export default function GetPseudoCode(title) {
         5.2 Return the path as the result.
         `;
       break;
-    case "Greedy Breath First Search":
+    case "Greedy Best First Search":
       code = `
         Here's a simple pseudo code representation of the Greedy Breath First search algorithm:
 

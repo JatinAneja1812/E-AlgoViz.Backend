@@ -126,7 +126,7 @@ export default function GetPythonCode(title) {
           print(node + ":", dist)
        `;
       break;
-    case "Greedy Breath First Search":
+    case "Greedy Best First Search":
       code = `
       import heapq
 

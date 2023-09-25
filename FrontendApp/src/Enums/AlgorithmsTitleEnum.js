@@ -1,7 +1,7 @@
 const AlgorithmsTitleEnum = {
   ASTAR: "A* Search",
   DIJKSTRA: "Dijkstra",
-  GREEDY_BREATH_FIRST_SEARCH: "Greedy Breath First Search",
+  GREEDY_BEST_FIRST_SEARCH: "Greedy Best First Search",
   BREATH_FIRST_SEARCH: "Breath First Search",
   BREATH_FIRST_SEARCH_BIDIRECTIONAL: "Bidirectional Breath First Search",
   DEPTH_FIRST_SEARCH: "Depth First Search",

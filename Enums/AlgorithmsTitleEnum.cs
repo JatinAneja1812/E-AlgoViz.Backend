@@ -6,7 +6,7 @@
         //Pathfinding
         ASTAR = 0,
         DIJKSTRA = 1,
-        GREEDY_BREATH_FIRST_SEARCH = 2,
+        GREEDY_BEST_FIRST_SEARCH = 2,
         BREATH_FIRST_SEARCH = 3,
         BREATH_FIRST_SEARCH_BIDIRECTIONAL = 4,
         DEPTH_FIRST_SEARCH = 5,
