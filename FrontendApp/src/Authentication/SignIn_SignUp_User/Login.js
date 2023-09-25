@@ -32,66 +32,74 @@ export default function Login(props) {
   }, []);
 
   const handleLogin = () => {
-    setIsLoading(true);
+    if( !email || !password )
+    {
+      setError("Please enter valid credentials in the Login form.")
+      setIsOpen(true);
+    }
+    else
+    {
+      setIsLoading(true);
 
-    const timer = setTimeout(async () => {
-      try {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        const user = userCredential.user;
-        if (user.emailVerified) {
-          // Allow
-          const usersCollection = collection(db, "users");
+      const timer = setTimeout(async () => {
+        try {
+          const userCredential = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+          const user = userCredential.user;
+          if (user.emailVerified) {
+            // Allow
+            const usersCollection = collection(db, "users");
 
-          getDocs(usersCollection)
-            .then((querySnapshot) => {
-              querySnapshot.forEach((doc) => {
-                const userData = doc.data();
-                if (userData.uid === user.uid) {
-                  sessionStorage.setItem("avatarColor", userData.avatarColor);
-                }
+            getDocs(usersCollection)
+              .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                  const userData = doc.data();
+                  if (userData.uid === user.uid) {
+                    sessionStorage.setItem("avatarColor", userData.avatarColor);
+                  }
+                });
+              })
+              .catch((error) => {
+                setError(error);
+                setEmail("");
+                setPassword("");
+                setIsOpen(true);
+                navigate("/");
+                endSession();
+                setIsLoading(false);
               });
-            })
-            .catch((error) => {
-              setError(error);
-              setEmail("");
-              setPassword("");
-              setIsOpen(true);
-              navigate("/");
-              endSession();
-              setIsLoading(false);
-            });
 
-          const path = "/homepage";
-          startSession(user);
-          const timeout = setTimeout(() => {
-            navigate(path);
+            const path = "/homepage";
+            startSession(user);
+            const timeout = setTimeout(() => {
+              navigate(path);
+              setIsLoading(false);
+            }, 3000);
+            return () => clearTimeout(timeout) && setIsLoading(false);
+          } else {
+            setError("Please verify your email before logging in.");
+            setEmail("");
+            setPassword("");
+            setIsOpen(true);
+            navigate("/");
             setIsLoading(false);
-          }, 3000);
-          return () => clearTimeout(timeout) && setIsLoading(false);
-        } else {
-          setError("Please verify your email before logging in.");
+            return () => clearTimeout(timer) && setIsLoading(false);
+          }
+        } catch (error) {
+          setError("Wrong Credential. Try Again.");
           setEmail("");
           setPassword("");
           setIsOpen(true);
           navigate("/");
           setIsLoading(false);
+          endSession();
           return () => clearTimeout(timer) && setIsLoading(false);
         }
-      } catch (error) {
-        setError("Wrong Credential. Try Again.");
-        setEmail("");
-        setPassword("");
-        setIsOpen(true);
-        navigate("/");
-        setIsLoading(false);
-        endSession();
-        return () => clearTimeout(timer) && setIsLoading(false);
-      }
-    }, 15000);
+      }, 15000);
+    }
   };
 
   const handleReset = () => {
@@ -181,7 +189,7 @@ export default function Login(props) {
           <div className="footer">
             <LiquidButtonWrapper>
               <LoadingButton
-                disabled={isLoading ? true : !email || !password ? true : false}
+                disabled={isLoading ? true : false}
                 className="liquidButton"
                 icon={null}
                 loadingPosition="end"

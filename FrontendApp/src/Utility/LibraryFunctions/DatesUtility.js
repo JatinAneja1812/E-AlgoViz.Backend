@@ -1,6 +1,7 @@
 import moment from "moment";
 
 export function CompareDates(dateStrA, dateStrB) {
+  console.log(dateStrA)
     if (dateStrA == null && dateStrB == null) {
         return 0;
     }

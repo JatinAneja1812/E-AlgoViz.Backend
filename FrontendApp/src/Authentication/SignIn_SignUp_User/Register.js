@@ -118,7 +118,14 @@ export default function Register(props) {
   };
 
   const OpenConfirmRegisterationModal = () => {
-    setConfirmModalOpen(true);
+    if(!validName || !validPwd || !validMatch ){
+      setConfirmModalOpen(false);
+      setError("Please enter valid details in the Register form.")
+      setErrorOpen(true);
+    }
+    else{
+      setConfirmModalOpen(true);
+    }
   }
 
   return (
@@ -324,13 +331,13 @@ export default function Register(props) {
             <div className="regfooter">
               <LiquidButtonWrapper>
                 <LoadingButton
-                  disabled={!validName || !validPwd || !validMatch ? true : false}
+                  // disabled={!validName || !validPwd || !validMatch ? true : false}
                   type="button"
                   icon={null}
                   loadingPosition="end"
                   variant="contained"
                   className="liquidButton" 
-                  style={{fontSize: "16px", color: "white", marginTop: "8px", width: "180px"}}
+                  style={{fontSize: "16px", color: "white", marginTop: "8px", width: "180px" }}
                   loading={isLoading}
                   onClick={OpenConfirmRegisterationModal}
                 >
