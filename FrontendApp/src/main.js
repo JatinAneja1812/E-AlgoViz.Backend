@@ -1,3 +1,4 @@
+// Import necessary modules
 const path = require("path");
 const {
   app,
@@ -11,15 +12,18 @@ const isDev = require("electron-is-dev");
 const child = require('child_process').execFile;
 const fetch = require('electron-fetch').default
 
+// Initialize variables for the main window and tray
 let mainWindow = null;
 let tray = null;
 
+// Determine the path to the backend process executable
 let connString = isDev
   ? path.normalize(path.join(__dirname, "\\Backend\\BackendProcess.exe"))
   : path.normalize(
       path.join(process.resourcesPath, "\\Backend\\BackendProcess.exe")
     );
 
+// Start the backend process
 child(connString, function(err, data) {
   if(err){
       console.error(err);
@@ -27,11 +31,13 @@ child(connString, function(err, data) {
   }
 });
 
+// Function to create the main Electron window
 function createWindow() {
   if (BrowserWindow.getAllWindows().length !== 0) {
     return;
   }
-  // Create the browser window.
+  // Load the application's HTML content based on whether in development or production mode
+  // Handle window events
   mainWindow = new BrowserWindow({
     height: 768,
     width: 1024,
@@ -62,9 +68,6 @@ function createWindow() {
   }
 
   mainWindow.once("ready-to-show", () => mainWindow.show());
-  mainWindow.on("maximize", () => {
-    mainWindow.reload();
-  });
   
   mainWindow.on("closed", function () {
     mainWindow = null;
@@ -75,6 +78,7 @@ function createWindow() {
   });
 }
 
+// Create the tray icon and context menu
 function createTray(){
   tray = new Tray(path.join('src/imgs/icons','AppIcon.png'))
 
@@ -100,11 +104,13 @@ function createTray(){
   tray.setToolTip('E-AlgoVis')
 }
 
+// Initialize the application window and tray
 app.whenReady().then((_) => {
   createWindow();
   createTray();
 });
 
+// Handle IPC (Inter-Process Communication) events
 ipcMain.on("close-window", (_) => {
   if (process.platform !== 'darwin') {
     // For platforms other than macOS
