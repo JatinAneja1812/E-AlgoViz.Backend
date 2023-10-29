@@ -11,7 +11,8 @@ const {
 const isDev = require("electron-is-dev");
 const child = require('child_process').execFile;
 const fetch = require('electron-fetch').default
-
+const { dialog } = require('electron');
+const fs = require('fs');
 // Initialize variables for the main window and tray
 let mainWindow = null;
 let tray = null;
@@ -85,8 +86,16 @@ function createTray(){
   const contextMenu = Menu.buildFromTemplate([
     {
       label: 'Help/Documentation',
-      click: _ => {
-        shell.openExternal('https://your-documentation-url.com');  //TODO: PROVICE APP DOCUMENETATION and USER GUIDE
+      click: () => {
+        const fileToDownload = path.join(__dirname, 'E-AlgoVis_UserGuide_and_ReleaseNotes.pdf');
+        const savePath = path.join(app.getPath('downloads'), 'E-AlgoVis_UserGuide_and_ReleaseNotes.pdf');
+        fs.copyFile(fileToDownload, savePath, (err) => {
+          if (err) {
+            console.log('Error copying file:', err);
+          } else {
+            console.log('File has been downloaded to:', savePath);
+          }
+        });
       }
     },
     {
