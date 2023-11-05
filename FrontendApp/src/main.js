@@ -11,7 +11,6 @@ const {
 const isDev = require("electron-is-dev");
 const child = require('child_process').execFile;
 const fetch = require('electron-fetch').default
-const { dialog } = require('electron');
 const fs = require('fs');
 // Initialize variables for the main window and tray
 let mainWindow = null;
