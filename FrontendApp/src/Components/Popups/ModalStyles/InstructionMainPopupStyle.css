@@ -1,0 +1,354 @@
+.grid {
+    margin: 0 0 0;
+    font-size: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.container-1 {
+    margin: 0 auto;
+    text-align: center;
+    justify-content: space-around;
+}
+
+.popupmain {
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    height: 118%;
+    margin-top: -57px;
+    background: rgba(0, 0, 0, 0.203);
+    z-index: 1001;
+}
+
+.popupmainTutorial {
+    text-align: center;
+    position: fixed;
+    margin-left: -398px;
+    background: rgba(0, 0, 0, 0.203);
+    z-index: 99;
+}
+
+
+.popup {
+    width: 80%;
+    height: 95%;
+    background: linear-gradient(90deg, #dfdfdf, #ffffff 100%);
+    background-size: cover;
+    position: absolute;
+    box-shadow: 1px 0px 1px 3px white;
+    text-align: center;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.btnGroup {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#tutorial {
+    position: absolute;
+    z-index: 3;
+    background-color: rgba(255, 255, 255, 1);
+    width: 55%;
+    height: 72%;
+    border-radius: 4px;
+    text-align: center;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+#textGroup {
+    position: absolute;
+    z-index: 3;
+    background-color: rgba(255, 255, 255, 1);
+    margin-top: -3%;
+    width: 95%;
+    height: 72%;
+    color: black;
+    text-align: center;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    bottom: 0;
+    top: -154px;
+    left: 0;
+    right: 0;
+}
+
+#nextButton {
+    color: #ffffff;
+    background-color: #1971cf;
+    position: absolute;
+    right: 2%;
+    bottom: 2%;
+}
+
+#disabledNext{
+    color: #ffffff;
+    background-color: #868b8a;
+    position: absolute;
+    right: 2%;
+    bottom: 2%;
+}
+
+#previousButton {
+    color: #ffffff;
+    background-color: #1971cf;
+    position: absolute;
+    right: 12%;
+    bottom: 2%;
+}
+
+#skipButton {
+    color: #ffffff;
+    background-color:  #1971cf;
+    position: absolute;
+    left: 2%;
+    bottom: 2%;
+}
+
+#finishButton {
+    color: #ffffff;
+    background-color: #1971cf;
+    position: absolute;
+    right: 2%;
+    bottom: 2%;
+}
+
+#finishButton:hover,
+#nextButton:hover,
+#previousButton:hover,
+#skipButton:hover {
+    background-color: #438bd8;
+}
+
+#tutorialCounter {
+    position: absolute;
+    right: 2%;
+    top: 2%;
+}
+
+#mainTutorialImage {
+    width: 25%;
+    padding-top: 5px;
+}
+
+#secondTutorialImage {
+    height: 40vh;
+    padding-top: 5px;
+}
+
+#thirdTutorialImage {
+    margin-left: 50px;
+    border: 1px solid #CCC;
+    top: -12vh;
+    position: relative;
+}
+
+#fouthTutorialImage{
+    padding-top: 5px;
+    height: 32vh;
+}
+
+#sortMainTutorialImage {
+    width: 57%;
+    height: 35vh;
+    top: -2vh;
+    position: relative;
+}
+
+#SortAlgoImg1{
+    padding-top: 5px;
+    height: 41vh;
+    width: 10vw;
+    border: 1px solid #CCC;
+    position: relative;
+}
+
+#SortAlgoImg2{
+    margin-left: 50px;
+    border: 1px solid #CCC;
+    top: -7vh;
+    height: 34vh;
+    position: relative;
+}
+
+#sortVisBoardImg {
+    width: 57%;
+    height: 35vh;
+    top: 2vh;
+    border: 1px solid #CCC;
+    position: relative;
+}
+
+#sortVisToolsImg {
+    padding-top: 11vh;
+    width: 56vw;
+}
+
+#sortVisToolsImg2 {
+    height: 10vh;
+    width: 27vw;
+    top: 9vh;
+    border: 1px solid #CCC;
+    position: relative;
+}
+
+#bstMainTutorialImage {
+    width: 57%;
+    height: 35vh;
+    top: 0vh;
+    position: relative;
+}
+
+#bstInsert{
+    padding-top: 5px;
+    height: 8vh;
+    width: 40%;
+    border: 1px solid #CCC;
+    position: relative;
+}
+
+#bstRandonInsert{
+    padding-top: 5px;
+    height: 8vh;
+    width: 24%;
+    border: 1px solid #CCC;
+    position: relative;
+}
+
+#image-container {
+    display: flex;
+    left: 11vh;
+    position: relative;
+    align-items: flex-start;
+  }
+
+  
+#visualizedSearch{
+    height: 35vh;
+    width: 44%;
+    border: 1px solid #CCC;
+}
+
+#bstSeachElement{
+    padding-top: 5px;
+    height: 7vh;
+    width: 34%;
+    top: 1vh;
+    left: 3vh;
+    position: relative;
+}
+
+#bstSeachOrder{
+    padding-top: 5px;
+    height: 23vh;
+    width: 17%;
+    top: 11vh;
+    left: -30vh;
+    position: relative;
+}
+
+#bstOrders{
+    height: 9vh;
+    width: 98%;
+    border: 1px solid #CCC
+}
+
+#bstResetBtn{
+    padding-top: 5px;
+    height: 7vh;
+    width: 22%;
+    top: -12vh;
+    left: -10vh;
+    position: relative;
+}
+
+#bstSpeedBtn{
+    padding-top: 5px;
+    height: 23vh;
+    width: 16%;
+    top: -1vh;
+    left: 6vh;
+    position: relative;
+}
+
+#PrimeNumberVisMainTutorialImage {
+    width: 45%;
+    height: 38vh;
+    top: 0vh;
+    position: relative;
+}
+
+#primeNumberInsert{
+    height: 8vh;
+    width: 100%;
+    top: 24px;
+    left: -9px;
+    border: 1px solid #CCC;
+    position: relative;
+}
+
+#primeNumberVisSpeed{
+    height: 7vh;
+    width: 55%;
+    border: 1px solid #CCC;
+    position: relative;
+    top: 22px;
+}
+
+#primeNumberVisReset{
+    height: 7vh;
+    border-radius: 9px;
+    width: 19%;
+    top: 5vh;
+    left: 3vh;
+    position: relative;
+}
+
+
+#textGroup>h3 {
+    font-size: 250%;
+    text-shadow: 1px 1px 1px rgb(80, 79, 79), 2px 2px 1px rgb(75, 112, 118);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 500;
+    padding-bottom: 0px;
+}
+
+#textGroup>h4 {
+    font-size: 20px;
+    font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 0px 20px 0px 20px;
+}
+
+#textGroup>p {
+    font-size: 110%;
+    font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 0px 20px 0px 20px;
+}
+
+#textGroup>ul li {
+    list-style: none;
+    padding-bottom: 5px;
+    padding-right: 40px;
+    font-size: 14px;
+}
+

@@ -1,6 +1,4 @@
-// This is the Main of the application. It has 2 parts starting main electron application  running as create-react-app on localhost:3000
-// and Serve at using Node.js and express.js on localhost:8080
-
+// Import necessary modules
 const path = require("path");
 const {
   app,
@@ -8,46 +6,45 @@ const {
   ipcMain,
   Tray,
   Menu,
-  nativeImage,
-  shell,
-  BrowserView,
-  session,
-  screen,
+  shell
 } = require("electron");
-const { ConnectionBuilder } = require("electron-cgi");
 const isDev = require("electron-is-dev");
-const menuTemplate = require("../src/Components/Menu/ElectronMenuTemplate");
-
+const child = require('child_process').execFile;
+const fetch = require('electron-fetch').default
+const fs = require('fs');
+// Initialize variables for the main window and tray
 let mainWindow = null;
+let tray = null;
 
+// Determine the path to the backend process executable
 let connString = isDev
   ? path.normalize(path.join(__dirname, "\\Backend\\BackendProcess.exe"))
   : path.normalize(
       path.join(process.resourcesPath, "\\Backend\\BackendProcess.exe")
     );
-let connection = new ConnectionBuilder().connectTo(connString).build();
 
-connection.onDisconnect = () => {
-  console.log("lost");
-  alert("Connection lost, restarting...");
-  _connection = new ConnectionBuilder().connectTo(connString).build();
-};
+// Start the backend process
+child(connString, function(err, data) {
+  if(err){
+      console.error(err);
+      return;
+  }
+});
 
+// Function to create the main Electron window
 function createWindow() {
-  if (BrowserWindow.getAllWindows().length != 0) {
+  if (BrowserWindow.getAllWindows().length !== 0) {
     return;
   }
-  // Create the browser window.
+  // Load the application's HTML content based on whether in development or production mode
+  // Handle window events
   mainWindow = new BrowserWindow({
-    // width: 800,
-    // height: 720,
-    // minWidth: 1920,
-    // minHeight: 1180,
     height: 768,
     width: 1024,
     useContentSize: true,
     frame: false,
     transparent: true,
+    resizable: true,
     webPreferences: {
       enableRemoteModule: true,
       contextIsolation: false,
@@ -59,10 +56,7 @@ function createWindow() {
   });
 
   mainWindow.maximize();
-  // mainWindow.setResizable(false);
   mainWindow.on("unmaximize", () => mainWindow.maximize());
-  // and load the index.html of the app.
-  // win.loadFile("index.html");
   mainWindow.loadURL(
     isDev
       ? "http://localhost:3000"
@@ -74,59 +68,75 @@ function createWindow() {
   }
 
   mainWindow.once("ready-to-show", () => mainWindow.show());
-
-  mainWindow.on("maximize", () => {
-    mainWindow.reload();
-  });
-
-  // Emitted when the window is closed.
+  
   mainWindow.on("closed", function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     mainWindow = null;
   });
   mainWindow.webContents.on("new-window", (event, url) => {
     event.preventDefault();
     mainWindow.loadURL(url);
   });
-
-  screenWidth = screen.getPrimaryDisplay().workAreaSize.width;
 }
 
-// const menuContents = Menu.buildFromTemplate(menuTemplate(mainWindow));
+// Create the tray icon and context menu
+function createTray(){
+  tray = new Tray(path.join('src/imgs/icons','AppIcon.png'))
 
-// let menuItem = menuContents.getMenuItemById("ViewMenu");
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Help/Documentation',
+      click: () => {
+        const fileToDownload = path.join(__dirname, 'E-AlgoVis_UserGuide_and_ReleaseNotes.pdf');
+        const savePath = path.join(app.getPath('downloads'), 'E-AlgoVis_UserGuide_and_ReleaseNotes.pdf');
+        fs.copyFile(fileToDownload, savePath, (err) => {
+          if (err) {
+            console.log('Error copying file:', err);
+          } else {
+            console.log('File has been downloaded to:', savePath);
+          }
+        });
+      }
+    },
+    {
+      label: 'Support/Contact',
+      click: _ => {
+        shell.openExternal('mailto:e-algovishelp@gmail.com');
+      }
+    },
+    {
+      label:'Quit',
+      click: _ => app.quit()
+    }
+  ])
+  tray.setContextMenu(contextMenu)
+  tray.setToolTip('E-AlgoVis')
+}
 
-// menuItem.submenu.append(
-//   new MenuItem({
-//     label: "Dark Mode",
-//     click: () => {
-//       mainWindow.webContents.executeJavaScript(`
-//       var element = document.body; element.classList.toggle("dark-mode");`);
-//       mainWindow.webContents.executeJavaScript(`
-//       document.getElementsByClassName("container").classList.toggle("darkContainer");`);
-//     },
-//   })
-// );
-
-// Menu.setApplicationMenu(menuContents);
-
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
+// Initialize the application window and tray
 app.whenReady().then((_) => {
   createWindow();
+  createTray();
 });
 
+// Handle IPC (Inter-Process Communication) events
 ipcMain.on("close-window", (_) => {
-  app.quit();
+  if (process.platform !== 'darwin') {
+    // For platforms other than macOS
+    if (tray) {
+      tray.destroy();
+    }
+    app.quit();
+  }
 });
 
 ipcMain.on("minimise-window", (_) => {
   if (BrowserWindow.getAllWindows().length === 1) {
     BrowserWindow.getAllWindows()[0].minimize();
   }
+});
+
+ipcMain.on("reload-window", (_) => {
+  mainWindow.reload();
 });
 
 ipcMain.on("maximise-window", (_) => {
@@ -140,17 +150,98 @@ ipcMain.on("maximise-window", (_) => {
   }
 });
 
-ipcMain.on("greeting", async (event, data) => {
-  console.log("Clicked");
-  console.log(
-    path.normalize(path.join(__dirname, "\\Backend\\BackendProcess.exe"))
-  );
+
+// APIS 
+
+ipcMain.on("GetAlgorithmsList", async (event) => {
   if (BrowserWindow.getAllWindows().length === 1) {
     try {
-      const greeting = await connection.send("greeting", "John");
-      console.log(greeting);
+      fetch(
+        "http://localhost:5000/api/Algorithms/AlgorithmsInfo",
+        {
+          method: "GET",
+          headers: {
+            Accept: "text/plain",
+            "Content-Type": "text/plain",
+          },
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("resultList", result);
+        });
     } catch (err) {
-      console.log(err); //err is the serialized exception thrown in the .NET handler for the greeting request
+      console.log(err);
+    }
+  }
+});
+
+//Sorting Algorithms API
+
+ipcMain.on("visualizeSort", async (event, array, algorithmType) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const sortDTO = {
+        array: array,
+        sortingAlgorithmType: algorithmType
+      };
+
+      fetch(
+        "http://localhost:5000/api/SortingAlgos/Sort",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(sortDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+          event.sender.send("sortResult", result);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
+//Pathfinding Algorithms API
+
+ipcMain.on("visualizeShortestPath", async (event, grid, startNode, endNode, algorithmType ) => {
+  if (BrowserWindow.getAllWindows().length === 1) {
+    try {
+      const dijkstraVisualizerDTO = {
+        grid: grid,
+        startNode: startNode,
+        endNode: endNode,
+        pathfindingAlgorithmType: algorithmType
+      };
+
+      fetch(
+        "http://localhost:5000/api/PathfindingAlgos/ShortestPath",
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(dijkstraVisualizerDTO)
+        }
+      )
+        .then((res) => {
+          return res.text();
+        })
+        .then((result) => {
+           event.sender.send("pathfindingAlgoResult", result);
+        });
+    } catch (err) {
+      console.log(err);
     }
   }
 });

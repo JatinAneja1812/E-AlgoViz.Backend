@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
 const TopbarWrapper = styled.div`
-  .topbar {
-    background-color: #0e76bc;
-    height: 3vh;
-    -webkit-user-select: none;
-    -webkit-app-region: drag;
-  }
+  
+  background-color: #fd746c;
+  height: 3vh;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
 
   .ant-menu-item {
     padding-left: 3vw;
@@ -28,7 +27,9 @@ const TopbarWrapper = styled.div`
     width: 100%;
     height: 5vh !important;
     font-size: small;
-    background: #0082df !important;
+    background: #eaeaea !important;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
   }
 
   .App-title {
@@ -39,14 +40,15 @@ const TopbarWrapper = styled.div`
     text-transform: uppercase;
     display: block;
     text-decoration: none;
-    color: #fff;
-    width: 28vw;
-    font-size: 25px;
-    line-height: 5vh;
+    color: #000;
+    width: 100%;
+    font-size: 17px;
+    cursor: pointer;
+    line-height: 4vh;
   }
 
   ul li {
-    -webkit-app-region: no-drag;
+    -webkit-app-region: drag;
     text-transform: uppercase;
   }
 
@@ -89,6 +91,17 @@ const TopbarWrapper = styled.div`
     cursor: pointer;
     -webkit-app-region: no-drag;
   }
+
+  .App-reload {
+    height: 2vh;
+    float: right;
+    position: absolute;
+    top: 1.1vh;
+    right: 9.4vw;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+  }
+
 `;
 
 export default TopbarWrapper;
