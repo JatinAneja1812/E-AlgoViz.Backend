@@ -89,9 +89,9 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "icon": "",
-        "name": "AlgoVisualizer",
-        "extraResource": "src/Backend/",
+        "icon": "src\\imgs\\icons\\AppIcon.png",
+        "name": "E-AlgoVis",
+        "extraResource": "src\\Backend\\",
         "asar": true,
         "win32metadata": {
           "requested-execution-level": "requireAdministrator"
@@ -101,7 +101,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "AlgoVisualizer"
+            "name": "E-AlgoVis"
           }
         },
         {

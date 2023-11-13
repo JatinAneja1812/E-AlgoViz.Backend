@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import WithDirection from '../../Utility/LibraryFunctions/rtl';
 
 const HomepageWrapper = styled.div`
 
@@ -11,4 +10,4 @@ const HomepageWrapper = styled.div`
 
 `;
 
-export default WithDirection(HomepageWrapper);
+export default HomepageWrapper;
