@@ -3,4 +3,5 @@ It is an Algorithm Visualizer Desktop App build in React ElectronJS framework in
 
 Installation
 
-1: Download the zip file or just 
+1: Copy the link of this project and open in Visual Studio 2022 using version control  OR  you can just download the entire project.
+2. Open A
