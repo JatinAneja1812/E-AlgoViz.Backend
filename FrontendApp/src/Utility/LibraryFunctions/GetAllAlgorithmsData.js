@@ -1,5 +1,5 @@
 import AlgorithmsTitleEnum from "../../Enums/AlgorithmsTitleEnum";
-import GetCSharpCode from "./CodingLanguages/GetC#Code";
+import GetCSharpCode from "./CodingLanguages/GetCSharpCode";
 import GetExplanation from "./CodingLanguages/GetCodeExplanation";
 import GetJSCode from "./CodingLanguages/GetJSCode";
 import GetJavaCode from "./CodingLanguages/GetJavaCode";

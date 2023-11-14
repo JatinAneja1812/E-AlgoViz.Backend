@@ -1,7 +1,7 @@
 export default function GetCSharpCode(title) {
   // Replace this with the actual code generation logic for each algorithm
   let code = "";
-
+ 
   switch (title) {
     case "A* Search":
       code = `
@@ -12,7 +12,7 @@ export default function GetCSharpCode(title) {
       {
           static int[] dx = { -1, 0, 1, 0 };
           static int[] dy = { 0, 1, 0, -1 };
-      
+          
           static bool IsValid(int x, int y, int[,] grid)
           {
               int n = grid.GetLength(0);
