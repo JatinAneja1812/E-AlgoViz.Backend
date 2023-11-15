@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
-import { Layout, Typography } from "antd";
+import { Layout, Typography, Tooltip } from "antd";
 import TopbarWrapper from "./Topbar.styles";
 import exitImg from "../../imgs/X.svg";
 import underscoreImg from "../../imgs/underscore.svg";
@@ -48,39 +48,49 @@ export default function Topbar() {
       <Header className="App-Header">
         <Text className="App-title">ALGORITHMS VISUALIZER</Text>
 
-        <img
-          src={exitImg}
-          className="App-exit"
-          alt="close"
-          onClick={handleCloseOnClick}
-        />
-        <img
-          src={underscoreImg}
-          className="App-minimise"
-          alt="mini"
-          onClick={handleMiniOnClick}
-        />
-        <img
-          src={reloadImg}
-          className="App-reload"
-          alt="reload"
-          onClick={handleReloadOnClick}
-        />
-        {maximisedWindow === false && (
+        <Tooltip title={"Close"}>
           <img
-            src={unmaximiseImg}
-            className="App-maximise"
-            alt="maxi"
-            onClick={handleMaxiOnClick}
+            src={exitImg}
+            className="App-exit"
+            alt="close"
+            onClick={handleCloseOnClick}
           />
+        </Tooltip>
+        <Tooltip title={"Minimise"}>
+          <img
+            src={underscoreImg}
+            className="App-minimise"
+            alt="mini"
+            onClick={handleMiniOnClick}
+          />
+        </Tooltip>
+        <Tooltip title={"Reload"}>
+          <img
+            src={reloadImg}
+            className="App-reload"
+            alt="reload"
+            onClick={handleReloadOnClick}
+          />
+        </Tooltip>
+        {maximisedWindow === false && (
+          <Tooltip title={"Maximise"}>
+            <img
+              src={unmaximiseImg}
+              className="App-maximise"
+              alt="maxi"
+              onClick={handleMaxiOnClick}
+            />
+          </Tooltip>
         )}
         {maximisedWindow === true && (
-          <img
-            src={unmaximiseImg}
-            className="App-maximise"
-            alt="maxi"
-            onClick={handleMaxiOnClick}
-          />
+          <Tooltip title={"Maximise"}>
+            <img
+              src={unmaximiseImg}
+              className="App-maximise"
+              alt="maxi"
+              onClick={handleMaxiOnClick}
+            />
+          </Tooltip>
         )}
 
       </Header>

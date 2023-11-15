@@ -1,7 +1,7 @@
 {
   "name": "algorithm_visualizer",
   "version": "1.0.0",
-  "description": "",
+  "description": "Its is an algorithms visualizer e-learning tool.",
   "private": true,
   "homepage": "./",
   "main": "src/main.js",
@@ -43,7 +43,6 @@
     "@electron-forge/maker-squirrel": "^6.0.5",
     "@electron-forge/maker-zip": "^6.0.5",
     "electron": "^23.0.0",
-    "electron-is-dev": "^2.0.0",
     "eslint": "^8.34.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.31.10",
@@ -73,6 +72,7 @@
     "cross-env": "^7.0.3",
     "electron-cgi": "^1.0.6",
     "electron-fetch": "^1.9.1",
+    "electron-is-dev": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "firebase": "^9.17.2",
     "moment": "^2.29.4",
@@ -90,9 +90,9 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "icon": "src\\imgs\\icons\\AppIcon.png",
+        "icon": "src/imgs/icons/AppIcon.png",
         "name": "E-AlgoVis",
-        "extraResource": "src\\Backend\\",
+        "extraResource": "src/Backend/",
         "asar": true,
         "win32metadata": {
           "requested-execution-level": "requireAdministrator"
